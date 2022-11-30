@@ -24,8 +24,8 @@ app.use((req, res, next) => {
 
   
 //routes
-app.use('/courses',courseRoutes)
-app.use('/users',userRoutes)
+app.use('/api/courses',courseRoutes)
+app.use('/api/user',userRoutes)
 app.post('/filtercourse',filterCourse)
 
 

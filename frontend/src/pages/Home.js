@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useCoursesContext} from "../hooks/useCoursesContext"
-
+import { useAuthContext } from "../hooks/useAuthContext"
 
 //components
 import CourseDetails from "../components/CourseDetails"
@@ -11,9 +11,10 @@ import FilterForm from "../components/FilterForm"
 const Home = () =>{
     const {courses,dispatch}=useCoursesContext()
     
+
     useEffect(()=>{
         const fetchCourses = async () =>{
-            const response = await fetch('/courses')
+            const response = await fetch('/api/courses')
             const json = await response.json()
 
             if(response.ok){
@@ -22,7 +23,7 @@ const Home = () =>{
         }
 
         fetchCourses()
-    }, [])
+    }, [dispatch])
 
 
     return (

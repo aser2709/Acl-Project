@@ -1,56 +1,38 @@
 import { useState } from "react"
+import { useLogin } from "../hooks/useLogin"
 
-const LoginForm= () =>{
-    const [username, setUsername] = useState('')
-    const [passsword, setPassword] = useState('')
-    const [error, setError] = useState(null)
+const Login = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const {login, error, isLoading} = useLogin()
 
-    const handleSubmit = async (e) =>{
-        e.preventDefault()
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-        const user = {username,passsword}
-        console.log(user)
+    await login(email, password)
+  }
 
-        const response = await fetch('/users/login',{
-            method: 'POST',
-            body: JSON.stringify(user),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json()
-        console.log(json)
+  return (
+    <form className="login" onSubmit={handleSubmit}>
+      <h3>Log In</h3>
+      
+      <label>Email address:</label>
+      <input 
+        type="email" 
+        onChange={(e) => setEmail(e.target.value)} 
+        value={email} 
+      />
+      <label>Password:</label>
+      <input 
+        type="password" 
+        onChange={(e) => setPassword(e.target.value)} 
+        value={password} 
+      />
 
-        if(!response.ok){
-            setError(json.error)
-        }
-        if(response.ok){
-            console.log('User logged in',json)
-        }
-    }
-
-
-    return(
-        <form className="signup" onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        <div className="course-details">
-            <label>Username</label>
-            <input
-            type="text"
-            onChange={(e)=> setUsername(e.target.value)}
-            value={username}
-            />
-            <label>Passsword</label>
-            <input
-            type="text"
-            onChange={(e)=> setPassword(e.target.value)}
-            value={passsword}
-            />
-            <button>Log in</button>
-            {error && <div className='error'>{error}</div>}
-        </div>    
-        </form>
-    )
-
+      <button disabled={isLoading}>Log in</button>
+      {error && <div className="error">{error}</div>}
+    </form>
+  )
 }
-export default LoginForm
+
+export default Login

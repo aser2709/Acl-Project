@@ -1,14 +1,14 @@
 const express = require('express')
 const router = express.Router()
 
-const { signUp, login, logout } = require('../controllers/userController')
+const { logout, signupUser, loginUser } = require('../controllers/userController')
 
 
 //sign up
-router.post('/', signUp)
+router.post('/signup', signupUser)
 
 //login
-router.post('/login', login)
+router.post('/login', loginUser)
 
 //logout
 router.get('/logout', logout)

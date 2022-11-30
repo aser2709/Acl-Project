@@ -1,60 +1,38 @@
 import { useState } from "react"
+import { useSignup } from "../hooks/useSignup"
 
+const Signup = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [username, setUsername] = useState('')
+  const [userType, setUserType] = useState('')
+  const {signup, error, isLoading} = useSignup()
 
-const SignupForm=() =>{
-    const [email, setEmail] = useState('')
-    const [passsword, setPassword] = useState('')
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [username, setUsername] = useState('')
-    const [userType, setUserType] = useState('')
-    const [error, setError] = useState(null)
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    await signup(email, password, firstName,lastName,username,userType)
+  }
 
-        const user = {email,passsword,firstName,lastName,username,userType}
-        console.log(user)
-        const stringuser = JSON.stringify(user)
-        console.log(stringuser)
-
-        
-        const response = await fetch('/users/',{
-            method: 'POST',
-            body: JSON.stringify(user),
-            headers: {
-                'Content-Type' : 'application/json'
-            }
-        })
-        const json = await response.json()
-        console.log(json)
-
-        if(!response.ok){
-            setError(json.error)
-        }
-        if(response.ok){
-            console.log('User SignedUp',json)
-        }
-    }
-
-
-    return(
-        <form className="signup" onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
-        <div className="course-details">
-            <label>Username</label>
-            <input
-            type="text"
-            onChange={(e)=> setUsername(e.target.value)}
-            value={username}
-            />
-            <label>Passsword</label>
-            <input
-            type="text"
-            onChange={(e)=> setPassword(e.target.value)}
-            value={passsword}
-            />
-            <label>First Name</label>
+  return (
+    <form className="signup" onSubmit={handleSubmit}>
+      <h3>Sign Up</h3>
+      
+      <label>Email address:</label>
+      <input 
+        type="email" 
+        onChange={(e) => setEmail(e.target.value)} 
+        value={email} 
+      />
+      <label>Password:</label>
+      <input 
+        type="password" 
+        onChange={(e) => setPassword(e.target.value)} 
+        value={password} 
+      />
+        <label>First Name</label>
             <input
             type="text"
             onChange={(e)=> setFirstName(e.target.value)}
@@ -66,11 +44,11 @@ const SignupForm=() =>{
             onChange={(e)=> setLastName(e.target.value)}
             value={lastName}
             />
-            <label>Email</label>
+            <label>Username</label>
             <input
             type="text"
-            onChange={(e)=> setEmail(e.target.value)}
-            value={email}
+            onChange={(e)=> setUsername(e.target.value)}
+            value={username}
             />
             <label>Choose your type:</label>
             <select name="SubjectName" onChange={(e)=> setUserType(e.target.value)}
@@ -80,11 +58,11 @@ const SignupForm=() =>{
             <option value="Individual trainee">Individual trainee</option>
             <option value="Corporate trainee">Corporate trainee</option>
             </select>
-            <button>Sign up</button>
-            {error && <div className='error'>{error}</div>}
-        </div>
-        </form>
-    )
+
+      <button disabled={isLoading}>Sign up</button>
+      {error && <div className="error">{error}</div>}
+    </form>
+  )
 }
 
-export default SignupForm
+export default Signup
