@@ -50,7 +50,7 @@ const Signup = () => {
             onChange={(e)=> setUsername(e.target.value)}
             value={username}
             />
-            <label>Choose your type:</label>
+            <label>Register as:</label>
             <select name="SubjectName" onChange={(e)=> setUserType(e.target.value)}
             value={userType}>
             <option value="">Choose a Type</option>
