@@ -5,6 +5,9 @@ const mongoose = require('mongoose')
 const { filterCourse } = require('./controllers/courseController')
 const courseRoutes = require('./routes/courses')
 const userRoutes = require('./routes/users')
+const adminCont = require("./controllers/adminController");
+const instructorCont = require("./controllers/adminController");
+const corporatetraineeCont = require("./controllers/adminController");
 
 
 //express app
@@ -12,6 +15,9 @@ const app = express()
 
 // middleware
 app.use(express.json())
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     console.log(req.path, req.method)
@@ -27,7 +33,9 @@ app.use((req, res, next) => {
 app.use('/api/courses',courseRoutes)
 app.use('/api/user',userRoutes)
 app.post('/filtercourse',filterCourse)
-
+app.use("/api", adminCont);
+app.use("/api", instructorCont);
+app.use("/api", corporatetraineeCont);
 
 
 
