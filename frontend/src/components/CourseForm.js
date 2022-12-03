@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useCoursesContext } from "../hooks/useCoursesContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 const CourseForm = () => {
   const [title, setTitle] = useState('')
@@ -8,24 +10,39 @@ const CourseForm = () => {
   const [subject, setSubject] = useState('')
   const [total_hours_course, setTotalHours] = useState('')
   const [error, setError] = useState(null)
+  const [emptyFields, setEmptyFields] = useState([])
+  const {user} = useAuthContext()
+  const { dispatch } = useCoursesContext()
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
 
-    setInstructor('Asser')
-    const course = {title,price,short_summary,subject,total_hours_course,instructor:instructor,rating:0}
+    if (!user) {
+        setError('You must be logged in')
+        return
+      }
 
+<<<<<<< HEAD
     const response = await fetch('/api/courses',{
+=======
+     
+      
+    const course = {title,price,short_summary,subject,total_hours_course,instructor,rating:0}
+
+    const response = await fetch('/api/courses', {
+>>>>>>> 912230ec5460dc29b163652373cfbe0b69d06f65
         method: 'POST',
         body: JSON.stringify(course),
         headers: {
-            'Content-Type' : 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
         }
-    })
+      })
     const json = await response.json()
 
         if(!response.ok){
             setError(json.error)
+            setEmptyFields(json.emptyFields)
         }
         if(response.ok){
             setTitle('')
@@ -35,7 +52,9 @@ const CourseForm = () => {
             setSubject('')
             setTotalHours('')
             setError(null)
+            setEmptyFields([])
             console.log('new course added',json)
+            dispatch({type: 'CREATE_COURSE', payload: json})
         }
 
   }
@@ -60,6 +79,12 @@ const CourseForm = () => {
         type="text"
         onChange={(e)=> setShort(e.target.value)}
         value={short_summary}
+        />
+        <label>Instructor</label>
+        <input
+        type="text"
+        onChange={(e)=> setInstructor(e.target.value)}
+        value={instructor}
         />
         <label>Course Subject:</label>
         <select name="SubjectName" onChange={(e)=> setSubject(e.target.value)}

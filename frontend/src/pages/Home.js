@@ -9,22 +9,25 @@ import FilterForm from "../components/FilterForm"
 
 const Home = () =>{
     const {courses,dispatch}=useCoursesContext()
-    
+    const {user} = useAuthContext()
 
     useEffect(()=>{
         const fetchCourses = async () =>{
-            const response = await fetch('/api/courses')
+            const response = await fetch('/api/courses', {
+                headers: {'Authorization': `Bearer ${user.token}`},
+            })
             const json = await response.json()
 
             if(response.ok){
                 dispatch({type:'SET-COURSES',payload: json})
             }
+            
         }
-
+        if(user){
         fetchCourses()
-    }, [dispatch])
-
-
+        }
+    }, [dispatch, user])
+    
     return (
         <div className="home">
     

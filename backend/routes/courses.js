@@ -8,6 +8,9 @@ const {
     deleteCourse,
     filterCourse
 } = require('../controllers/courseController')
+const requireAuth = require('../middleware/requireAuth')
+
+router.use(requireAuth)
 
 //Get all Courses
 router.get('/', getCourses)
