@@ -4,13 +4,14 @@ import { useAuthContext } from "../hooks/useAuthContext"
 
 //components
 import CourseDetails from "../components/CourseDetails"
-import FilterForm from "../components/FilterForm"
 
 
 
-const Home = () =>{
+
+const instructorProfile = () => {
     const {courses,dispatch}=useCoursesContext()
     const {user} = useAuthContext()
+    
 
     useEffect(()=>{
         const fetchCourses = async () =>{
@@ -28,9 +29,14 @@ const Home = () =>{
         fetchCourses()
         }
     }, [dispatch, user])
-    
+
+      
     return (
-        <div className="home">
+        <div className="instructor">
+            <div className="info">
+              
+
+            </div>
     
             <div className="courses">
                 {courses && courses.map((course)=>(
@@ -38,10 +44,10 @@ const Home = () =>{
                 ))}
             </div>
         
-            <FilterForm/>
             
         </div>
     )
 }
 
-export default Home
+export default instructorProfile
+    
