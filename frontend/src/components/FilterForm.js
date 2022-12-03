@@ -18,7 +18,7 @@ const FilterForm = () => {
         var index = par.selectedIndex
         setSubjectName(par.options[index].value);
         var course = ""
-        if (subjectName == "") {
+        if (subjectName === "") {
             course = {
                 "$and": [
                     { "price": { "$gte": lowprice, "$lte": highprice } },

@@ -15,7 +15,7 @@ const CourseForm = () => {
     setInstructor('Asser')
     const course = {title,price,short_summary,subject,total_hours_course,instructor:instructor,rating:0}
 
-    const response = await fetch('/courses',{
+    const response = await fetch('/api/courses',{
         method: 'POST',
         body: JSON.stringify(course),
         headers: {

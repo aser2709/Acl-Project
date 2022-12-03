@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom'
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
+import React from 'react'
+import Sidebar from './Sidebar'
+import ReactFlagsSelect from "react-flags-select";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [selected, setSelected] = useState("");
   const { logout } = useLogout()
   const { user } = useAuthContext()
 
@@ -13,8 +18,9 @@ const Navbar = () => {
   return (
     <header>
       <div className="container">
+        <Sidebar/>
         <Link to="/">
-          <h1>Course Page</h1>
+          <h1>Coree</h1>
         </Link>
         <nav>
           {user && (
@@ -29,6 +35,12 @@ const Navbar = () => {
               <Link to="/signup">Signup</Link>
             </div>
           )}
+        </nav>
+        <nav>
+          <ReactFlagsSelect
+            selected={selected}
+            onSelect={(code) => setSelected(code)}
+          />
         </nav>
       </div>
     </header>

@@ -7,6 +7,9 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
 import AddCourse from './pages/AddCourse'
+import SingleCourse from './pages/SingleCourse'
+import Profile from './pages/Profile'
+import AddYoutubeLink from './components/AddYoutubeLink'
 
 function App() {
   const { user } = useAuthContext()
@@ -14,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <Navbar/>
         <div className="pages">
           <Routes>
             <Route 
@@ -30,9 +33,21 @@ function App() {
               element={!user ? <Signup /> : <Navigate to="/" />} 
             />
             <Route
-            path="/addcourse"
-            element={<AddCourse/>}
-          />
+              path="/addcourse"
+              element={<AddCourse/>}
+            />
+            <Route
+              path="/course"
+              element={<SingleCourse/>}
+            />
+            <Route
+              path="/profile"
+              element={<Profile/>}
+            />
+            <Route
+              path="/profile/youtube"
+              element={<AddYoutubeLink/>}
+            />
           </Routes>
         </div>
       </BrowserRouter>

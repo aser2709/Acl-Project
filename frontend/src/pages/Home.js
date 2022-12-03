@@ -1,6 +1,5 @@
 import { useEffect } from "react"
 import { useCoursesContext} from "../hooks/useCoursesContext"
-import { useAuthContext } from "../hooks/useAuthContext"
 
 //components
 import CourseDetails from "../components/CourseDetails"
@@ -30,7 +29,7 @@ const Home = () =>{
         <div className="home">
     
             <div className="courses">
-                {courses && courses.map((course)=>(
+                {courses && Array.from(courses).map((course)=>(
                     <CourseDetails key={course._id} course={course}/>
                 ))}
             </div>
