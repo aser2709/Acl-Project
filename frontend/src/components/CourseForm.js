@@ -22,8 +22,9 @@ const CourseForm = () => {
         return
       }
 
-    setInstructor('Asser')
-    const course = {title,price,short_summary,subject,total_hours_course,instructor:instructor,rating:0}
+     
+      
+    const course = {title,price,short_summary,subject,total_hours_course,instructor,rating:0}
 
     const response = await fetch('/api/courses', {
         method: 'POST',
@@ -74,6 +75,12 @@ const CourseForm = () => {
         type="text"
         onChange={(e)=> setShort(e.target.value)}
         value={short_summary}
+        />
+        <label>Instructor</label>
+        <input
+        type="text"
+        onChange={(e)=> setInstructor(e.target.value)}
+        value={instructor}
         />
         <label>Course Subject:</label>
         <select name="SubjectName" onChange={(e)=> setSubject(e.target.value)}
