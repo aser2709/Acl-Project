@@ -17,20 +17,10 @@ const CourseForm = () => {
   const handleSubmit = async (e) =>{
     e.preventDefault()
 
-    if (!user) {
-        setError('You must be logged in')
-        return
-      }
+    setInstructor('Asser')
+    const course = {title,price,short_summary,subject,total_hours_course,instructor:instructor,rating:0}
 
-<<<<<<< HEAD
-    const response = await fetch('/api/courses',{
-=======
-     
-      
-    const course = {title,price,short_summary,subject,total_hours_course,instructor,rating:0}
-
-    const response = await fetch('/api/courses', {
->>>>>>> 912230ec5460dc29b163652373cfbe0b69d06f65
+    const response = await fetch('/courses',{
         method: 'POST',
         body: JSON.stringify(course),
         headers: {
