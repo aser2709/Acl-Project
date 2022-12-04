@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const adminmodel = require('../models/adminModel');
-const instructormodel = require('../models/instructorModel');
-const corporatetraineemodel = require('../models/corporatetraineeModel');
+const userModel = require('../models/userModel');
 
 router.post("/addadmin", async (req,res) =>{
     const allAdmins = await adminmodel.find({});
@@ -20,35 +19,19 @@ router.post("/addadmin", async (req,res) =>{
         res.send("Created");
     }
 });
-router.post("/addinstructor", async (req,res) =>{
-    const allInstructor = await instructormodel.find({});
-    var instructorExists = false;
-    allInstructor.forEach(currentInstructor => {
-        if(req.body.Username == currentInstructor.Username){
-            instructorExists = true;
+router.post("/adduser", async (req,res) =>{
+    const allUser = await userModel.find({});
+    var userExists = false;
+    allUser.forEach(currentUser => {
+        if(req.body.username == currentUser.username){
+            userExists = true;
         }
     });
-    if(instructorExists){
+    if(userExists){
         res.send("username already exists");
     }else{
-        const instructor = new instructormodel(req.body);
-        await instructor.save();
-        res.send("Created");
-    }
-});
-router.post("/addcorporatetrainee", async (req,res) =>{
-    const allcorporatetrainee = await corporatetraineemodel.find({});
-    var corporatetraineeExists = false;
-    allcorporateTrainee.forEach(currentcorporateTrainee => {
-        if(req.body.Username == currentcorporateTrainee.Username){
-            corporatetraineeExists = true;
-        }
-    });
-    if(corporatetraineeExists){
-        res.send("username already exists");
-    }else{
-        const corporatetrainee = new corporatetraineemodel(req.body);
-        await corporatetrainee.save();
+        const user = new userModel(req.body);
+        await user.save();
         res.send("Created");
     }
 });
