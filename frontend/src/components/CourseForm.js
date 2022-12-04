@@ -21,23 +21,22 @@ const CourseForm = () => {
         setError('You must be logged in')
         return
       }
+      const course = {title,price,short_summary,subject,total_hours_course,instructor,rating:0};
 
-<<<<<<< HEAD
-    const response = await fetch('/api/courses',{
-=======
-     
+
+
+
+
       
-    const course = {title,price,short_summary,subject,total_hours_course,instructor,rating:0}
 
-    const response = await fetch('/api/courses', {
->>>>>>> 912230ec5460dc29b163652373cfbe0b69d06f65
-        method: 'POST',
-        body: JSON.stringify(course),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user.token}`
-        }
-      })
+    const response = await fetch('/api/courses',{
+      method: 'POST',
+      body: JSON.stringify(course),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      }
+    })
     const json = await response.json()
 
         if(!response.ok){
