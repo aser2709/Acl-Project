@@ -17,26 +17,16 @@ const CourseForm = () => {
   const handleSubmit = async (e) =>{
     e.preventDefault()
 
-    if (!user) {
-        setError('You must be logged in')
-        return
-      }
-      const course = {title,price,short_summary,subject,total_hours_course,instructor,rating:0};
-
-
-
-
-
-      
+    const course = {title,price,short_summary,subject,total_hours_course,instructor:instructor,rating:0}
 
     const response = await fetch('/api/courses',{
-      method: 'POST',
-      body: JSON.stringify(course),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
-      }
-    })
+        method: 'POST',
+        body: JSON.stringify(course),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        }
+      })
     const json = await response.json()
 
         if(!response.ok){

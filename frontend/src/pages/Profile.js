@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaBox } from 'react-icons/fa'
+
 
 const Profile = () => {
   return (
