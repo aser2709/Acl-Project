@@ -1,8 +1,6 @@
 import { useState } from "react"
 import { useSignup } from "../hooks/useSignup"
 
-import { useAdminsignup } from "../hooks/useAdminsignup"
-
 const AdminHome = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -17,7 +15,6 @@ const AdminHome = () => {
     e.preventDefault()
 
     await signup(email, password, firstName,lastName,username,userType)
-    await admin(Username,Password)
   } 
 
   return (

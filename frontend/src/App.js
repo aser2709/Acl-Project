@@ -11,6 +11,7 @@ import SingleCourse from './pages/SingleCourse'
 import Profile from './pages/Profile'
 import AddYoutubeLink from './components/AddYoutubeLink' 
 import AdminHome from './pages/AdminHome'
+import Quiz from './pages/Quiz'
 
 function App() {
   const { user } = useAuthContext()
@@ -32,6 +33,10 @@ function App() {
             <Route 
               path="/admin" 
               element={<AdminHome/>} 
+            /> 
+            <Route 
+              path="/Quiz" 
+              element={<Quiz />} 
             /> 
             <Route 
               path="/signup" 
