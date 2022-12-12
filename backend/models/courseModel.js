@@ -2,15 +2,29 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
+const subtitleSchema = new Schema({
+    name:{
+        type:String,
+        required: true
+    },
+    youtubelink:{
+        type:String,
+        required: true
+    },
+    short_description:{
+        type:String,
+        required: true
+    }
+})
 const courseSchema = new Schema({
 
     title: {
         type: String,
         required: true
     },
-    subtitle: {
-        type: String
-    },
+    subtitle:[
+        subtitleSchema,
+    ],
     price: {
         type: Number,
         required: true
@@ -25,6 +39,7 @@ const courseSchema = new Schema({
     },
     rating:{
         type:Number,
+        required: true
     },
     subject:{
             type: String,
@@ -34,10 +49,14 @@ const courseSchema = new Schema({
             type: Number,
             required: true
         },
-        user_id: {
+    user_id: {
             type: String,
             required: true
-          }
+          },
+    video_preview:{
+        type: String,
+        required: true
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Course', courseSchema)

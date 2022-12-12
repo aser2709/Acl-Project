@@ -9,9 +9,12 @@ import Navbar from './components/Navbar'
 import AddCourse from './pages/AddCourse'
 import SingleCourse from './pages/SingleCourse'
 import Profile from './pages/Profile'
-import AddYoutubeLink from './components/AddYoutubeLink' 
 import AdminHome from './pages/AdminHome'
 import Quiz from './pages/Quiz'
+import Post from './components/Certification'
+import YoutubeNotes from './components/YoutubeNotes'
+import Support from './pages/Support'
+import YourCourses from './pages/YourCourses'
 
 function App() {
   const { user } = useAuthContext()
@@ -24,7 +27,7 @@ function App() {
           <Routes>
             <Route 
               path="/" 
-              element={<Home/>} 
+              element={<YourCourses/>} 
             />                                                              
             <Route 
               path="/login" 
@@ -49,14 +52,25 @@ function App() {
             <Route
               path="/course"
               element={<SingleCourse/>}
-            />
+            /><Route
+            path="/yourCourses"
+            element={<Home/>}
+          />
             <Route
               path="/profile"
               element={<Profile/>}
             />
             <Route
               path="/profile/youtube"
-              element={<AddYoutubeLink/>}
+              element={<YoutubeNotes/>}
+            />
+            <Route
+              path="/profile/cert"
+              element={<Post/>}
+            />
+            <Route
+              path="/support"
+              element={<Support/>}
             />
           </Routes>
         </div>

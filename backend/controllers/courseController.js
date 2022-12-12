@@ -1,11 +1,17 @@
 const Course = require('../models/courseModel')
 const mongoose = require('mongoose')
 
-//get all courses
+//get all instructor courses
 const getCourses = async (req, res) => {
     const user_id = req.user._id
 
     const courses = await Course.find({user_id}).sort({ createdAt: -1 })
+    res.status(200).json(courses)
+}
+//get all courses
+const getAllCourses = async (req, res) => {
+
+    const courses = await Course.find({}).sort({ createdAt: -1 })
     res.status(200).json(courses)
 }
 
@@ -27,7 +33,7 @@ const getCourse = async (req, res) => {
 
 //create a new course
 const createCourse = async (req, res) => {
-        const { title, subtitle, price, short_summary, instructor, rating,subject,total_hours_course } = req.body
+        const { title, subtitle, price, short_summary, instructor, rating,subject,total_hours_course,video_preview } = req.body
     
         let emptyFields =[]
     
@@ -65,7 +71,7 @@ const createCourse = async (req, res) => {
         try{
         const user_id = req.user._id
         const course = await
-        Course.create({title, subtitle, price, short_summary, instructor, rating,subject,total_hours_course, user_id})
+        Course.create({title, subtitle, price, short_summary, instructor, rating,subject,total_hours_course, user_id,video_preview})
         res.status(200).json(course)
         
         } catch (error){
@@ -113,17 +119,15 @@ const updateCourse = async (req, res) => {
 }
 //Filter a course
 const filterCourse = async (req, res) => {
-    const user_id = req.user._id
-    const course = await Course.find({ ...req.body, user_id }).sort({ createdAt: -1 })
+    const course = await Course.find({ ...req.body }).sort({ createdAt: -1 })
     res.status(200).json(course)
 }
-
-
 module.exports = {
     createCourse,
     getCourses,
     getCourse,
     deleteCourse,
     updateCourse,
-    filterCourse
+    filterCourse,
+    getAllCourses
 }

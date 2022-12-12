@@ -5,7 +5,7 @@ import * as RiIcons from 'react-icons/ri';
 import * as CgIcons from 'react-icons/cg';
 
 
-export const SidebarData = 
+export const SidebarDataTrainee = 
 [
   {
     title: 'Home',
@@ -24,14 +24,9 @@ export const SidebarData =
     subNav: [
         {
             title: 'Your Courses',
-            path: '/yourCourses',
+            path: '#',
             icon: <IoIcons.IoIosPaper />
           },
-          {
-        title: 'Add Courses',
-        path: '/AddCourse',
-        icon: <IoIcons.IoIosPaper />
-      }
     ]
   },
   {

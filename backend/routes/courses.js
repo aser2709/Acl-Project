@@ -6,14 +6,18 @@ const {
     getCourse,
     updateCourse,
     deleteCourse,
-    filterCourse
+    filterCourse,
+    getAllCourses
 } = require('../controllers/courseController')
 const requireAuth = require('../middleware/requireAuth')
 
 router.use(requireAuth)
 
-//Get all Courses
+//Get all instructor Courses
 router.get('/', getCourses)
+
+//Get all Courses
+router.get('/courses',getAllCourses)
 
 // GET a single Course
 router.get('/:id', getCourse)

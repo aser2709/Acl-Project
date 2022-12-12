@@ -73,6 +73,32 @@ header a {
   border-radius: 50%;
   color: #333;
 }
+.head-text{
+  position: relative;
+color: #3c4144;
+font-size:1cm;
+font-family:serif;
+font-weight: 3000;
+}
+.head-date{
+  position: relative;
+  color: #3c4144;
+  font-size:0.7cm;
+  font-family:serif;
+  font-weight: 3000;
+}
+.center__date{
+  position: absolute;
+  right: 62%;
+  top: 500%;
+  transform: translate(-50%,-200%);
+}
+.center__text{
+  position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .FilterForm {
   border-radius: 2px;
   padding: 20px;
@@ -176,5 +202,72 @@ nav button {
   cursor: pointer;
   font-size: 1em;
 }
+.inputnotes{
+  width: 10cm;
+  height: 630px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+  max-lines: none;
+  margin-bottom: 4mm;
+}
+.buttonnotes{
+  position: absolute;
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  align-items: center;
+  top: 93%;
+  left: 6%;
+}
+.Subtitle_Name{
+  position: relative;
+  background: #fff;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  padding-left: 4mm;
+  padding-top: 3mm;
+  padding-bottom: 2mm;
+  text-align: center;
+  font-family: "Poppins";
+  font-size: 1.01em;
+}
+.youtubedisplay {
+  margin-top: 2mm;
+  display: grid;
+  grid-template-columns: 11cm 8cm;
+}
+.Support_Button{
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+}
+.change_password{
+  width: 11.5cm;
+  height: 2cm;
+}
+.short_description{
+  background: #fff;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  padding-left: 4mm;
+  padding-top: 3mm;
+  padding-bottom: 2mm;
+  margin-top: 1.5mm;
+  font-family: "Poppins";
+  width: 25.5cm;
+  font-size: 1.01em;
+}
+
 
 

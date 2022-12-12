@@ -37,7 +37,7 @@ const handleClick = async () =>{
             </Link>
             <p><strong>Length (weeks): </strong>{course.length}</p>
             <p><strong>Price: </strong>{course.price}</p>
-            <p><strong>Subtitle: </strong>{course.subtitle}</p>
+            <p><strong>Subtitle: </strong>{course.subtitle[0].name}</p>
             <p><strong>Short Summary: </strong>{course.short_summary}</p>
             <p><strong>Instructor: </strong>{course.instructor}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
