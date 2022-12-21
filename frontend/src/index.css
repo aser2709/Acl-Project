@@ -44,7 +44,6 @@ header a {
   grid-template-columns: 2fr 2fr;
   gap: 100px;
 }
-
 .course-details {
   background: #fff;
   border-radius: 4px;
@@ -268,6 +267,101 @@ nav button {
   width: 25.5cm;
   font-size: 1.01em;
 }
+/* popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80vh;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-inner {
+  position: relative;
+  padding-left: 3cm;
+  padding-bottom: 2cm;
+  padding-right: -6cm;
+  width: 100%;
+  max-width: 640px;
+  background-color: #fff;
+}
+
+.popup-inner .close-btn{
+  position: absolute;
+  right: 62%;
+  bottom: 8%;
+}
+
+.buy-course{
+  background-color: #28bac2;
+  position: absolute;
+  right: 20px;
+  top: 75%;
+}
+.h1-price{
+  font-size: 6mm;
+}
+.yes-course{
+  background-color: #28bac2;
+  position: absolute;
+  right: 32%;
+  bottom: 8%;
+  width: 25mm;
+}
+.course-title-single{
+  background: #fff;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  padding-left: 4mm;
+  padding-right: 4mm;
+  position: relative;
+  padding-top: 3mm;
+  left: 40%;
+  padding-bottom: 2mm;
+  margin-top: 1.5mm;
+  width: fit-content;
+  font-family: "Poppins";
+}
+.single-course-details{
+  position: relative;
+  left: 20%;
+}
+.subtitles-single-course{
+  position: relative;
+  left: 20%;
+}
+.subtitle-single-course{
+  position: absolute;
+  bottom: -320%;
+  left: 9%;
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  margin: 1mm;
+  padding-left: 1mm;
+  padding-right: 1mm;
+  width: fit-content;
+}
+.join-course{
+  background-color: #28bac2;
+  position: relative;
+  left: 106%;
+}
+.join-course:hover{
+  background-color:rgb(255, 255, 255);
+  color: #28bac2;
+  position: relative;
+  left: 106%;
+  border: 1px solid var(--primary);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+
 
 
 

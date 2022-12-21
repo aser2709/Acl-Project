@@ -8,7 +8,6 @@ const CourseForm = () => {
   const [formValues, setFormValues] = useState([{ name: "", youtubelink: "", short_description: "" }])
   const [youtubeError, setYoutubeError] = useState('');
   const [short_summary, setShort] = useState('')
-  const [instructor, setInstructor] = useState('')
   const [subject, setSubject] = useState('')
   const [video_preview, setVideo] = useState('')
   const [total_hours_course, setTotalHours] = useState('')
@@ -21,22 +20,26 @@ const CourseForm = () => {
     let newFormValues = [...formValues];
     newFormValues[i][e.target.name] = e.target.value;
     setFormValues(newFormValues);
+    
   }
 
   let addFormFields = () => {
     setFormValues([...formValues, { name: "", youtubelink: "", short_description: "" }])
   }
-
   let removeFormFields = (i) => {
     let newFormValues = [...formValues];
     newFormValues.splice(i, 1);
     setFormValues(newFormValues)
   }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     setFormValues(formValues);
-    const subtitle = formValues;
+
+    const instructor = user.user_.firstName +" "+user.user_.lastName;
+    const subtitle = 
+    [{name: 'Real time Systems',youtube: {youtubelink:"https://www.youtube.com/watch?v=8erNeVqyX3A",short_description:"A real-time system is one that must process information and produce a response within a specified time, else risk severe consequences, including failure."}},
+    {name: 'Arduino Uno', youtube: [{youtubelink:"https://www.youtube.com/watch?v=_ItSHuIJAJ8",short_description:"This video talks in detail about the components of Arduino UNO board"},{youtubelink:"https://www.youtube.com/watch?v=yq9dNests2w",short_description:"Features of Arduino Uno board"}]}];
+    
     const course = { title, price, short_summary, subject, total_hours_course, instructor: instructor, rating: 0, subtitle, video_preview };
     const youtubeRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
 
@@ -65,7 +68,6 @@ const CourseForm = () => {
           setTitle('')
           setPrice('')
           setShort('')
-          setInstructor('')
           setSubject('')
           setTotalHours('')
           setVideo('')
@@ -121,7 +123,7 @@ const CourseForm = () => {
               onChange={e => handleChange(index, e)} />
           {
             index ?
-              <button type="button" className="button remove" onClick={() => removeFormFields(index)}>Remove</button>
+              <button type="button" className="button remove" onClick={() => removeFormFields(index)}>Remove Subtitle</button>
               : null
           }
         </div>
@@ -133,12 +135,6 @@ const CourseForm = () => {
         onChange={(e) => setShort(e.target.value)}
         value={short_summary}
         maxLength={250}
-      />
-      <label>Instructor</label>
-      <input
-        type="text"
-        onChange={(e) => setInstructor(e.target.value)}
-        value={instructor}
       />
       <label>Course Subject:</label>
       <select name="SubjectName" onChange={(e) => setSubject(e.target.value)}

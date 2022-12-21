@@ -2,11 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const subtitleSchema = new Schema({
-    name:{
-        type:String,
-        required: true
-    },
+const youtubeLinkScehma = new Schema({
     youtubelink:{
         type:String,
         required: true
@@ -15,6 +11,15 @@ const subtitleSchema = new Schema({
         type:String,
         required: true
     }
+})
+const subtitleSchema = new Schema({
+    name:{
+        type:String,
+        required: true
+    },
+    youtube:[
+        youtubeLinkScehma
+    ]
 })
 const courseSchema = new Schema({
 

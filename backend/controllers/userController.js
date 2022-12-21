@@ -15,8 +15,8 @@ const loginUser = async (req, res) => {
 
     // create a token
     const token = createToken(user._id)
-
-    res.status(200).json({ email, token })
+    const user_ = await User.findOne({email:email},{userType:1, firstName:1,lastName:1,_id:0})
+    res.status(200).json({email,token,user_})
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
@@ -32,7 +32,8 @@ const signupUser = async (req, res) => {
     // create a token
     const token = createToken(user._id)
 
-    res.status(200).json({ email, token })
+    const user_ = await User.findOne({email:email},{userType:1, firstName:1,lastName:1,_id:0})
+    res.status(200).json({email,token,user_})
   } catch (error) {
     res.status(400).json({ error: error.message })
   }
