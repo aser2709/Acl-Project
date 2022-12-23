@@ -7,7 +7,9 @@ const {
     updateCourse,
     deleteCourse,
     filterCourse,
-    getAllCourses
+    getAllCourses,
+    addRating,
+    getRating
 } = require('../controllers/courseController')
 const requireAuth = require('../middleware/requireAuth')
 
@@ -33,5 +35,8 @@ router.patch('/:id',updateCourse)
 
 // Filter a Course
 router.get('/coursefilter/',filterCourse)
+
+router.post('/:id', addRating )
+router.get('/:id', getRating )
 
 module.exports = router

@@ -15,9 +15,13 @@ import Post from './components/Certification'
 import YoutubeNotes from './components/YoutubeNotes'
 import Support from './pages/Support'
 import YourCourses from './pages/YourCourses'
+import Forgot from './pages/forgot'
+import Reset from './pages/reset'
+
 
 function App() {
   const { user } = useAuthContext()
+
 
   return (
     <div className="App">
@@ -72,11 +76,21 @@ function App() {
               path="/support"
               element={<Support/>}
             />
+            <Route
+              path="/forgotpassword"
+              element={<Forgot/>}
+            />
+            <Route
+              path="/resetpassword"
+              element={<Reset/>}
+            />
+              
           </Routes>
         </div>
       </BrowserRouter>
     </div>
   );
+  
 }
 
 export default App;

@@ -122,6 +122,55 @@ const filterCourse = async (req, res) => {
     const course = await Course.find({ ...req.body }).sort({ createdAt: -1 })
     res.status(200).json(course)
 }
+const addRating = async(req,res) =>{
+    const {rating} = req.body
+    const { id } = req.params
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'No such course' })
+    }
+    const course = await Course.findById({ _id: id })
+    if (rating == '1'){
+        course.rating = 1
+        course.markModified('rating')  
+        course.save()
+    }
+    if (rating == '2'){
+        course.rating = 2
+        course.markModified('rating')  
+        course.save()
+    }
+    if (rating == '3'){
+        course.rating = 3
+        course.markModified('rating')  
+        course.save()
+    }
+    if (rating == '4'){
+        course.rating = 4
+        course.markModified('rating')  
+        course.save()
+    }
+    if (rating == '5'){
+        course.rating = 5
+        course.markModified('rating')  
+        course.save()
+    
+    }
+    console.log(rating)
+    console.log(course.get( 'rating', null, {getters: false}))
+    res.status(200).json(course.get('rating', null, {getters: false}))
+}
+
+const getRating = async (req,res) =>{
+    const { id } = req.params
+    const course = await Course.findById({ _id: id })
+
+    return course.get('rating', null, {getters: false})
+}
+
+
+
+
+
 module.exports = {
     createCourse,
     getCourses,
@@ -129,5 +178,7 @@ module.exports = {
     deleteCourse,
     updateCourse,
     filterCourse,
-    getAllCourses
+    getAllCourses,
+    addRating, 
+    getRating
 }

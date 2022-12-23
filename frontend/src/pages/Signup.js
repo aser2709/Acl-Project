@@ -58,6 +58,12 @@ const Signup = () => {
             <option value="Individual trainee">Individual trainee</option>
             <option value="Corporate trainee">Corporate trainee</option>
             </select>
+            
+            <label for="tos1"> I have read and agreed to the
+            <a HREF="javascript:window.open('/tos', 'Terms of service', 'width=900,height=900');"><i>Terms of service</i></a> .
+            <input type="checkbox" id="tos1" name="tos1" value="agreed" required/> 
+            </label>
+            
 
       <button disabled={isLoading}>Sign up</button>
       {error && <div className="error">{error}</div>}
