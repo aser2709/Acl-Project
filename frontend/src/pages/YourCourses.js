@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useCoursesContext} from "../hooks/useCoursesContext"
 import { useAuthContext } from "../hooks/useAuthContext"
+import { useState } from "react"
 
 //components
 import CourseDetails from "../components/CourseDetails"
@@ -8,9 +9,11 @@ import FilterForm from "../components/FilterForm"
 
 
 
+
 const YourCourses = () =>{
     const {courses,dispatch}=useCoursesContext()
     const {user} = useAuthContext()
+    
 
     useEffect(()=>{
         const fetchCourses = async () =>{
@@ -37,7 +40,7 @@ const YourCourses = () =>{
                     <CourseDetails key={course._id} course={course}/>
                 ))}
             </div>
-        
+             
             <FilterForm/>
             
         </div>

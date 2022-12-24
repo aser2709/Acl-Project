@@ -7,6 +7,7 @@ const subtitleSchema = new Schema({
         type:String,
         required: false,
     },
+const youtubeLinkScehma = new Schema({
     youtubelink:{
         type:String,
         required: false,
@@ -15,6 +16,24 @@ const subtitleSchema = new Schema({
         type:String,
         required: false
     }
+}),
+const subtitleSchema = new Schema({
+    name:{
+        type:String,
+        required: true
+    },
+    youtube:[
+        youtubeLinkScehma
+    ]
+})
+const subtitleSchema = new Schema({
+    name:{
+        type:String,
+        required: true
+    },
+    youtube:[
+        youtubeLinkScehma
+    ]
 })
 const courseSchema = new Schema({
 

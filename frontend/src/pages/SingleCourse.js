@@ -1,16 +1,21 @@
 import React from 'react'
 import { useEffect, useState } from "react"
 import { useCoursesContext} from "../hooks/useCoursesContext"
-import CourseDetails from '../components/CourseDetails'
-import { useAuthContext } from '../hooks/useAuthContext'
+import SingleCourseDetails from '../components/SingleCourseDetails'
+import { useAuthContext } from "../hooks/useAuthContext"
+
+import { useNavigate } from 'react-router-dom'
 
 
 const SingleCourse = () => {
-    const [rating, setRating] = useState('')
+        const [rating, setRating] = useState('')
+    const navigate = useNavigate();
     const params = new URLSearchParams(window.location.search);
     const course_id = params.get('courseId');
     const {user} = useAuthContext()
     const {courses,dispatch}=useCoursesContext()
+    
+    const [text, setText] = useState('Join Course')
     
     const handleRating = async (e) => {
         e.preventDefault()
@@ -35,8 +40,7 @@ const SingleCourse = () => {
                 method: "GET",
                 body: JSON.stringify(fetchCourses),
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${user.token}`
+                    'Content-Type': 'application/json'
                 }
             })
             const json = await response.json()
@@ -47,12 +51,39 @@ const SingleCourse = () => {
         }
         fetchCourses()
     }, [dispatch,course_id,user])
+        if(user){
+            fetchCourses()
+            }
+    
+    const mouseEnter = () =>{
+        if(courses){
+            setText(courses.price)
+            }
+    }
+    const mouseLeave = () =>{
+        setText('Join Course')
+    }
+    const toNavigate = () => {
+        navigate('/pay');
+    }
   return (
     <div className="home">
         <div className='courses'>
                 {courses && 
-                    <CourseDetails course={courses}/>
-                    }
+                    <SingleCourseDetails course={courses}/>
+                }
+                <div className='subtitles-single-course'>
+                    {courses && <strong>Subtitles: </strong>}
+                        <div className='subtitle-single-course'>
+                            {courses &&
+                                Array.from(courses.subtitle).map((courses) =>(
+                                <p>{courses.name}</p>
+                                ))}
+                        </div>
+                </div>
+                {
+                    user && user.user_.userType=="Individual trainee" &&<button className='join-course' onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={toNavigate}>{text}</button>
+                }
         </div>  
         <form className="signup" onSubmit={handleRating}>
         <label>Rate this course!:</label>
