@@ -40,7 +40,8 @@ const SingleCourse = () => {
                 method: "GET",
                 body: JSON.stringify(fetchCourses),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
                 }
             })
             const json = await response.json()
@@ -49,11 +50,11 @@ const SingleCourse = () => {
                 dispatch({type:'SET-COURSES',payload: json})
             }
         }
-        fetchCourses()
-    }, [dispatch,course_id,user])
         if(user){
             fetchCourses()
             }
+    }, [dispatch,course_id,user])
+        
     
     const mouseEnter = () =>{
         if(courses){
@@ -68,6 +69,7 @@ const SingleCourse = () => {
     }
   return (
     <div className="home">
+   
         <div className='courses'>
                 {courses && 
                     <SingleCourseDetails course={courses}/>
@@ -80,21 +82,23 @@ const SingleCourse = () => {
                                 <p>{courses.name}</p>
                                 ))}
                         </div>
-                </div>
+                        </div>
+                      
+                
                 {
                     user && user.user_.userType=="Individual trainee" &&<button className='join-course' onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={toNavigate}>{text}</button>
                 }
         </div>  
-        <form className="signup" onSubmit={handleRating}>
-        <label>Rate this course!:</label>
-      <input 
-        type="rating" 
-        onChange={(e) => setRating(e.target.value)} 
-        value={rating} 
-      />
-      <button>Rate</button>
-     
-        </form>
+        <form className='Rate' onSubmit={handleRating}>
+                        <label>Rate this course!</label>
+                    <input 
+                        type="rating" 
+                        onChange={(e) => setRating(e.target.value)} 
+                        value={rating} 
+                    />
+                    <button>Rate</button>
+                    
+                        </form>
     </div>
   )
 }

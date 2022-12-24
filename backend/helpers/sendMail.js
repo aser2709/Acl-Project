@@ -19,16 +19,16 @@ const sendEmailReset = (to, url, text, name) => {
   oauth2client.setCredentials({
     refresh_token: G_REFRESH_TOKEN,
   });
-  //const accessToken = oauth2client.getAccessToken();
+  const accessToken = oauth2client.getAccessToken();
   const smtpTransport = nodemailer.createTransport({
     service: "gmail",
     auth: {
       type: "OAuth2",
       user: ADMIN_EMAIL,
       clientId: G_CLIENT_ID,
-      clientSecret: G_CLIENT_SECRET,
+      clientSecret: G_CLIENT_SECRET, 
       refreshToken: G_REFRESH_TOKEN,
-      //accessToken,
+      accessToken,
     },
   });
 

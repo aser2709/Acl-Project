@@ -1,30 +1,15 @@
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
-
-const subtitleSchema = new Schema({
-    name:{
-        type:String,
-        required: false,
-    },
 const youtubeLinkScehma = new Schema({
     youtubelink:{
         type:String,
-        required: false,
+        required: true
     },
     short_description:{
         type:String,
-        required: false
-    }
-}),
-const subtitleSchema = new Schema({
-    name:{
-        type:String,
         required: true
-    },
-    youtube:[
-        youtubeLinkScehma
-    ]
+    }
 })
 const subtitleSchema = new Schema({
     name:{
