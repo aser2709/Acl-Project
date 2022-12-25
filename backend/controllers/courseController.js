@@ -123,39 +123,38 @@ const filterCourse = async (req, res) => {
     res.status(200).json(course)
 }
 const addRating = async(req,res) =>{
-    const {rating} = req.body
+    const rating = req.body
+    console.log(rating.rating)
     const { id } = req.params
       if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({ error: 'No such course' })
     }
     const course = await Course.findById({ _id: id })
-    if (rating == '1'){
+    if (rating.rating == '1'){
         course.rating = 1
-        course.markModified('rating')  
+        course.markModified('rating')
         course.save()
     }
-    if (rating == '2'){
+    if (rating.rating == '2'){
         course.rating = 2
         course.markModified('rating')  
         course.save()
     }
-    if (rating == '3'){
+    if (rating.rating == '3'){
         course.rating = 3
         course.markModified('rating')  
         course.save()
     }
-    if (rating == '4'){
+    if (rating.rating == '4'){
         course.rating = 4
         course.markModified('rating')  
         course.save()
     }
-    if (rating == '5'){
+    if (rating.rating == '5'){
         course.rating = 5
         course.markModified('rating')  
         course.save()
-    
     }
-    console.log(rating)
     console.log(course.get( 'rating', null, {getters: false}))
     res.status(200).json(course.get('rating', null, {getters: false}))
 }

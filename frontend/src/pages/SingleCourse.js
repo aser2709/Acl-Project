@@ -19,17 +19,17 @@ const SingleCourse = () => {
     
     const handleRating = async (e) => {
         e.preventDefault()
-    
+        console.log(rating)
+        const ratings = {rating:rating}
         const response = await fetch('api/courses/' + course_id,{
             method: 'POST',
-            body: JSON.stringify({rating}) ,
-            headers:{
+            body: JSON.stringify(ratings),
+            headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.token}`
-             }
+            }
         })
         const json = await response.json()
-    
-        console.log(json)
       }
     
 
