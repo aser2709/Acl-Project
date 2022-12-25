@@ -5,9 +5,9 @@ import { useAuthContext } from "../hooks/useAuthContext"
 const CourseForm = () => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
-  const [formValues, setFormValues] = useState([{ name: "", youtubelink: "", short_description: "" }])
-  const [youtubeError, setYoutubeError] = useState('');
+  const [fields, setFields] = useState([{ name: '', youtube: [{youtubelink: '' ,short_description: ''}] }]);
   const [short_summary, setShort] = useState('')
+  const [CourseAdded,setCourseAdded] = useState(null)
   const [subject, setSubject] = useState('')
   const [video_preview, setVideo] = useState('')
   const [total_hours_course, setTotalHours] = useState('')
@@ -16,72 +16,75 @@ const CourseForm = () => {
   const { user } = useAuthContext()
   const { dispatch } = useCoursesContext()
 
-  let handleChange = (i, e) => {
-    let newFormValues = [...formValues];
-    newFormValues[i][e.target.name] = e.target.value;
-    setFormValues(newFormValues);
-    
-  }
-
-  let addFormFields = () => {
-    setFormValues([...formValues, { name: "", youtubelink: "", short_description: "" }])
-  }
-  let removeFormFields = (i) => {
-    let newFormValues = [...formValues];
-    newFormValues.splice(i, 1);
-    setFormValues(newFormValues)
-  }
+  const handleChange = (event, fieldIndex, nestedFieldIndex) => {
+    const values = [...fields];
+    values[fieldIndex].name = event.target.value;
+    setFields(values);
+  };
+  const handleChangeYoutubelink = (event, fieldIndex, nestedFieldIndex) => {
+    const values = [...fields];
+    values[fieldIndex].youtube[nestedFieldIndex].youtubelink = event.target.value;
+    setFields(values);
+  };
+  const handleChangeShort = (event, fieldIndex, nestedFieldIndex) => {
+    const values = [...fields];
+    values[fieldIndex].youtube[nestedFieldIndex].short_description = event.target.value;
+    setFields(values);
+  };
+  const addField = () => {
+    setFields([...fields, { name: '', youtube: [{youtubelink: '',short_description: ''}] }]);
+  };
+  const addNestedField = fieldIndex => {
+    const values = [...fields];
+    values[fieldIndex].youtube.push({youtubelink: '',short_description: ''});
+    setFields(values);
+  };
+  const removeField = fieldIndex => {
+    const values = [...fields];
+    values.splice(fieldIndex, 1);
+    setFields(values);
+  };
+  const removeNestedField = (fieldIndex, nestedFieldIndex) => {
+    const values = [...fields];
+    values[fieldIndex].youtube.splice(nestedFieldIndex, 1);
+    setFields(values);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setFormValues(formValues);
-
+    setFields(fields)
     const instructor = user.user_.firstName +" "+user.user_.lastName;
-    const subtitle = 
-    [{name: 'Real time Systems',youtube: {youtubelink:"https://www.youtube.com/watch?v=8erNeVqyX3A",short_description:"A real-time system is one that must process information and produce a response within a specified time, else risk severe consequences, including failure."}},
-    {name: 'Arduino Uno', youtube: [{youtubelink:"https://www.youtube.com/watch?v=_ItSHuIJAJ8",short_description:"This video talks in detail about the components of Arduino UNO board"},{youtubelink:"https://www.youtube.com/watch?v=yq9dNests2w",short_description:"Features of Arduino Uno board"}]}];
-    
-    const course = { title, price, short_summary, subject, total_hours_course, instructor: instructor, rating: 0, subtitle, video_preview };
-    const youtubeRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
+    const subtitle = fields;
+    const course = { title, price, short_summary, subject, total_hours_course, instructor: instructor, rating: 0, subtitle: subtitle, video_preview };
 
-
-    for (var i = 0; i < formValues.length - 1; i++); {
-      if (youtubeRegex.test(formValues[i].youtubelink) && youtubeRegex.test(video_preview)) {
-        console.log(formValues);
-        setYoutubeError('');
-        const response = await fetch('/api/courses', {
-          method: 'POST',
-          body: JSON.stringify(course),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${user.token}`
-          }
-        })
-
-        const json = await response.json()
-
-        if (!response.ok) {
-          setError(json.error)
-          setEmptyFields(json.emptyFields)
-        }
-
-        if (response.ok) {
-          setTitle('')
-          setPrice('')
-          setShort('')
-          setSubject('')
-          setTotalHours('')
-          setVideo('')
-          setError(null)
-          setFormValues([{ name: "", youtubelink: "" }])
-          setEmptyFields([])
-          console.log('new course added', json)
-          dispatch({ type: 'CREATE_COURSE', payload: json })
-        }
+    const response = await fetch('/api/courses',{
+      method: 'POST',
+      body: JSON.stringify(course),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
       }
-      else {
-        setYoutubeError('invalid Youtube url');
-      }
-    }
+    })
+    const json = await response.json() 
+            if (!response.ok) {
+                setError(json.error)
+                setEmptyFields(json.emptyFields)
+                setCourseAdded("Unsuccessful add of Course")
+            }
+            if (response.ok) {
+              setTitle('')
+              setPrice('')
+              setShort('')
+              setSubject('')
+              setTotalHours('')
+              setVideo('')
+              setError(null)
+              setCourseAdded("Successful add of Course")
+              const values = [{ name: '', youtube: [{youtubelink: '' ,short_description: ''}] }];
+              setFields(values)
+              setEmptyFields([])
+              console.log('new course added', json)
+              dispatch({ type: 'CREATE_COURSE', payload: json })
+            }
   }
 
   return (
@@ -99,36 +102,44 @@ const CourseForm = () => {
         onChange={(e) => setPrice(e.target.value)}
         value={price}
       />
-      {formValues.map((element, index) => (
-        <div className="form-inline" key={index}>
-          <label>subtitle</label>
-            <input type="text"
-              name="name"
-              placeholder='Enter Subtitle' 
-              required value={element.name || ""} 
-              onChange={e => handleChange(index, e)}
-            />
-          <label>short description</label>
-            <input type="text" 
-              name="short_description" 
-              placeholder='Enter short description about the subtitle (maxLength 180)' 
-              maxLength={180} required value={element.short_description || ""} 
-              onChange={e => handleChange(index, e)} 
-            />
-          <label>url</label>
-            <input type="text" 
-              name="youtubelink" 
-              placeholder='Enter Youtube Link for subtitle' 
-              required value={element.youtubelink || ""} 
-              onChange={e => handleChange(index, e)} />
-          {
-            index ?
-              <button type="button" className="button remove" onClick={() => removeFormFields(index)}>Remove Subtitle</button>
-              : null
-          }
+      {Array.from(fields).map((field, fieldIndex) => (
+        <div key={fieldIndex}>
+        <label>Subtitle</label>
+          <input
+            type="text"
+            value={field.name}
+            onChange={event => handleChange(event, fieldIndex, null)}
+          />
+          {Array.from(field.youtube).map((youtube, nestedFieldIndex) => (
+            <div key={nestedFieldIndex}>
+              <label>Youtube</label>
+              <input
+                type="text"
+                value={youtube.youtubelink}
+                onChange={event => handleChangeYoutubelink(event, fieldIndex, nestedFieldIndex)}
+              />
+              <label>Short Description</label>
+              <input
+              type="text"
+              value={youtube.short_description}
+              onChange={event => handleChangeShort(event,fieldIndex,nestedFieldIndex)}
+              />
+              <button type="button" onClick={() => removeNestedField(fieldIndex, nestedFieldIndex)}>
+                Remove Links
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={() => addNestedField(fieldIndex)}>
+            Add Link
+          </button>
+          <button type="button" onClick={() => removeField(fieldIndex)}>
+            Remove Subtitle
+          </button>
         </div>
       ))}
-      <button className="button add" type="button" onClick={() => addFormFields()}>Add more Subtitles</button>
+      <button type="button" onClick={addField}>
+        Add Subtitle
+      </button>
       <label>Short Summary about the  course</label>
       <input
         type="text"
@@ -160,7 +171,8 @@ const CourseForm = () => {
       />
       <button>Add course</button>
       {error && <div className='error'>{error}</div>}
-      {youtubeError && <div className='error'>{youtubeError} </div>}
+      {CourseAdded==="Unsuccessful add of Course" && <div className='error'>{CourseAdded}</div>}
+      {CourseAdded==="Successful add of Course" && <div className='success'>{CourseAdded}</div>}
     </form>
   )
 }

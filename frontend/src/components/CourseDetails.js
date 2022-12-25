@@ -47,7 +47,7 @@ const close = () => {
             <h4>{course.title}</h4>
             </Link>
             <p><strong>Short Summary: </strong>{course.short_summary}</p>
-            <p><strong>Length (weeks): </strong>{course.total_hours_course}</p>
+            <p><strong>Length (hours): </strong>{course.total_hours_course}</p>
             <p><strong>Instructor: </strong>{course.instructor}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
             <p><strong>Rating: </strong>{course.rating}</p>
