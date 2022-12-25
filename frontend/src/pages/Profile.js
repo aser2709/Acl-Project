@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
 
@@ -7,8 +9,12 @@ const Profile = () => {
   const [newPassword,setNewPassword] = useState('');
   const [error, setError] = useState(null)
   const [mssg, setMssg] = useState(null)
-  
+  const { user } = useAuthContext()
+  const navigate = useNavigate();
 
+  const toNavigate = () => {
+    navigate('/');
+  }
 
   const handleSubmit = async (e) =>{
     e.preventDefault();
@@ -44,6 +50,8 @@ const Profile = () => {
   }
 
   return (
+    <>
+    { user &&
     <div className='change_password'>  
       <form onSubmit={handleSubmit}>
         <h1>Change Your Password</h1>
@@ -60,6 +68,10 @@ const Profile = () => {
         {mssg && <div className='mssg'>{mssg}</div>}
       </form>
     </div>
+  }
+  {!user && <div className='error'>Anuthorized to be here</div>}
+  {!user && <div><button onClick={toNavigate}>Back to home page</button></div>}
+  </>
   )
 }
 
