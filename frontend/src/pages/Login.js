@@ -13,7 +13,7 @@ const Login = () => {
   }
 
   return (
-    <form className="login" onSubmit={handleSubmit}>
+    <form className="signup" onSubmit={handleSubmit}>
       <h3>Log In</h3>
       
       <label>Email address:</label>
@@ -28,7 +28,8 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)} 
         value={password} 
       />
-
+            <label > 
+            <a HREF="/forgotpassword"><i>Forgot Password?</i></a> </label>
       <button disabled={isLoading}>Log in</button>
       {error && <div className="error">{error}</div>}
     </form>

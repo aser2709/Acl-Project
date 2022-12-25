@@ -151,6 +151,28 @@ form select{
   border-radius: 8px;
   text-align: center;
 }
+.Rate{
+  max-width: 200px;
+  margin: 100px 100px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+}
+.Rate h1{
+  background: var(--primary);
+  color: #fff;
+  width: 100%;
+  padding: 5px;
+  font-family: "Poppins";
+  border-radius: 8px;
+  text-align: center;
+}
+.Rate label{
+  display: block;
+}
+.Rate button{
+margin-left: 110px;
+}
 .signup{
   max-width: 400px;
   margin: 40px auto;
@@ -266,6 +288,10 @@ nav button {
   font-family: "Poppins";
   width: 25.5cm;
   font-size: 1.01em;
+}
+input[type="checkbox"]
+{
+    vertical-align:middle;
 }
 /* popup */
 .popup {

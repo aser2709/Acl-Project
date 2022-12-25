@@ -1,25 +1,48 @@
 import React from 'react'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useCoursesContext} from "../hooks/useCoursesContext"
 import SingleCourseDetails from '../components/SingleCourseDetails'
 import { useAuthContext } from "../hooks/useAuthContext"
-import { useState } from "react"
+
 import { useNavigate } from 'react-router-dom'
 
 
 const SingleCourse = () => {
-    
+        const [rating, setRating] = useState('')
     const navigate = useNavigate();
     const params = new URLSearchParams(window.location.search);
     const course_id = params.get('courseId');
-    const {courses,dispatch}=useCoursesContext()
     const {user} = useAuthContext()
+    const {courses,dispatch}=useCoursesContext()
+    
     const [text, setText] = useState('Join Course')
     
+    const handleRating = async (e) => {
+        e.preventDefault()
+    
+        const response = await fetch('api/courses/' + course_id,{
+            method: 'POST',
+            body: JSON.stringify({}) ,
+            headers:{
+                'Authorization': `Bearer ${user.token}`
+             }
+        })
+        const json = await response.json()
+    
+        console.log(json)
+      }
+    
+
+
     useEffect(()=>{
         const fetchCourses = async () =>{
             const response = await fetch(`/api/courses/${course_id}`, {
-                headers: {'Authorization': `Bearer ${user.token}`},
+                method: "GET",
+                body: JSON.stringify(fetchCourses),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
+                }
             })
             const json = await response.json()
 
@@ -30,7 +53,9 @@ const SingleCourse = () => {
         if(user){
             fetchCourses()
             }
-    }, [dispatch,user])
+    }, [dispatch,course_id,user])
+        
+    
     const mouseEnter = () =>{
         if(courses){
             setText(courses.price)
@@ -44,6 +69,7 @@ const SingleCourse = () => {
     }
   return (
     <div className="home">
+   
         <div className='courses'>
                 {courses && 
                     <SingleCourseDetails course={courses}/>
@@ -56,11 +82,23 @@ const SingleCourse = () => {
                                 <p>{courses.name}</p>
                                 ))}
                         </div>
-                </div>
+                        </div>
+                      
+                
                 {
                     user && user.user_.userType=="Individual trainee" &&<button className='join-course' onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={toNavigate}>{text}</button>
                 }
         </div>  
+        <form className='Rate' onSubmit={handleRating}>
+                        <label>Rate this course!</label>
+                    <input 
+                        type="rating" 
+                        onChange={(e) => setRating(e.target.value)} 
+                        value={rating} 
+                    />
+                    <button>Rate</button>
+                    
+                        </form>
     </div>
   )
 }

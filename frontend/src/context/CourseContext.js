@@ -20,6 +20,7 @@ export const courseReducer = (state,action)=>{
                 return{
                     courses: state.courses.filter((w) => w._id !== action.payload._id)
                 }
+                
         default:
             return state
     }
