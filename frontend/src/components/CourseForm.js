@@ -85,7 +85,7 @@ const CourseForm = () => {
   }
 
   return (
-    <form className='create' onSubmit={handleSubmit}>
+    <form className='signup' onSubmit={handleSubmit}>
       <h3>Add a new Course</h3>
       <label>Course Title</label>
       <input
@@ -158,6 +158,10 @@ const CourseForm = () => {
         placeholder='Enter Youtube Link for the course'
         value={video_preview}
       />
+      <label for="tos1"> I have read and agreed to the
+            <a HREF="javascript:window.open('/tos', 'Terms of service', 'width=900,height=900');"><i> media rights contract</i></a> .
+            <input type="checkbox" id="tos1" name="tos1" value="agreed" required/> 
+            </label>
       <button>Add course</button>
       {error && <div className='error'>{error}</div>}
       {youtubeError && <div className='error'>{youtubeError} </div>}

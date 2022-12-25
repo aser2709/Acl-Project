@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 const SingleCourse = () => {
-        const [rating, setRating] = useState('')
+    const [rating, setRating] = useState('')
     const navigate = useNavigate();
     const params = new URLSearchParams(window.location.search);
     const course_id = params.get('courseId');
@@ -22,7 +22,7 @@ const SingleCourse = () => {
     
         const response = await fetch('api/courses/' + course_id,{
             method: 'POST',
-            body: JSON.stringify({}) ,
+            body: JSON.stringify({rating}) ,
             headers:{
                 'Authorization': `Bearer ${user.token}`
              }
