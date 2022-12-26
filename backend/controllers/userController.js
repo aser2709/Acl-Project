@@ -114,5 +114,65 @@ const resetpassword = async (req,res) => {
   }
 
 }
+const addRating = async(req,res) =>{
+  const rating = req.body
+  console.log(rating.rating)
+  const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'No such instructor' })
+  }
+  const instructor = await Course.findById({ _id: id })
+  
+  if (rating.rating == '1'){
+      instructor.rating = 1
+      instructor.markModified('rating')
+      instructor.save()
+  }
+  if (rating.rating == '2'){
+      instructor.rating = 2
+      instructor.markModified('rating')  
+      instructor.save()
+  }
+  if (rating.rating == '3'){
+      instructor.rating = 3
+      instructor.markModified('rating')  
+      instructor.save()
+  }
+  if (rating.rating == '4'){
+      instructor.rating = 4
+      instructor.markModified('rating')  
+      instructor.save()
+  }
+  if (rating.rating == '5'){
+      instructor.rating = 5
+      instructor.markModified('rating')  
+      instructor.save()
+  }
+ 
 
-module.exports = { signupUser, loginUser, logout, changePassword, forgotPassword, resetpassword }
+  //console.log(instructor)
+  res.status(200)
+}
+
+const getRating = async (req,res) =>{
+  const { id } = req.params
+  const instructor = await User.findById({ _id: id })
+
+  let items = Object.entries(instructor.get('rating', null, {getters: false})); // get an array of key/value pairs of the object like this [[1:1], [2:1]...]
+  let sum = 0; // sum of weighted ratings
+  let total = 0; // total number of ratings
+  console.log(items)
+  for(let [key,value] of items){
+      console.log(value)
+      if(Number.isInteger(value)){
+          total += value;
+          sum += value * parseInt(key);
+          }  // multiply the total number of ratings by it's weight in this case which is the key
+  }
+   let final = Math.round((sum / total) * 10) / 10
+  console.log(final)
+
+  return final 
+}
+
+module.exports = { signupUser, loginUser, logout, changePassword, forgotPassword, resetpassword, addRating, getRating }

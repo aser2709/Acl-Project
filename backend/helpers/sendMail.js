@@ -4,7 +4,8 @@ const { OAuth2 } = google.auth;
 const OAUTH_PLAYGROUND = "https://developers.google.com/oauthplayground";
 require("dotenv").config();
 
-const { G_CLIENT_ID, G_CLIENT_SECRET, G_REFRESH_TOKEN, ADMIN_EMAIL } =
+
+const { G_CLIENT_ID, G_CLIENT_SECRET, G_REFRESH_TOKEN} =
   process.env;
 
 const oauth2client = new OAuth2(
@@ -16,24 +17,30 @@ const oauth2client = new OAuth2(
 
 
 const sendEmailReset = (to, url, text, name) => {
-  oauth2client.setCredentials({
-    refresh_token: G_REFRESH_TOKEN,
-  });
-  const accessToken = oauth2client.getAccessToken();
-  const smtpTransport = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      type: "OAuth2",
-      user: ADMIN_EMAIL,
-      clientId: G_CLIENT_ID,
-      clientSecret: G_CLIENT_SECRET, 
-      refreshToken: G_REFRESH_TOKEN,
-      accessToken,
-    },
-  });
+    oauth2client.setCredentials({
+        refresh_token: G_REFRESH_TOKEN,
+      });
+    const accessToken = oauth2client.getAccessToken();
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        transport: {
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+              type: "OAuth2",
+              user: 'acladm22@gmail.com',
+              pass: 'Qwertyui.1',
+              clientId: G_CLIENT_ID,
+              clientSecret: G_CLIENT_SECRET, 
+              refreshToken: G_REFRESH_TOKEN,
+              accessToken,
+            },
+          },
+      });
 
   const mailOptions = {
-    from: ADMIN_EMAIL,
+    from: "acladm22@gmail.com",
     to: to,
     subject: "RESET PASSWORD",
     html: `
@@ -112,9 +119,12 @@ const sendEmailReset = (to, url, text, name) => {
   `,
   };
 
-  smtpTransport.sendMail(mailOptions, (err, info) => {
-    if (err) return { err };
-    return info;
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
   });
 };
 

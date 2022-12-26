@@ -54,8 +54,10 @@ const courseSchema = new Schema({
             let sum = 0; // sum of weighted ratings
             let total = 0; // total number of ratings
             for(let [key,value] of items){
+                if(Number.isInteger(value)){
                 total += value;
-                sum += value * parseInt(key); // multiply the total number of ratings by it's weight in this case which is the key
+                sum += value * parseInt(key);
+                } // multiply the total number of ratings by it's weight in this case which is the key
             }
             return Math.round(sum / total)
         },
@@ -73,14 +75,14 @@ const courseSchema = new Schema({
                 this.get('rating', null, {getters: false})[r] = 1 + parseInt(this.get('rating', null, {getters: false})[r])
                 return this.get('rating', null, {getters: false})} // return the updated ratings object
         },
-        validate:{
+       /* validate:{
             validator: function(i){
                 let b = [1, 2, 3, 4, 5] // valid star levels
                 let v = Object.keys(i).sort()
                 return b.every((x, j) => (v.length === b.length) && x === parseInt(v[j]))
             },
             message: "Invalid Star Level"
-        },
+        },*/
         default: {1:1, 2:1, 3:1, 4:1, 5:1}
     },
     subject:{

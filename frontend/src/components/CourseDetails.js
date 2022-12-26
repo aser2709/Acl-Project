@@ -15,6 +15,7 @@ const CourseDetails = ({course}) => {
     const [buttonPopup,setButtonPopup] = useState(false);
 
 
+
 const handleClick = async () =>{
 
     if(!user){
@@ -50,7 +51,7 @@ const close = () => {
             <p><strong>Length (hours): </strong>{course.total_hours_course}</p>
             <p><strong>Instructor: </strong>{course.instructor}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
-            <p><strong>Rating: </strong>{course.rating}</p>
+            <p><strong>Rating: </strong>{}</p>
             <h1 className="h1-price">Price: {course.price}</h1>
             <p>{formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
             {
