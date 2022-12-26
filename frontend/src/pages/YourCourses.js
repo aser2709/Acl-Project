@@ -30,11 +30,7 @@ const YourCourses = () =>{
         if(user){
             fetchCourses()
             }
-    }, [dispatch, user])
-    useEffect(()=>{
-
-    })
-    
+    }, [dispatch, user])    
     return (
         <div className="home">
     

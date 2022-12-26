@@ -37,7 +37,7 @@ const Home = () =>{
         }
         if(user && (user.user_.userType==="Individual trainee" || user.user_.userType==="Corporate trainee")){
             const fetchCourses = async () =>{
-                const response= await fetch('/api/user/courses',{
+                const response= await fetch('/api/user/registeredCourse/all',{
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.token}`,
