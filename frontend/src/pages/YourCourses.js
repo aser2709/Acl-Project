@@ -31,6 +31,9 @@ const YourCourses = () =>{
             fetchCourses()
             }
     }, [dispatch, user])
+    useEffect(()=>{
+
+    })
     
     return (
         <div className="home">

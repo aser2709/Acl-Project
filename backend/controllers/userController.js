@@ -115,4 +115,46 @@ const resetpassword = async (req,res) => {
 
 }
 
-module.exports = { signupUser, loginUser, logout, changePassword, forgotPassword, resetpassword }
+//Add registered course
+const AddRegisteredCourse = async (req,res) => {
+  const course = req.body
+  try{
+  const user_email = course.email
+  if(user_email){
+  const addedCourse = await User.updateOne(
+    {email: user_email},
+    {$push: {
+      registeredCourses: course.xCourse,
+    },
+  },
+  {upsert: true}
+  );
+  res.status(200).json(addedCourse)
+  }
+  }catch(error){
+    res.status(400).json({error:error.message})
+    console.log("Im here")
+  }
+}
+//get All registered Courses for a user
+const getAllCoursesUser = async (req,res) => {
+  const email = req.headers.body
+  try{
+    const yourCourses = await User.findOne({email:email},{registeredCourses:1,_id:0})
+    res.status(200).json(yourCourses)
+  } catch(error){
+    res.status(400).json({error: error.message})
+  }
+}
+const getSingleCourseUser = async (req,res) => {
+  const email = req.headers.body
+  const { id } = req.params
+  try{
+  const yourCourse = await User.find({"registeredCourses._id": id},)
+  res.status(200).json(yourCourse)
+  } catch(error){
+    res.status(400).json({error: error.message})
+  }
+}
+
+module.exports = { signupUser, loginUser, logout, changePassword, forgotPassword, resetpassword,AddRegisteredCourse,getAllCoursesUser,getSingleCourseUser }
