@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { logout, signupUser, loginUser, changePassword, forgotPassword, resetpassword, AddRegisteredCourse, getAllCoursesUser, getSingleCourseUser } = require('../controllers/userController')
+const { logout, signupUser, loginUser, changePassword, forgotPassword, resetpassword, addRating, getRating, AddRegisteredCourse, getAllCoursesUser, getSingleCourseUser } = require('../controllers/userController')
 
 const requireAuth = require("../middleware/requireAuth");
 
@@ -17,6 +17,9 @@ router.get('/logout', logout)
 //forgot password
 router.post("/forgotpassword", forgotPassword);
 router.post("/resetpassword", requireAuth, resetpassword);
+
+router.post('/:id', addRating )
+router.get('/:id', getRating )
 
 
 //changePassword

@@ -88,17 +88,26 @@ const SingleCourse = () => {
                 {
                     user && user.user_.userType=="Individual trainee" &&<button className='join-course' onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={toNavigate}>{text}</button>
                 }
-        </div>  
-        <form className='Rate' onSubmit={handleRating}>
-                        <label>Rate this course!</label>
+          </div>  
+                    <form className='Rate' onSubmit={handleRating}>
+                    <label>Rate this course!</label>
                     <input 
                         type="rating" 
                         onChange={(e) => setRating(e.target.value)} 
                         value={rating} 
                     />
                     <button>Rate</button>
-                    
-                        </form>
+                    </form>
+                    <div></div>
+                    <form className='Rate' onSubmit={handleRating}>
+                    <label>Rate this instructor!</label>
+                    <input 
+                        type="rating" 
+                        onChange={(e) => setRating(e.target.value)} 
+                        value={rating} 
+                    />
+                    <button>Rate</button>
+                    </form>
     </div>
   )
 }
