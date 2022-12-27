@@ -115,7 +115,10 @@ const userSchema = new Schema({
           message: "Invalid Star Level"
       },*/
       default: {1:1, 2:1, 3:1, 4:1, 5:1}
-  },     
+  },
+  registeredCourses:[
+    registeredCoursesSchema
+  ] 
 }, { timestamps: true }, {toObject:{getters: true, }, toJSON:{getters: true}})
 
 userSchema.statics.signup = async function(email, password, firstName,lastName,username,userType) {
