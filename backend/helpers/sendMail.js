@@ -5,22 +5,11 @@ const OAUTH_PLAYGROUND = "https://developers.google.com/oauthplayground";
 require("dotenv").config();
 
 
-const { G_CLIENT_ID, G_CLIENT_SECRET, G_REFRESH_TOKEN} =
-  process.env;
 
-const oauth2client = new OAuth2(
-  G_CLIENT_ID,
-  G_CLIENT_SECRET,
-  G_REFRESH_TOKEN,
-  OAUTH_PLAYGROUND
-);
 
 
 const sendEmailReset = (to, url, text, name) => {
-    oauth2client.setCredentials({
-        refresh_token: G_REFRESH_TOKEN,
-      });
-    const accessToken = oauth2client.getAccessToken();
+   
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         transport: {
@@ -28,13 +17,10 @@ const sendEmailReset = (to, url, text, name) => {
             port: 465,
             secure: true,
             auth: {
-              type: "OAuth2",
+              
               user: 'acladm22@gmail.com',
-              pass: 'Qwertyui.1',
-              clientId: G_CLIENT_ID,
-              clientSecret: G_CLIENT_SECRET, 
-              refreshToken: G_REFRESH_TOKEN,
-              accessToken,
+              pass: 'nfjoebzmskmtsalg',
+              
             },
           },
       });
