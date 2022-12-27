@@ -5,6 +5,47 @@ const validator = require('validator')
 
 const Schema = mongoose.Schema
 
+const youtubeLinkScehma = new Schema({
+  _id:{
+    type: String
+  },
+  youtubelink:{
+      type:String,
+      required: true
+  },
+  short_description:{
+      type:String,
+      required: true
+  }
+})
+const subtitleSchema = new Schema({
+  _id:{
+    type: String
+  },
+  name:{
+      type:String,
+      required: true
+  },
+  youtube:[
+      youtubeLinkScehma
+  ]
+})
+const registeredCoursesSchema = new Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  subtitle:[
+    subtitleSchema,
+  ],
+  short_summary: {
+    type: String,
+    required: true
+  },
+  _id:{
+    type: String
+  }
+})
 const userSchema = new Schema({
 
     email :{

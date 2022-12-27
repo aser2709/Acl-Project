@@ -37,21 +37,37 @@ const handleClick = async () =>{
 const buyCourse = async () =>{
     setButtonPopup(true);
 }
-const close = () => {
-    setButtonPopup(false);
+const close = async () => {
+    const title = course.title
+    const subtitle = course.subtitle
+    const _id = course._id
+    const short_summary = course.short_summary
+    const  xCourse = {title,subtitle,short_summary,_id}
+    const email = user.email
+    const RCourse = {xCourse,email}
+        const response = await fetch('api/user/registerCourse',{
+            method: 'PATCH',
+            body: JSON.stringify(RCourse),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
+        if(response.ok)
+        {
+            console.log("Course Registered")
+            setButtonPopup(false);
+        }
 }
 
 
     return (
         <div className="course-details">
-            <Link onClick={() => window.location.href=`/course?courseId=${course._id}`}>
-            <h4>{course.title}</h4>
-            </Link>
+            <h4 onClick={() => window.location.href=`/course?courseId=${course._id}`}>{course.title}</h4>
             <p><strong>Short Summary: </strong>{course.short_summary}</p>
             <p><strong>Length (hours): </strong>{course.total_hours_course}</p>
             <p><strong>Instructor: </strong>{course.instructor}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
-            <p><strong>Rating: </strong>{}</p>
             <h1 className="h1-price">Price: {course.price}</h1>
             <p>{formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
             {
@@ -65,7 +81,7 @@ const close = () => {
             <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
                 <h3>You sure you want to register for {course.title}</h3>
                 <button className="yes-course" onClick={close}>yes</button>
-            </Popup> 
+            </Popup>
         </div>
     )
 }
