@@ -95,7 +95,7 @@ function Quiz() {
             {score} out of {questions.length} correct - (
             {(score / questions.length) * 100}%)
           </h2>
-          <button onClick={() => restartGame()}>Restart game</button>
+          <button onClick={() => restartGame()}>Restart Quiz</button>
         </div>
       ) : (
         /* 5. Question Card  */

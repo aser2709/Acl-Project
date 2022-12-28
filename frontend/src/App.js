@@ -10,6 +10,8 @@ import AddCourse from './pages/AddCourse'
 import SingleCourse from './pages/SingleCourse'
 import Profile from './pages/Profile'
 import AdminHome from './pages/AdminHome'
+import AddUser from './pages/AddUser'
+import AddAdmin from './pages/AddAdmin'
 import Quiz from './pages/Quiz'
 import Post from './components/Certification'
 import YoutubeNotes from './components/YoutubeNotes'
@@ -17,6 +19,7 @@ import Support from './pages/Support'
 import YourCourses from './pages/YourCourses'
 import Forgot from './pages/forgot'
 import Reset from './pages/reset'
+import Adminlogin from './pages/AdminLogin'
 
 
 function App() {
@@ -37,9 +40,25 @@ function App() {
               path="/login" 
               element={!user ? <Login /> : <Navigate to="/" />} 
             />
+            
+            
             <Route 
               path="/admin" 
+              element={<Adminlogin/>} 
+            /> 
+            <Route 
+              path="/adminHome" 
               element={<AdminHome/>} 
+            /> 
+            
+            <Route 
+              path="/addadmin" 
+              element={<AddAdmin/>} 
+            /> 
+            
+            <Route 
+              path="/adduser" 
+              element={<AddUser/>} 
             /> 
             <Route 
               path="/Quiz" 
