@@ -3,10 +3,12 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Input from "../pages/Input/Input";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { useState } from "react";
+import Input from "../pages/Input/Input";
+
+
 
 const initialState = {
   password: "",
@@ -17,7 +19,7 @@ const Reset = () => {
   const [visible, setVisible] = useState(false);
   const [data, setData] = useState(initialState);
   const { password, cf_password } = data;
-  const { token } = useParams();
+  const { id } = useParams();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -56,11 +58,9 @@ const Reset = () => {
       });
     try {
       await axios.post(
-        "/api/user/resetpassword",
+        "/api/user/resetpassword/" + id,
         { password },
-        {
-          headers: { Authorization: token },
-        }
+
       );
       handleReset();
       return toast("Password was successfully changed 🤗", {

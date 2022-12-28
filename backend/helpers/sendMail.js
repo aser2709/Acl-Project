@@ -1,32 +1,26 @@
 const nodemailer = require("nodemailer");
-const { google } = require("googleapis");
-const { OAuth2 } = google.auth;
-const OAUTH_PLAYGROUND = "https://developers.google.com/oauthplayground";
-require("dotenv").config();
+const User = require('../models/userModel')
 
 
-
-
-
-const sendEmailReset = (to, url, text, name) => {
+const sendEmailReset = async (to, url, text, name) => {
    
+
     var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        transport: {
-            host: 'smtp.gmail.com',
-            port: 465,
-            secure: true,
+        service: 'hotmail',
+      
             auth: {
               
-              user: 'acladm22@gmail.com',
-              pass: 'nfjoebzmskmtsalg',
+              user: 'ahmeddosama@outlook.com',
+              pass: 'Qwertyui.1',
               
             },
-          },
+            tls:{
+                rejectUnauthorized: false,
+            },
       });
 
   const mailOptions = {
-    from: "acladm22@gmail.com",
+    from: "ahmeddosama@outlook.com",
     to: to,
     subject: "RESET PASSWORD",
     html: `

@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const sendMail = require("../helpers/sendMail");
 const createTokenforgot = require("../helpers/createTokenforgot");
+const mongoose = require('mongoose')
 
 
 const createToken = (_id) => {
@@ -79,8 +80,8 @@ const forgotPassword = async (req,res) => {
     const ac_token = createTokenforgot.access({ id: user.id });
 
     // send email
-    const url = `http://localhost:3000/user/reset-password/${ac_token}`;
-    const name = user.name;
+    const url = `http://localhost:3000/resetpassword/${user._id}`;
+    const name = user.firstName;
     sendMail.sendEmailReset(email, url, "Reset your password", name);
 
     // success
@@ -96,16 +97,14 @@ const resetpassword = async (req,res) => {
   try {
     // get password
     const { password } = req.body;
+    const {id} = req.params
 
     // hash password
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
 
     // update password
-    await User.findOneAndUpdate(
-      { _id: req.user.id },
-      { password: hashPassword }
-    );
+    const userUpdate = await User.findOneAndUpdate({ _id: id }, { password: hashPassword })
 
     // reset success
     res.status(200).json({ msg: "Password was updated successfully." });
