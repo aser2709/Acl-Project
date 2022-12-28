@@ -5,6 +5,47 @@ const validator = require('validator')
 
 const Schema = mongoose.Schema
 
+const youtubeLinkScehma = new Schema({
+  _id:{
+    type: String
+  },
+  youtubelink:{
+      type:String,
+      required: true
+  },
+  short_description:{
+      type:String,
+      required: true
+  }
+})
+const subtitleSchema = new Schema({
+  _id:{
+    type: String
+  },
+  name:{
+      type:String,
+      required: true
+  },
+  youtube:[
+      youtubeLinkScehma
+  ]
+})
+const registeredCoursesSchema = new Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  subtitle:[
+    subtitleSchema,
+  ],
+  short_summary: {
+    type: String,
+    required: true
+  },
+  _id:{
+    type: String
+  }
+})
 const userSchema = new Schema({
 
     email :{
@@ -74,7 +115,10 @@ const userSchema = new Schema({
           message: "Invalid Star Level"
       },*/
       default: {1:1, 2:1, 3:1, 4:1, 5:1}
-  },     
+  },
+  registeredCourses:[
+    registeredCoursesSchema
+  ] 
 }, { timestamps: true }, {toObject:{getters: true, }, toJSON:{getters: true}})
 
 userSchema.statics.signup = async function(email, password, firstName,lastName,username,userType) {

@@ -54,7 +54,7 @@ const CourseForm = () => {
     setFields(fields)
     const instructor = user.user_.firstName +" "+user.user_.lastName;
     const subtitle = fields;
-    const course = { title, price, short_summary, subject, total_hours_course, instructor: instructor, rating: 0, subtitle: subtitle, video_preview };
+    const course = { title, price, short_summary, subject, total_hours_course, instructor: instructor, rating: 1, subtitle: subtitle, video_preview };
 
     const response = await fetch('/api/courses',{
       method: 'POST',
@@ -180,5 +180,4 @@ const CourseForm = () => {
     </form>
   )
 }
-
 export default CourseForm

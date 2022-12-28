@@ -56,6 +56,7 @@ header a {
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
+  cursor: pointer;
 }
 .course-details p {
   margin: 0;
@@ -362,12 +363,11 @@ input[type="checkbox"]
   left: 20%;
 }
 .subtitle-single-course{
-  position: absolute;
-  bottom: -320%;
+  position: relative;
   left: 9%;
   border: 1px solid var(--primary);
   border-radius: 10px;
-  margin: 1mm;
+  margin: 0.5mm;
   padding-left: 1mm;
   padding-right: 1mm;
   width: fit-content;

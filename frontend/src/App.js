@@ -100,7 +100,7 @@ function App() {
               element={<Forgot/>}
             />
             <Route
-              path="/resetpassword"
+              path="/resetpassword/:id"
               element={<Reset/>}
             />
               

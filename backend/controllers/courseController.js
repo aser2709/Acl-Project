@@ -183,10 +183,6 @@ const getRating = async (req,res) =>{
     return final 
 }
 
-
-
-
-
 module.exports = {
     createCourse,
     getCourses,

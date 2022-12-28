@@ -24,7 +24,7 @@ export const SidebarDataTrainee =
     subNav: [
         {
             title: 'Your Courses',
-            path: '#',
+            path: '/yourCourses',
             icon: <IoIcons.IoIosPaper />
           },
     ]

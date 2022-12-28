@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const sendMail = require("../helpers/sendMail");
 const createTokenforgot = require("../helpers/createTokenforgot");
+const mongoose = require('mongoose')
 
 
 const createToken = (_id) => {
@@ -79,8 +80,8 @@ const forgotPassword = async (req,res) => {
     const ac_token = createTokenforgot.access({ id: user.id });
 
     // send email
-    const url = `http://localhost:3000/user/reset-password/${ac_token}`;
-    const name = user.name;
+    const url = `http://localhost:3000/resetpassword/${user._id}`;
+    const name = user.firstName;
     sendMail.sendEmailReset(email, url, "Reset your password", name);
 
     // success
@@ -96,16 +97,14 @@ const resetpassword = async (req,res) => {
   try {
     // get password
     const { password } = req.body;
+    const {id} = req.params
 
     // hash password
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
 
     // update password
-    await User.findOneAndUpdate(
-      { _id: req.user.id },
-      { password: hashPassword }
-    );
+    const userUpdate = await User.findOneAndUpdate({ _id: id }, { password: hashPassword })
 
     // reset success
     res.status(200).json({ msg: "Password was updated successfully." });
@@ -113,6 +112,48 @@ const resetpassword = async (req,res) => {
     res.status(500).json({ msg: err.message });
   }
 
+}
+
+//Add registered course
+const AddRegisteredCourse = async (req,res) => {
+  const course = req.body
+  try{
+  const user_email = course.email
+  if(user_email){
+  const addedCourse = await User.updateOne(
+    {email: user_email},
+    {$push: {
+      registeredCourses: course.xCourse,
+    },
+  },
+  {upsert: true}
+  );
+  res.status(200).json(addedCourse)
+  }
+  }catch(error){
+    res.status(400).json({error:error.message})
+    console.log("Im here")
+  }
+}
+//get All registered Courses for a user
+const getRegisteredCourses = async (req,res) =>{
+  const email = req.headers.body
+  try{
+    const yourCourses = await User.findOne({email:email},{registeredCourses:1,_id:0})
+    res.status(200).json(yourCourses)
+  } catch(error){
+    res.status(400).json({error: error.message})
+  }
+}
+//get a registered Course for a user
+const getSingleCourseUser = async (req,res) => {
+  const { id } = req.params
+  try{
+  const yourCourse = await User.findOne({"registeredCourses._id": id},{registeredCourses:1,_id:0})
+  res.status(200).json(yourCourse)
+  } catch(error){
+    res.status(400).json({error: error.message})
+  }
 }
 const addRating = async(req,res) =>{
   const rating = req.body
@@ -122,7 +163,7 @@ const addRating = async(req,res) =>{
       return res.status(400).json({ error: 'No such instructor' })
   }
   const instructor = await Course.findById({ _id: id })
-  
+
   if (rating.rating == '1'){
       instructor.rating = 1
       instructor.markModified('rating')
@@ -148,7 +189,7 @@ const addRating = async(req,res) =>{
       instructor.markModified('rating')  
       instructor.save()
   }
- 
+
 
   //console.log(instructor)
   res.status(200)
@@ -175,4 +216,4 @@ const getRating = async (req,res) =>{
   return final 
 }
 
-module.exports = { signupUser, loginUser, logout, changePassword, forgotPassword, resetpassword, addRating, getRating }
+module.exports = { signupUser, loginUser, logout, changePassword, forgotPassword, resetpassword,AddRegisteredCourse,getRegisteredCourses,getSingleCourseUser,getRating,addRating }

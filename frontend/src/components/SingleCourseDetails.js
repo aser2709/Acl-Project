@@ -25,7 +25,6 @@ const SingleCourseDetails = ({course}) => {
         </div>
         <p><strong>Length (hours): </strong>{course.total_hours_course}</p>
         <p><strong>Subject: </strong>{course.subject}</p>
-        <p><strong>Rating: </strong>{course.rating.get}</p>
         <p><strong>Instructor: </strong>{course.instructor}</p>
     </div>
   )

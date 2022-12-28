@@ -30,8 +30,7 @@ const YourCourses = () =>{
         if(user){
             fetchCourses()
             }
-    }, [dispatch, user])
-    
+    }, [dispatch, user])    
     return (
         <div className="home">
     
