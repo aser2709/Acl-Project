@@ -70,10 +70,10 @@ const SingleCourse = () => {
   return (
     <div className="home">
    
-        <div className='courses'>
-                {courses && 
-                    <SingleCourseDetails course={courses}/>
-                }
+       { user && <div className='courses'>
+                        {courses && 
+                            <SingleCourseDetails course={courses}/>
+                        }
                 <div className='subtitles-single-course'>
                     {courses && <strong>Subtitles: </strong>}
                         <div className='subtitle-single-course'>
@@ -82,13 +82,17 @@ const SingleCourse = () => {
                                 <p>{courses.name}</p>
                                 ))}
                         </div>
-                        </div>
+                </div>
                       
                 
                 {
                     user && user.user_.userType=="Individual trainee" &&<button className='join-course' onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={toNavigate}>{text}</button>
                 }
-          </div>  
+                </div> }
+                {
+                            !user && <div className='error'>Anuthorized to be here</div>
+                         } 
+                   { user &&
                     <form className='Rate' onSubmit={handleRating}>
                     <label>Rate this course!</label>
                     <input 
@@ -98,7 +102,10 @@ const SingleCourse = () => {
                     />
                     <button>Rate</button>
                     </form>
+                    }
+                    
                     <div></div>
+                    {user &&
                     <form className='Rate' onSubmit={handleRating}>
                     <label>Rate this instructor!</label>
                     <input 
@@ -108,7 +115,9 @@ const SingleCourse = () => {
                     />
                     <button>Rate</button>
                     </form>
+                    }
     </div>
+    
   )
 }
 
