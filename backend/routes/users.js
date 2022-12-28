@@ -16,7 +16,7 @@ router.get('/logout', logout)
 
 //forgot password
 router.post("/forgotpassword", forgotPassword);
-router.post("/resetpassword", requireAuth, resetpassword);
+router.post("/resetpassword/:id",resetpassword);
 
 router.post('/:id', addRating )
 router.get('/:id', getRating )
