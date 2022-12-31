@@ -20,7 +20,7 @@ import YourCourses from './pages/YourCourses'
 import Forgot from './pages/forgot'
 import Reset from './pages/reset'
 import Adminlogin from './pages/AdminLogin'
-
+import Search from './components/Search'
 
 function App() {
   const { user } = useAuthContext()
@@ -35,7 +35,11 @@ function App() {
             <Route 
               path="/" 
               element={<YourCourses/>} 
-            />                                                              
+            />      
+            <Route 
+              path="/Search" 
+              element={<Search/>} 
+            />                                                           
             <Route 
               path="/login" 
               element={!user ? <Login /> : <Navigate to="/" />} 
