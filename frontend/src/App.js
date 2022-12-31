@@ -32,7 +32,7 @@ import { InstructorCourses } from './pages/InstructorCourses'
 import Adminlogin from './pages/AdminLogin'
 import Addreport from './pages/AddReport'
 import Search from './components/Search'
-import UserReports from './pages/UserReports'
+import UserReports from './pages/userReports'
 
 function App() {
   const { user } = useAuthContext()

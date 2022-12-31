@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useCoursesContext } from "../hooks/useCoursesContext"
 
 
-import ReportDetails from "../components/ReportDetails"
+import ReportDetails from "../components/reportDetails"
 
 
 const UserReports = () =>{
