@@ -69,6 +69,9 @@ const close = async () => {
             <p><strong>Instructor: </strong>{course.instructor}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
             <h1 className="h1-price">Price: {course.price}</h1>
+            <button   className = "report-problem" onClick={() => window.location.href=`/adding?courseId=${course._id}&courseName=${course.title}`}>
+                <h3> Report a Problem </h3>
+            </button>
             <p>{formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
             {
                 user && user.user_.userType=="Instructor" &&

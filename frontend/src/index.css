@@ -413,6 +413,14 @@ input[type="checkbox"]
 }
 
 
+.unresolved{
 
+  color: red;
+}
+
+.resolved{
+
+  color: green;
+}
 
 

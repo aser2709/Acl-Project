@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 
 //get all user reports
 const getUserReports = async (req, res) => {
-    const user_email = req.user.email
+    const user_email = req.headers.email
+    console.log(user_email)
     //req.body
 
     const reports = await Report.find({user_email}).sort({ createdAt: -1 })
@@ -51,14 +52,16 @@ const createReport = async (req, res) => {
 
     const user_email = req.body.userEmail
     const course_id = req.body.courseId
+    const course_name = req.body.courseName
 
     console.log(course_id)
+    console.log(req.body)
     const resolved = false
     console.log(user_email)
 
     const report = await
 
-    Report.create({user_email,course_id,Type,Body,resolved})
+    Report.create({user_email,course_id,course_name,Type,Body,resolved})
     res.status(200).json(report)
     
     } catch (error){

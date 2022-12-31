@@ -22,6 +22,7 @@ import Reset from './pages/reset'
 import Adminlogin from './pages/AdminLogin'
 import Addreport from './pages/AddReport'
 import Search from './components/Search'
+import UserReports from './pages/UserReports'
 
 function App() {
   const { user } = useAuthContext()
@@ -111,6 +112,10 @@ function App() {
             <Route
               path="/adding"
               element={<Addreport/>}
+            />
+            <Route
+              path="/myreports"
+              element={<UserReports/>}
             />
               
           </Routes>

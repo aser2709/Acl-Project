@@ -9,6 +9,11 @@ const reportSchema = new Schema({
       type: String,
       required: true
     },
+    course_name: {
+      type: String,
+      required: true
+
+    },
 
     Type: {
         type: String,
