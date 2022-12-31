@@ -329,6 +329,12 @@ input[type="checkbox"]
   position: absolute;
   right: 20px;
   top: 75%;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  color: white;
 }
 .h1-price{
   font-size: 6mm;
@@ -373,9 +379,15 @@ input[type="checkbox"]
   width: fit-content;
 }
 .join-course{
-  background-color: #28bac2;
   position: relative;
   left: 106%;
+  background-color: var(--primary);
+  color: white;
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
 }
 .join-course:hover{
   background-color:rgb(255, 255, 255);
@@ -383,8 +395,10 @@ input[type="checkbox"]
   position: relative;
   left: 106%;
   border: 1px solid var(--primary);
-  border-radius: 20px;
+  border-radius: 30px;
   cursor: pointer;
+  font-size: larger;
+  width: 30mm;
 }
 .success {
   color: #270;

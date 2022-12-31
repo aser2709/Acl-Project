@@ -30,6 +30,7 @@ const SingleCourse = () => {
             }
         })
         const json = await response.json()
+        console.log(json)
       }
     
 
@@ -86,7 +87,7 @@ const SingleCourse = () => {
                       
                 
                 {
-                    user && user.user_.userType=="Individual trainee" &&<button className='join-course' onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={toNavigate}>{text}</button>
+                    user && user.user_.userType==="Individual trainee" &&<button className='join-course' onMouseEnter={mouseEnter} onMouseLeave={mouseLeave} onClick={toNavigate}>{text}</button>
                 }
                 </div> }
                 {

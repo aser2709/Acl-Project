@@ -10,7 +10,6 @@ const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' })
 }
 
-
 // login a user
 const loginUser = async (req, res) => {
   const { email, password } = req.body
@@ -43,6 +42,7 @@ const signupUser = async (req, res) => {
     res.status(400).json({ error: error.message })
   }
 }
+
 const logout = async (req, res) => {
 
   res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
@@ -98,7 +98,9 @@ const resetpassword = async (req,res) => {
     // get password
     const { password } = req.body;
     const {id} = req.params
-
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'No such user' })
+  }
     // hash password
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
@@ -135,6 +137,7 @@ const AddRegisteredCourse = async (req,res) => {
     console.log("Im here")
   }
 }
+
 //get All registered Courses for a user
 const getRegisteredCourses = async (req,res) =>{
   const email = req.headers.body
@@ -145,16 +148,66 @@ const getRegisteredCourses = async (req,res) =>{
     res.status(400).json({error: error.message})
   }
 }
+
 //get a registered Course for a user
 const getSingleCourseUser = async (req,res) => {
   const { id } = req.params
+  const email = req.headers.body
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'No such Course' })
+  }
   try{
-  const yourCourse = await User.findOne({"registeredCourses._id": id},{registeredCourses:1,_id:0})
-  res.status(200).json(yourCourse)
+  const yourCourse = await User.findOne(
+    {email:email},
+    {"registeredCourses":1,_id:0},
+    );
+    const filter = yourCourse.registeredCourses.filter(r=>r._id===id)
+    res.status(200).json(filter)
   } catch(error){
     res.status(400).json({error: error.message})
   }
 }
+
+//get All subtitles from a registered Course
+const getAllSubtitles = async (req,res) =>{
+  const {id} = req.params
+  const email = req.headers.body
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'No such Course' })
+}
+  try {
+    const allSubtitles = await User.findOne(
+      {email:email},
+      {registeredCourses:1,_id:0}
+    )
+    const filter = allSubtitles.registeredCourses.filter(r=>r._id===id)
+    res.status(200).json(filter)
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
+}
+
+//get a single subtitle from a registered Course
+const getSubtitle = async (req,res)=>{
+  const { id } = req.params
+  const email = req.headers.body
+  const name  = req.headers.name
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'No such Subtitle' })
+}
+  try{
+  const yourSubtitle = await User.findOne(
+    {email:email},
+    {registeredCourses:1,_id:0})
+  const filter = yourSubtitle.registeredCourses.filter(r=>r._id===id)
+  const subtitle = filter[0].subtitle.filter(r=>r.name ===name)
+  res.status(200).json(subtitle[0])
+  } catch(error){
+    res.status(400).json({error: error.message})
+  }
+}
+
+//Add Rating
 const addRating = async(req,res) =>{
   const rating = req.body
   console.log(rating.rating)
@@ -195,6 +248,7 @@ const addRating = async(req,res) =>{
   res.status(200)
 }
 
+//Get Rating
 const getRating = async (req,res) =>{
   const { id } = req.params
   const instructor = await User.findById({ _id: id })
@@ -216,4 +270,4 @@ const getRating = async (req,res) =>{
   return final 
 }
 
-module.exports = { signupUser, loginUser, logout, changePassword, forgotPassword, resetpassword,AddRegisteredCourse,getRegisteredCourses,getSingleCourseUser,getRating,addRating }
+module.exports = { signupUser, loginUser, logout, changePassword, forgotPassword, resetpassword,AddRegisteredCourse,getRegisteredCourses,getSingleCourseUser,getRating,addRating,getSubtitle,getAllSubtitles }

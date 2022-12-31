@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useCoursesContext} from "../hooks/useCoursesContext"
 import { useAuthContext } from "../hooks/useAuthContext"
-import { useState } from "react"
+
 
 //components
 import CourseDetails from "../components/CourseDetails"
@@ -21,7 +21,6 @@ const YourCourses = () =>{
                 headers: {'Authorization': `Bearer ${user.token}`},
             })
             const json = await response.json()
-
             if(response.ok){
                 dispatch({type:'SET-COURSES',payload: json})
             }

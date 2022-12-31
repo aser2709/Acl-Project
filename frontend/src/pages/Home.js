@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useCoursesContext} from "../hooks/useCoursesContext"
 import { useAuthContext } from "../hooks/useAuthContext"
-import { Link, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 
 //components
 import CourseDetails from "../components/CourseDetails"

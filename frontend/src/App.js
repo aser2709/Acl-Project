@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
 
+/** Redux Store */
+import store from './redux/store'
+import { Provider } from 'react-redux'
+
 // pages & components
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -10,13 +14,19 @@ import AddCourse from './pages/AddCourse'
 import SingleCourse from './pages/SingleCourse'
 import Profile from './pages/Profile'
 import AdminHome from './pages/AdminHome'
-import Quiz from './pages/Quiz'
 import Post from './components/Certification'
 import YoutubeNotes from './components/YoutubeNotes'
 import Support from './pages/Support'
 import YourCourses from './pages/YourCourses'
 import Forgot from './pages/forgot'
 import Reset from './pages/reset'
+import Main from './components/Quiz/Main'
+import Quiz from './components/Quiz/Quiz'
+import Result from './components/Quiz/Result'
+import { UnAuthorized } from './pages/UnAuthorized'
+import CreateQuiz from './components/Quiz/CreateQuiz'
+import { RegisteredSubtitles } from './pages/RegisteredSubtitles'
+import { InstructorCourses } from './pages/InstructorCourses'
 
 
 function App() {
@@ -25,6 +35,7 @@ function App() {
 
   return (
     <div className="App">
+      <Provider store={store}>
       <BrowserRouter>
         <Navbar/>
         <div className="pages">
@@ -42,10 +53,6 @@ function App() {
               element={<AdminHome/>} 
             /> 
             <Route 
-              path="/Quiz" 
-              element={<Quiz />} 
-            /> 
-            <Route 
               path="/signup" 
               element={!user ? <Signup /> : <Navigate to="/" />} 
             />
@@ -56,10 +63,15 @@ function App() {
             <Route
               path="/course"
               element={<SingleCourse/>}
-            /><Route
+            />
+            <Route
             path="/yourCourses"
             element={<Home/>}
-          />
+            />
+            <Route
+            path="/yourInCourses"
+            element={<InstructorCourses/>}
+            />
             <Route
               path="/profile"
               element={<Profile/>}
@@ -84,10 +96,34 @@ function App() {
               path="/resetpassword/:id"
               element={<Reset/>}
             />
-              
+            <Route
+              path="/quiz"
+              element={<Main/>}
+            />
+            <Route
+              path="/quiz/:id"
+              element={<Quiz/>}
+            />
+            <Route
+              path="/result/:id"
+              element={<Result/>}
+            />
+            <Route
+              path="/unauthorized"
+              element={<UnAuthorized/>}
+            />
+            <Route
+              path="/createQuizcourse/:id"
+              element={<CreateQuiz/>}
+            />
+            <Route
+              path="/subtitles/:id"
+              element={<RegisteredSubtitles/>}
+            />
           </Routes>
         </div>
       </BrowserRouter>
+      </Provider>
     </div>
   );
   

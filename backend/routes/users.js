@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { logout, signupUser, loginUser, changePassword, forgotPassword, resetpassword, addRating, getRating, AddRegisteredCourse, getRegisteredCourses, getSingleCourseUser } = require('../controllers/userController')
+const { logout, signupUser, loginUser, changePassword, forgotPassword, resetpassword, addRating, getRating, AddRegisteredCourse, getRegisteredCourses, getSingleCourseUser, getSubtitle, getAllSubtitles } = require('../controllers/userController')
 
 const requireAuth = require("../middleware/requireAuth");
 
@@ -32,5 +32,12 @@ router.patch('/registerCourse',AddRegisteredCourse);
 router.get('/registeredCourse/all',getRegisteredCourses);
 //get Single Course a user registered for
 router.get('/courses/:id',getSingleCourseUser);
+
+
+//Get subtitles for a registered course
+router.get('/registeredCourse/subtitles/:id',getAllSubtitles)
+
+//Get a single Subtitl for a registered course
+router.get('/registeredCourse/subtitle/:id',getSubtitle)
 
 module.exports = router

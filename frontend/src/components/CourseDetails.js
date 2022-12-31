@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom"
-import { useCoursesContext } from "../hooks/useCoursesContext"
+
 import { useAuthContext } from "../hooks/useAuthContext"
 import Popup from "../components/Popup"
 import { useState } from "react"
@@ -10,30 +9,12 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 const CourseDetails = ({course}) => {
 
-    const {dispatch} = useCoursesContext()
     const {user} = useAuthContext()
     const [buttonPopup,setButtonPopup] = useState(false);
 
 
 
-const handleClick = async () =>{
 
-    if(!user){
-        return
-    }
-
-    const response = await fetch('api/courses/' + course._id,{
-        method: 'DELETE',
-        headers:{
-            'Authorization': `Bearer ${user.token}`
-         }
-    })
-    const json = await response.json()
-
-    if (response.ok){
-    dispatch({type:'DELETE_COURSE', payload: json})
-    }
-}
 const buyCourse = async () =>{
     setButtonPopup(true);
 }
@@ -70,10 +51,6 @@ const close = async () => {
             <p><strong>Subject: </strong>{course.subject}</p>
             <h1 className="h1-price">Price: {course.price}</h1>
             <p>{formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
-            {
-                user && user.user_.userType=="Instructor" &&
-            <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
-            }
             {
                 user && user.user_.userType=="Individual trainee" &&
                 <button className="buy-course" onClick={buyCourse}>Register</button>
