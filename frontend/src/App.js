@@ -20,6 +20,7 @@ import YourCourses from './pages/YourCourses'
 import Forgot from './pages/forgot'
 import Reset from './pages/reset'
 import Adminlogin from './pages/AdminLogin'
+import Addreport from './pages/AddReport'
 
 
 function App() {
@@ -102,6 +103,10 @@ function App() {
             <Route
               path="/resetpassword/:id"
               element={<Reset/>}
+            />
+            <Route
+              path="/adding"
+              element={<Addreport/>}
             />
               
           </Routes>

@@ -42,5 +42,6 @@ router.get("/admin/logout", async (req,res) => {
     res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
     res.status(200).json({ mssg: "Logged Out Successfully" });
   });
+  
 
 module.exports = router;

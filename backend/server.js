@@ -8,7 +8,7 @@ const userRoutes = require('./routes/users')
 const adminCont = require("./controllers/adminController");
 const instructorCont = require("./controllers/adminController");
 const corporatetraineeCont = require("./controllers/adminController");
-
+const adminrequest = require("./routes/request")
 
 //express app
 const app = express()
@@ -30,6 +30,8 @@ app.use((req, res, next) => {
 
   
 //routes
+
+app.use("/admin",adminrequest);
 app.use('/api/courses',courseRoutes)
 app.use('/api/user',userRoutes)
 app.post('/filtercourse',filterCourse)

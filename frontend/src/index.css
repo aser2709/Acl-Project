@@ -394,6 +394,24 @@ input[type="checkbox"]
   border-radius: 3px 3px 3px 3px;
 }
 
+.report-problem{
+  background-color: #919595;
+  position: relative;
+  font-size: 10px;
+  font-weight: bolder;
+  font-style: italic;
+  height: auto;
+  border-style:solid;
+  top: 4%;
+  
+  
+}
+
+.report-problem:hover{
+
+  background-color: #28bac2;
+}
+
 
 
 

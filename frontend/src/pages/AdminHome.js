@@ -15,6 +15,11 @@ const AdminHome = () =>{
         <div className="">
         <button className='Support_Button' onClick={toAddUser}>Add User</button>
         <button className='Support_Button' onClick={toAddAdmin}>Add Admin</button>
+         <button className='Support_Button' onClick={toAddAdmin}>Refund</button>
+         <button className='Support_Button' onClick={toAddAdmin}>Problems</button>
+         <button className='Support_Button' onClick={toAddAdmin}>Requests</button>
+         <button className='Support_Button' onClick={toAddAdmin}>Access</button>
+         <button className='Support_Button' onClick={toAddAdmin}>Set Promotions</button>
             
         </div>
     )

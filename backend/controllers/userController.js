@@ -216,4 +216,5 @@ const getRating = async (req,res) =>{
   return final 
 }
 
+
 module.exports = { signupUser, loginUser, logout, changePassword, forgotPassword, resetpassword,AddRegisteredCourse,getRegisteredCourses,getSingleCourseUser,getRating,addRating }
