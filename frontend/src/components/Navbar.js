@@ -21,10 +21,11 @@ const Navbar = () => {
   }
   return (
     <header>
+
       <div className="container">
-      {!user && <SidebarGuest/>}
-        {user && user.user_.userType==="Instructor" && <Sidebar/>}
+      {user && user.user_.userType==="Instructor" && <Sidebar/>}
         {user && (user.user_.userType==="Individual trainee" || user.user_.userType==="Corporate trainee") && <SidebarTrainee/>}
+      {!user && <SidebarGuest/>}
         <Link to="/">
           <h1>Coree</h1>
         </Link>

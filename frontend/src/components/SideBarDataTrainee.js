@@ -27,6 +27,11 @@ export const SidebarDataTrainee =
             path: '/yourCourses',
             icon: <IoIcons.IoIosPaper />
           },
+          {
+            title: 'Reports',
+            path: '/myreports',
+            icon: <IoIcons.IoIosPaper />
+          }
     ]
   },
   {

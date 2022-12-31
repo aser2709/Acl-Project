@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { logout, signupUser, loginUser, changePassword, forgotPassword, resetpassword, addRating, getRating, AddRegisteredCourse, getRegisteredCourses, getSingleCourseUser, getSubtitle, getAllSubtitles } = require('../controllers/userController')
+const { logout, updateEmail, signupUser, loginUser, changePassword, forgotPassword, resetpassword, addRating, getRating, AddRegisteredCourse, getRegisteredCourses, getSingleCourseUser, getBiography, updateBiography, getSubtitle, getAllSubtitles } = require('../controllers/userController')
 
 const requireAuth = require("../middleware/requireAuth");
 
@@ -24,6 +24,15 @@ router.get('/:id', getRating )
 
 //changePassword
 router.patch('/change_password',changePassword)
+
+//chaneEmail
+router.patch('/change_email', updateEmail)
+
+//getbioGraphy
+router.get('/get_biography/bio', getBiography)
+
+//chanebiography
+router.patch('/change_biography', updateBiography)
 
 //Add a registered course
 router.patch('/registerCourse',AddRegisteredCourse);

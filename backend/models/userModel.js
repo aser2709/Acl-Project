@@ -74,6 +74,11 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    biography:{
+      type: String,
+      required: false,
+      
+  },
     password:{
     type: String,
     required: true

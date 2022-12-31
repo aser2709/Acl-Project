@@ -14,6 +14,8 @@ import AddCourse from './pages/AddCourse'
 import SingleCourse from './pages/SingleCourse'
 import Profile from './pages/Profile'
 import AdminHome from './pages/AdminHome'
+import AddUser from './pages/AddUser'
+import AddAdmin from './pages/AddAdmin'
 import Post from './components/Certification'
 import YoutubeNotes from './components/YoutubeNotes'
 import Support from './pages/Support'
@@ -27,7 +29,10 @@ import { UnAuthorized } from './pages/UnAuthorized'
 import CreateQuiz from './components/Quiz/CreateQuiz'
 import { RegisteredSubtitles } from './pages/RegisteredSubtitles'
 import { InstructorCourses } from './pages/InstructorCourses'
-
+import Adminlogin from './pages/AdminLogin'
+import Addreport from './pages/AddReport'
+import Search from './components/Search'
+import UserReports from './pages/UserReports'
 
 function App() {
   const { user } = useAuthContext()
@@ -43,14 +48,34 @@ function App() {
             <Route 
               path="/" 
               element={<YourCourses/>} 
-            />                                                              
+            />      
+            <Route 
+              path="/Search" 
+              element={<Search/>} 
+            />                                                           
             <Route 
               path="/login" 
               element={!user ? <Login /> : <Navigate to="/" />} 
             />
+            
+            
             <Route 
               path="/admin" 
+              element={<Adminlogin/>} 
+            /> 
+            <Route 
+              path="/adminHome" 
               element={<AdminHome/>} 
+            /> 
+            
+            <Route 
+              path="/addadmin" 
+              element={<AddAdmin/>} 
+            /> 
+            
+            <Route 
+              path="/adduser" 
+              element={<AddUser/>} 
             /> 
             <Route 
               path="/signup" 
@@ -95,6 +120,14 @@ function App() {
             <Route
               path="/resetpassword/:id"
               element={<Reset/>}
+            />
+            <Route
+              path="/adding"
+              element={<Addreport/>}
+            />
+            <Route
+              path="/myreports"
+              element={<UserReports/>}
             />
             <Route
               path="/quiz"
