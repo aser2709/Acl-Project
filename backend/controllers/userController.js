@@ -63,6 +63,33 @@ const changePassword = async (req, res) => {
     res.status(200).json({ mssg: "Password changed Successfully" })
   }
 }
+//update email
+const updateEmail = async (req, res) => {
+ 
+  const { email, newEmail} = req.body
+  
+  const user = await User.findOneAndUpdate({email: email},{email: newEmail})
+  
+  res.status(200).json(user)
+}
+
+//Biography
+const getBiography = async (req, res) => {
+  
+  const email = req.headers.body
+  
+  const user = await User.find({email: email},{biography: 1})
+
+  res.status(200).json(user)
+}
+const updateBiography = async (req, res) => {
+ 
+  const { email, biography} = req.body
+  
+  const user = await User.findOneAndUpdate({email: email},{biography: biography})
+  
+  res.status(200).json(user)
+}
 
 const forgotPassword = async (req,res) => {
   try {
@@ -216,5 +243,4 @@ const getRating = async (req,res) =>{
   return final 
 }
 
-
-module.exports = { signupUser, loginUser, logout, changePassword, forgotPassword, resetpassword,AddRegisteredCourse,getRegisteredCourses,getSingleCourseUser,getRating,addRating }
+module.exports = { signupUser,getBiography,updateBiography, updateEmail, loginUser, logout, changePassword, forgotPassword, resetpassword,AddRegisteredCourse,getRegisteredCourses,getSingleCourseUser,getRating,addRating }
