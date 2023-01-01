@@ -160,7 +160,7 @@ const AddRegisteredCourse = async (req,res) => {
     {email: user_email},
     {$push: {
       registeredCourses: course.xCourse,
-    },
+    },  
   },
   {upsert: true}
   );

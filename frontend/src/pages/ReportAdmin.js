@@ -4,10 +4,10 @@ import { useState } from "react"
 import { useCoursesContext } from "../hooks/useCoursesContext"
 
 
-import ReportDetails from "../components/reportDetails"
+import ReportAdminDetails from "../components/ReportAdminDetails"
 
 
-const UserReports = () =>{
+const AdminReports = () =>{
     const {user} = useAuthContext()
     const {courses,dispatch}=useCoursesContext()
     
@@ -15,14 +15,13 @@ const UserReports = () =>{
 
     useEffect(()=>{
         const fetchReports = async () =>{
-        const userEmail = user.email;
-        const response = await fetch('/api/reports/yourReports', {
+        const response = await fetch('/api/reports/allReports', {
                 method: 'GET',
-                headers: {'Authorization': `Bearer ${user.token}`,
-                email: userEmail
+                headers: {'Authorization': `Bearer ${user.token}`
             },
             })
             const json = await response.json()
+            console.log(json)
             
 
             if(response.ok){
@@ -42,7 +41,7 @@ const UserReports = () =>{
             <div className="reports">
 
                 { courses && Array.from(courses).map((report)=>(
-                    <ReportDetails key={courses} report={report}/>
+                    <ReportAdminDetails key={courses} report={report}/>
                 ))}
             </div>
              
@@ -51,4 +50,4 @@ const UserReports = () =>{
     )
 }
 
-export default UserReports
+export default AdminReports
