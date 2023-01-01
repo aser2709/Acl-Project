@@ -1,5 +1,7 @@
 const Course = require('../models/courseModel')
+const Result = require('../models/resultModel')
 const mongoose = require('mongoose')
+
 
 //get all instructor courses
 const getCourses = async (req, res) => {
@@ -63,12 +65,7 @@ const createCourse = async (req, res) => {
         if(!subject){
             emptyFields.push('subject')
         }
-    
-    
-       // if(emptyFields.length > 0){
-          //  return res.status(400).json({error: 'Please fill in the empty fields.', emptyFields})
-       // }
-        
+
         try{
         const user_id = req.user._id
         const course = await
@@ -79,9 +76,6 @@ const createCourse = async (req, res) => {
             res.status(400).json({error: error.message} + "test")
         }
     }
-    
-    
-
 
 //delete a course
 const deleteCourse = async (req, res) => {
@@ -118,11 +112,13 @@ const updateCourse = async (req, res) => {
 
     res.status(200).json(course)
 }
+
 //Filter a course
 const filterCourse = async (req, res) => {
     const course = await Course.find({ ...req.body }).sort({ createdAt: -1 })
     res.status(200).json(course)
 }
+
 const addRating = async(req,res) =>{
     const rating = req.body
     console.log(rating.rating)
@@ -184,6 +180,191 @@ const getRating = async (req,res) =>{
     return final 
 }
 
+//Get Subtitles for a Course
+const getSubtitles = async (req,res) =>{
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'No such Subtitle' })
+    }
+    const subtitle = await Course.find({_id:id},{
+        subtitle:1,_id:0
+    })
+    if(subtitle==""){
+        res.status(400).json({ error: 'No such Subtitle' })
+    }else{
+    res.status(200).json(subtitle[0])
+    }
+}
+
+//Create Quiz for a Course
+const addQuizCourse = async (req,res) =>{
+    try {
+        const {questions,answers} = req.body
+        const {id} = req.params
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: 'No such course' })
+        }
+        const course = await Course.updateOne(
+            {_id:id},
+            {
+                exercise: {questions,answers}
+
+            },
+            {upsert: true}
+            );
+        res.status(200).json(course)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+//Get Course Quiz
+const getQuizCourse = async (req,res) =>{
+    const {id} = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'No such course' })
+    }
+    try {
+        const quiz = await Course.find({_id:id},{exercise:1,_id:0})
+        if (quiz=="") {
+            return res.status(404).json({ error: 'No such course' })
+        }
+        res.status(200).json(quiz)
+        
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+//Create Quiz for a subtitle
+const addQuizSubtitle = async (req,res) =>{
+    try {
+        const {id} = req.params
+        const {questions,answers} = req.body
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: 'No such Subtitle' })
+        }
+        const subtitle = await Course.updateOne(
+        {"subtitle._id":id},
+            { $set: {"subtitle.$[elem].exercise": {questions,answers}}},
+            {arrayFilters: [{"elem._id": {$eq: id}}]
+        }
+        );
+    res.status(200).json(subtitle)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+    
+}
+
+//Get Quiz for a subtitle
+const getQuizSubtitle = async (req,res) =>{
+    const { id } = req.params
+    const name = req.headers.body
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'No such Subtitle' })
+    }
+    const subtitle = await Course.find({"subtitle._id":id},{
+        subtitle:1,_id:0
+    })
+    if(subtitle==""){
+        res.status(400).json({ error: 'No such Subtitle' })
+    }else{
+        const fill = subtitle[0].subtitle
+        const filt = fill.filter(r => r.name === name )
+        console.log(filt)
+        if(filt==""){
+            res.status(400).json({ error: 'No such Subtitle' })
+        }else{
+            res.status(200).json(filt[0].exercise)
+        }
+    }
+}
+
+//Create result for a quiz Course
+const addResultCourse = async (req,res) =>{
+    try {
+        const { username , result,attempts,points,achived } = req.body;
+        const {id} = req.params
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: 'No such course' })
+        }
+        if (!username && !result ) throw new Error("Data not Provided")
+        const course = await Course.updateOne(
+            {_id:id},
+            {$push: {
+                results: { username , result,attempts,points,achived }
+                },
+            },
+            {upsert: true}
+            );
+        Result.create({ username , result,attempts,points,achived },function(err,data){
+            res.json({mssg: "Result Saved Successfully"})
+        })
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+//Create result for a quiz subtitle
+const addResultSubtitle = async (req,res) => {
+    try {
+        const { username , result,attempts,points,achived } = req.body;
+        const {id} = req.params
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: 'No such Subtitle' })
+        }
+        if (!username && !result ) throw new Error("Data not Provided")
+        const subtitle = await Course.updateOne(
+            {"subtitle._id":id},
+                { $push: {"subtitle.$[elem].results": { username , result,attempts,points,achived }}},
+                {arrayFilters: [{"elem._id": {$eq: id}}]
+            }
+            );
+        res.status(400).json(subtitle)
+    } catch (error) {
+        
+    }
+}
+
+//Get result for a quiz Course
+const getResultCourse = async (req,res) => {
+    try {
+        const {id} = req.params
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: 'No such course' })
+        }
+        const r = await Course.find({_id:id},{results:1,_id:0})
+        res.json(r)
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+//Get result for a quiz subtitle
+const getResultSubtilte = async (req,res) => {
+    const {id} = req.params
+    const {name} = req.body
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'No such Subtitle' })
+    }
+    const subtitle = await Course.find({"subtitle._id":id},{
+        subtitle:1,_id:0
+    })
+    if(subtitle==""){
+        res.status(400).json({ error: 'No such Subtitle' })
+    }else{
+        const fill = subtitle[0].subtitle
+        const filt = fill.filter(r => r.name === name )
+        if(filt==""){
+            res.status(400).json({ error: 'No such Subtitle' })
+        }else{
+            res.status(200).json(filt[0].results)
+        }
+    }
+}
+
+
 module.exports = {
     createCourse,
     getCourses,
@@ -194,5 +375,14 @@ module.exports = {
     getAllCourses,
     addRating, 
     getRating,
+    addQuizCourse,
+    addQuizSubtitle,
+    getQuizCourse,
+    getQuizSubtitle,
+    addResultCourse,
+    addResultSubtitle,
+    getResultCourse,
+    getResultSubtilte,
+    getSubtitles,
     
 }

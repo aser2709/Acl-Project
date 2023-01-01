@@ -1,40 +1,50 @@
 const express = require("express");
+
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const router = express.Router();
-const adminmodel = require('../models/adminModel');
-const userModel = require('../models/userModel');
+const adminmodel = require('../models/adminModel')
 
-router.post("/addadmin", async (req,res) =>{
-    const allAdmins = await adminmodel.find({});
-    var adminExists = false;
-    allAdmins.forEach(currentAdmin => {
-        if(req.body.Username == currentAdmin.Username){
-            adminExists = true;
-        }
-    });
-    if(adminExists){
-        res.send("username already exists");
-    }else{
-        const admin = new adminmodel(req.body);
-        await admin.save();
-        res.send("Created");
+const createTokenforgot = require("../helpers/createTokenforgot");
+
+
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' })
+}
+
+router.post("/admin/signup", async (req,res) =>{
+    const { Username,Password} = req.body
+
+  const userType = 'Admin'
+  try {
+    const admin = await adminmodel.signup(Username,Password,userType)
+    
+    // create a token
+    const token = createToken(admin._id)
+    const user_ = await adminmodel.findOne({Username:Username},{userType:1,_id:0})
+    res.status(200).json({Username,token,user_})
+  } catch (error) {
+    res.status(400).json({ error: error.message })}
+});
+router.post("/admin/login", async (req,res) => {
+    const { Username, Password } = req.body
+  
+    try {
+      const admin = await adminmodel.login(Username, Password)
+  
+      // create a token
+      const token = createToken(admin._id)
+      const user_ = await adminmodel.findOne({Username:Username},{userType:1,_id:0})
+      res.status(200).json({Username,token,user_})
+    } catch (error) {
+      res.status(400).json({ error: error.message })
     }
 });
-router.post("/adduser", async (req,res) =>{
-    const allUser = await userModel.find({});
-    var userExists = false;
-    allUser.forEach(currentUser => {
-        if(req.body.username == currentUser.username){
-            userExists = true;
-        }
-    });
-    if(userExists){
-        res.send("username already exists");
-    }else{
-        const user = new userModel(req.body);
-        await user.save();
-        res.send("Created");
-    }
-});
+router.get("/admin/logout", async (req,res) => {
 
+    res.cookie('jwt', '', { httpOnly: true, maxAge: 1 });
+    res.status(200).json({ mssg: "Logged Out Successfully" });
+  });
+  
 
 module.exports = router;
