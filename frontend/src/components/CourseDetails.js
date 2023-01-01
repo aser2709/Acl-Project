@@ -2,6 +2,8 @@
 import { useAuthContext } from "../hooks/useAuthContext"
 import Popup from "../components/Popup"
 import { useState } from "react"
+import { FaBeer } from 'react-icons/fa';
+import {MdReportProblem} from 'react-icons/md'
 
 //date-fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
@@ -50,12 +52,12 @@ const close = async () => {
             <p><strong>Instructor: </strong>{course.instructor}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
             <h1 className="h1-price">Price: {course.price}</h1>
+            <p>{formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
             { user &&
             <button   className = "report-problem" onClick={() => window.location.href=`/adding?courseId=${course._id}&courseName=${course.title}`}>
-                <h3> Report a Problem </h3>
+                <MdReportProblem size={30} />
             </button>
             }
-            <p>{formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
             {
                 user && user.user_.userType=="Individual trainee" &&
                 <button className="buy-course" onClick={buyCourse}>Register</button>

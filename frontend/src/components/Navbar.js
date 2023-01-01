@@ -45,11 +45,15 @@ const Navbar = () => {
             </div>
           )}
         </nav><nav>
-          <ReactFlagsSelect
+        </nav>
+        <div className='menu-flags'>
+        <ReactFlagsSelect
             selected={selected}
             onSelect={(code) => setSelected(code)}
+            searchable={true}
+            className="menu-flags"
           />
-        </nav>
+        </div>
       </div>
     </header>
   )
