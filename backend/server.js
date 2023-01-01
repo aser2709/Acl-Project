@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const { filterCourse } = require('./controllers/courseController')
 const courseRoutes = require('./routes/courses')
 const userRoutes = require('./routes/users')
+const guestRoutes = require('./routes/guest')
 const adminCont = require("./controllers/adminController");
 const instructorCont = require("./controllers/adminController");
 const corporatetraineeCont = require("./controllers/adminController");
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
   
 //routes
 app.use('/api/courses',courseRoutes)
+app.use('/api/guest',guestRoutes)
 app.use('/api/user',userRoutes)
 app.post('/filtercourse',filterCourse)
 app.use("/api", adminCont);

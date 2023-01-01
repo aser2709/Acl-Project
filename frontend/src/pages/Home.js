@@ -25,12 +25,17 @@ const Home = () =>{
             const response = await fetch('/api/courses', {
                 headers: {'Authorization': `Bearer ${user.token}`},
             })
+
+           
+                
             const json = await response.json()
 
             if(response.ok){
                 dispatch({type:'SET-COURSES',payload: json})
             }
           }
+          
+
           if(user){
             fetchCourses()
             }

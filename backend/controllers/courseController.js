@@ -8,6 +8,7 @@ const getCourses = async (req, res) => {
     const courses = await Course.find({user_id}).sort({ createdAt: -1 })
     res.status(200).json(courses)
 }
+
 //get all courses
 const getAllCourses = async (req, res) => {
 
@@ -192,5 +193,6 @@ module.exports = {
     filterCourse,
     getAllCourses,
     addRating, 
-    getRating
+    getRating,
+    
 }

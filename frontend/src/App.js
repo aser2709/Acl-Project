@@ -17,6 +17,8 @@ import Support from './pages/Support'
 import YourCourses from './pages/YourCourses'
 import Forgot from './pages/forgot'
 import Reset from './pages/reset'
+import Guest from './pages/guest'
+import Tos from './pages/tos'
 
 
 function App() {
@@ -32,7 +34,11 @@ function App() {
             <Route 
               path="/" 
               element={<YourCourses/>} 
-            />                                                              
+            /> 
+            <Route 
+              path="/guest" 
+              element={<Guest/>} 
+            />                                                                
             <Route 
               path="/login" 
               element={!user ? <Login /> : <Navigate to="/" />} 
@@ -75,6 +81,14 @@ function App() {
             <Route
               path="/support"
               element={<Support/>}
+            />
+            <Route
+              path="/tos"
+              element={<Tos/>}
+            />
+            <Route
+              path="/tos"
+              element={<Tos/>}
             />
             <Route
               path="/forgotpassword"
