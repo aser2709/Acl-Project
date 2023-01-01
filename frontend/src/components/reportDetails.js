@@ -23,7 +23,7 @@ const ReportDetails = ({report}) => {
             
             {
                 report.resolved==false &&
-                <p><strong>Status:</strong><div class = "unresolved">Unresolved </div></p>
+                <p><strong>Status:</strong><div class = "unresolved">Pending </div></p>
             
             }
             {
