@@ -10,7 +10,7 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 
 
-const RequestAdminDetails = ({request,}) => {
+const RequestAdminDetails = ({request}) => {
     
     const navigate = useNavigate();
     const {user} = useAuthContext();
@@ -28,9 +28,43 @@ const RequestAdminDetails = ({request,}) => {
             const json = await response.json()
             console.log(json)
 
-    }
 
-    fetchRequests()
+    }
+    const fetchCourse = async() =>{
+        const response = await fetch(`/api/courses/${request.course_id}`,{
+            method: 'GET',
+            headers: {'Authorization': `Bearer ${user.token}`,
+            
+            'Content-Type': 'application/json',
+
+        },
+        })
+        const json = await response.json()
+        console.log(json._id)
+        if(response.ok){
+            const title = json.title
+            const subtitle = json.subtitle
+            const _id = json._id
+            const short_summary = json.short_summary
+            const xCourse = {title,subtitle,short_summary,_id}
+            const email = request.Email
+            const RCourse = {xCourse,email}
+                const addCourse = await fetch('api/user/registerCourse',{
+                    method: 'PATCH',
+                    body: JSON.stringify(RCourse),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user.token}`
+                    }
+                })
+                if(addCourse.ok)
+                {
+                    fetchRequests()
+                }
+
+        }
+    }
+    fetchCourse()
 }
 
     
