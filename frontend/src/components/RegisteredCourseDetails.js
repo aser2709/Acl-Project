@@ -13,10 +13,13 @@ const RegisteredCourseDetails = ({course}) => {
       window.location.href=`/quiz?courseId=${course._id}`
     }
   return (
+    
     <div className='course-details'>
+      const url = `${course.video_preview}`;
       <h4 onClick={handleClick}>{course.title}</h4>
       <p><strong>Short Summary: </strong>{course.short_summary}</p>
       <button onClick={handleQuizClick}>Take Quiz</button>
+      <button onClick={handleQuizClick}>Watch Video</button>
     </div>
   )
 }

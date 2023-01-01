@@ -33,6 +33,18 @@ export const SidebarDataAdmin =
             icon: <IoIcons.IoIosPaper />
           }
         ]
-    },
+    },{
+      title: 'Report',
+      path: '/reportadmin',
+      icon: <AiIcons.AiFillHome/>,
+      iconClosed: <RiIcons.RiArrowDownSFill />,
+      iconOpened: <RiIcons.RiArrowUpSFill />, 
+  },{
+    title: 'Requests',
+    path: '/requestadmin',
+    icon: <AiIcons.AiFillHome/>,
+    iconClosed: <RiIcons.RiArrowDownSFill />,
+    iconOpened: <RiIcons.RiArrowUpSFill />, 
+},
 
 ]

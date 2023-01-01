@@ -454,7 +454,7 @@ input[type="checkbox"]
 
 .unresolved{
 
-  color: red;
+  color: rgb(249, 184, 34);
 }
 
 .resolved{
@@ -465,4 +465,31 @@ input[type="checkbox"]
 .menu-flags{
   background-color: #28bac2;
 }
+.resolve_button{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  width: 13%;
+  padding: 10px;
+  margin-top: -7%;
+  margin-right: 4px;
+  margin-left: 40%;
+  font-family: "Poppins";
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
 
+}.seen_button{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  width: 13%;
+  padding: 10px;
+  margin-right: 4px;
+  margin-left: 60%;
+  font-family: "Poppins";
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+
+}

@@ -1,34 +1,64 @@
 
 import { useAuthContext } from "../hooks/useAuthContext"
 import Popup from "../components/Popup"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FaBeer } from 'react-icons/fa';
 import {MdReportProblem} from 'react-icons/md'
-
+import {useCoursesContext} from '../hooks/useCoursesContext'
 //date-fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 
-const CourseDetails = ({course}) => {
+const CourseDetails = ({ course }) => {
 
-    const {user} = useAuthContext()
-    const [buttonPopup,setButtonPopup] = useState(false);
+    const { dispatch } = useCoursesContext()
+    const { user } = useAuthContext()
+    const [buttonPopup, setButtonPopup] = useState(false);
+    const [rateCourse, setRateCourse] = useState(0)
+    const [rateInstructor, setRateInstructor] = useState(0)
 
+    useEffect(() => {
+        fetch('api/courses/viewRating/' + course._id, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        }).then((resp) => resp.json()).then((data) => {
+            setRateCourse(data)
+            console.log("Rating" + data)
 
+        })
+    }, [])
+    
+    useEffect(() => {
+        fetch('api/user/' + course.user_id, {
+           
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        }).then((resp) => resp.json()).then((data) => {
+            setRateInstructor(data)
+            console.log(data)
+        })
+    }, [])
 
+   
 
-const buyCourse = async () =>{
-    setButtonPopup(true);
-}
-const close = async () => {
-    const title = course.title
-    const subtitle = course.subtitle
-    const _id = course._id
-    const short_summary = course.short_summary
-    const  xCourse = {title,subtitle,short_summary,_id}
-    const email = user.email
-    const RCourse = {xCourse,email}
-        const response = await fetch('api/user/registerCourse',{
+        
+    const buyCourse = async () => {
+        setButtonPopup(true);
+    }
+    const close = async () => {
+        const title = course.title
+        const subtitle = course.subtitle
+        const _id = course._id
+        const short_summary = course.short_summary
+        const xCourse = { title, subtitle, short_summary, _id }
+        const email = user.email
+        const RCourse = { xCourse, email }
+
+        const response = await fetch('api/user/registerCourse', {
             method: 'PATCH',
             body: JSON.stringify(RCourse),
             headers: {
@@ -36,30 +66,32 @@ const close = async () => {
                 'Authorization': `Bearer ${user.token}`
             }
         })
-        if(response.ok)
-        {
+        if (response.ok) {
             console.log("Course Registered")
             setButtonPopup(false);
         }
-}
+    }
 
 
     return (
         <div className="course-details">
-            <h4 onClick={() => window.location.href=`/course?courseId=${course._id}`}>{course.title}</h4>
+            <h4 onClick={() => window.location.href = `/course?courseId=${course._id}`}>{course.title}</h4>
             <p><strong>Short Summary: </strong>{course.short_summary}</p>
             <p><strong>Length (hours): </strong>{course.total_hours_course}</p>
             <p><strong>Instructor: </strong>{course.instructor}</p>
+            <p><strong>Instructor Rating: </strong>{rateInstructor}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
+            <p><strong>Course Rating: </strong>{rateCourse}</p>
+            
             <h1 className="h1-price">Price: {course.price}</h1>
-            <p>{formatDistanceToNow(new Date(course.createdAt), {addSuffix: true})}</p>
-            { user &&
-            <button   className = "report-problem" onClick={() => window.location.href=`/adding?courseId=${course._id}&courseName=${course.title}`}>
-                <MdReportProblem size={30} />
-            </button>
+            {parseInt(course.discount) > 0 ? <h4 className="h1-price">After Discount: {course.price - (course.price * parseInt(course.discount) / 100)}</h4> : ''}
+            <p>{formatDistanceToNow(new Date(course.createdAt), { addSuffix: true })}</p>
+            {
+                user && user.user_.userType == "Instructor" &&
+                <span className="material-symbols-outlined" >delete</span>
             }
             {
-                user && user.user_.userType=="Individual trainee" &&
+                user && user.user_.userType == "Individual trainee" &&
                 <button className="buy-course" onClick={buyCourse}>Register</button>
             }
             <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>

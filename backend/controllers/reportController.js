@@ -53,6 +53,7 @@ const createReport = async (req, res) => {
     const user_email = req.body.userEmail
     const course_id = req.body.courseId
     const course_name = req.body.courseName
+    const unseen = true
 
     console.log(course_id)
     console.log(req.body)
@@ -61,7 +62,7 @@ const createReport = async (req, res) => {
 
     const report = await
 
-    Report.create({user_email,course_id,course_name,Type,Body,resolved})
+    Report.create({user_email,course_id,course_name,Type,Body,resolved,unseen})
     res.status(200).json(report)
     
     } catch (error){
@@ -91,7 +92,8 @@ const deleteReport = async (req, res) => {
 //update a report
 const updateReport = async (req, res) => {
     const { id } = req.params
-
+    
+    console.log(req.body)
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({ error: 'No such Report' })
     }
@@ -99,8 +101,9 @@ const updateReport = async (req, res) => {
     const report = await Report.findOneAndUpdate({ _id: id }, {
         ...req.body
     })
+    console.log(id)
 
-    if (!course) {
+    if (!report) {
         return res.status(400).json({ error: 'No such Report' })
     }
 

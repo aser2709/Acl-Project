@@ -27,11 +27,16 @@ router.use(requireAuth)
 //Get all instructor Courses
 router.get('/', getCourses, getRating)
 
+
 //Get all Courses
 router.get('/courses',getAllCourses, getRating)
 
+
 // GET a single Course
 router.get('/:id', getCourse , getRating)
+
+// GET a view rating
+router.get('/viewRating/:id', getRating)
 
 // POST a new Course
 router.post('/', createCourse)
