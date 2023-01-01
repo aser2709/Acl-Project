@@ -63,7 +63,10 @@ export default function Result() {
             </div>
 
             <div className='start'>
-                <Link className='btn' to={`/quiz?courseId=${course_id}`} onClick={onRestart}>Restart</Link> 
+                {!flag && 
+                <Link className='btn' to={`/quiz?courseId=${course_id}`} onClick={onRestart}>Restart</Link>
+                }
+                <Link className='btn' to={`/`} onClick={onRestart}>Show Result</Link>
             </div>
             {/** result table*/}
             <div className='container1'>

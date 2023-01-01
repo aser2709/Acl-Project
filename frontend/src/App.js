@@ -33,6 +33,10 @@ import Adminlogin from './pages/AdminLogin'
 import Addreport from './pages/AddReport'
 import Search from './components/Search'
 import UserReports from './pages/userReports'
+import SubtitleMain from './components/Quiz/SubtitleMain'
+import SubtitleQuiz from './components/Quiz/SubtitleQuiz'
+import InstructorSubtitles from './pages/InstructorSubtitles'
+import CreateSubtitleQuiz from './components/Quiz/CreateSubtitleQuiz'
 
 function App() {
   const { user } = useAuthContext()
@@ -138,6 +142,14 @@ function App() {
               element={<Quiz/>}
             />
             <Route
+              path="/subtitlequiz"
+              element={<SubtitleMain/>}
+            />
+            <Route
+              path="/subtitlequiz/:id"
+              element={<SubtitleQuiz/>}
+            />
+            <Route
               path="/result/:id"
               element={<Result/>}
             />
@@ -150,8 +162,16 @@ function App() {
               element={<CreateQuiz/>}
             />
             <Route
+              path="/createQuizsubtitle/:id"
+              element={<CreateSubtitleQuiz/>}
+            />
+            <Route
               path="/subtitles/:id"
               element={<RegisteredSubtitles/>}
+            />
+            <Route
+              path="/instructorsubtitles/:id"
+              element={<InstructorSubtitles/>}
             />
           </Routes>
         </div>

@@ -67,10 +67,17 @@ const changePassword = async (req, res) => {
 const updateEmail = async (req, res) => {
  
   const { email, newEmail} = req.body
-  
+
+  const exist = await User.find({email:newEmail})
+  console.log(exist)
+  if(exist[0]==''){
+    res.status(400).json({error: "Email Already Exists"})
+  }
+  else{
+
   const user = await User.findOneAndUpdate({email: email},{email: newEmail})
-  
-  res.status(200).json(user)
+  res.status(200).json({mssg: "Email Changed Successfully"})
+  }
 }
 
 //Biography

@@ -6,14 +6,14 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 import '../Quiz/Main.css'
 
 
-const Main = () => {
+const SubtitleMain = () =>{
     const inputRef = useRef(null)
     const dispatch = useDispatch()
     const { user } = useAuthContext()
     const params = new URLSearchParams(window.location.search);
-    const course_id = params.get('courseId');
-  
-    
+    const subtitle_id = params.get('subtitleId');
+    const subtitleName = params.get('subtitleName');
+        
     function startQuiz(){
         if(user && user.user_?.firstName && user.user_?.lastName){
             const userName= user.user_.firstName +" "+user.user_.lastName;
@@ -32,10 +32,10 @@ const Main = () => {
                 <li>The result will be declared at the end of the quiz. </li>
             </ol>
             <div className='start'>
-                <Link className='btn' to={`/quiz/${course_id}?courseId=${course_id}`} onClick={startQuiz}>Start Quiz</Link>
+                <Link className='btn' to={`/subtitlequiz/${subtitle_id}?subtitleId=${subtitle_id}&subtitleName=${subtitleName}`} onClick={startQuiz}>Start Quiz</Link>
             </div>            
 </div>
   )
 }
 
-export default Main
+export default SubtitleMain

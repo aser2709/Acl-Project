@@ -10,7 +10,7 @@ const RegisteredCourseDetails = ({course}) => {
     }
     const handleQuizClick = ()=>{
       localStorage.setItem('courseId',course._id)
-      window.location.href=`/quiz?courseId=${course._id}&subtitleId=''`
+      window.location.href=`/quiz?courseId=${course._id}`
     }
   return (
     <div className='course-details'>

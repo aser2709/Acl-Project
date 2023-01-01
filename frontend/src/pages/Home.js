@@ -20,22 +20,6 @@ const Home = () =>{
       }
 
     useEffect(()=>{
-        if(user && user.user_.userType==="Instructor"){
-        const fetchCourses = async () =>{
-            const response = await fetch('/api/courses', {
-                headers: {'Authorization': `Bearer ${user.token}`},
-            })
-            const json = await response.json()
-
-            if(response.ok){
-                dispatch({type:'SET-COURSES',payload: json})
-            }
-          }
-          if(user){
-            fetchCourses()
-            }
-        }
-        if(user && (user.user_.userType==="Individual trainee" || user.user_.userType==="Corporate trainee")){
             const fetchCourses = async () =>{
                 const response= await fetch('/api/user/registeredCourse/all',{
                     headers: {
@@ -51,7 +35,7 @@ const Home = () =>{
             if(user){
                 fetchCourses()
             }
-        }
+        
         
     }, [dispatch, user])
     
@@ -60,10 +44,6 @@ const Home = () =>{
             {!user && <div className='error'>Anuthorized to be here</div>}
             {!user && <div><button onClick={toNavigate}>Back to home page</button></div>}
             <div className="courses">
-                {user && user.user_.userType==="Instructor" && courses && Array.from(courses).map((course)=>(
-                    <CourseDetails key={course._id} course={course}/>
-                ))
-                }
                 {
                    user && (user.user_.userType==="Individual trainee" || user.user_.userType==="Corporate trainee")
                    && courses &&courses.registeredCourses && Array.from(courses.registeredCourses).map((course)=>(
@@ -71,7 +51,6 @@ const Home = () =>{
                    ))
                 }
             </div>
-            { user && user.user_.userType==="Instructor" && <FilterForm/>}
         </div>
     )
 }

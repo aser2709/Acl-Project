@@ -179,6 +179,22 @@ const getRating = async (req,res) =>{
     return final 
 }
 
+//Get Subtitles for a Course
+const getSubtitles = async (req,res) =>{
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'No such Subtitle' })
+    }
+    const subtitle = await Course.find({_id:id},{
+        subtitle:1,_id:0
+    })
+    if(subtitle==""){
+        res.status(400).json({ error: 'No such Subtitle' })
+    }else{
+    res.status(200).json(subtitle[0])
+    }
+}
+
 //Create Quiz for a Course
 const addQuizCourse = async (req,res) =>{
     try {
@@ -365,5 +381,6 @@ module.exports = {
     addResultCourse,
     addResultSubtitle,
     getResultCourse,
-    getResultSubtilte
+    getResultSubtilte,
+    getSubtitles
 }

@@ -17,7 +17,8 @@ const {
     addResultCourse,
     addResultSubtitle,
     getResultCourse,
-    getResultSubtilte
+    getResultSubtilte,
+    getSubtitles
 } = require('../controllers/courseController')
 const requireAuth = require('../middleware/requireAuth')
 
@@ -69,6 +70,9 @@ router.post('/subtitleresult/:id',addResultSubtitle)
 router.get('/courseresult/:id',getResultCourse)
 //Get Result for subtitle
 router.get('/subtitleresult/:id',getResultSubtilte)
+
+//Get Subtitles for a course
+router.get('/subtitles/:id',getSubtitles)
 
 
 module.exports = router

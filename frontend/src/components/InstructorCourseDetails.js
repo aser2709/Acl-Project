@@ -12,6 +12,9 @@ const InstructorCourseDetails = ({course}) => {
     const handleNavigate = ()=>{
             window.location.href=`/createQuizcourse/${course._id}?courseId=${course._id}`
     }
+    const NavigateSubtitle =()=>{
+        window.location.href=`/instructorsubtitles/${course._id}?courseId=${course._id}`
+    }
     const handleClick = async () =>{
 
         if(!user){
@@ -34,7 +37,7 @@ const InstructorCourseDetails = ({course}) => {
 
   return (
     <div className="course-details">
-            <h4>{course.title}</h4>
+            <h4 onClick={NavigateSubtitle}>{course.title}</h4>
             <p><strong>Short Summary: </strong>{course.short_summary}</p>
             <p><strong>Length (hours): </strong>{course.total_hours_course}</p>
             <p><strong>Instructor: </strong>{course.instructor}</p>

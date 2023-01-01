@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
 
-const CreateQuiz = () => {
+const CreateSubtitleQuiz = () => {
   const [questions, setQuestions] = useState([{ question: '', options: ['', '', '', ''], id: 1 }]);
   const [answers, setAnswers] = useState(['']);
   const [errors, setErrors] = useState([]);
   const [QuizAdded,setQuizAdded] = useState(null)
   const { user } = useAuthContext()
   const params = new URLSearchParams(window.location.search);
-  const course_id = params.get('courseId');
-  //console.log(course_id);
+  const subtitle_id = params.get('subtitleId');
+  const [flag,setFlag] = useState(false)
+
   
 
   const handleAddQuestion = () => {
@@ -70,7 +71,7 @@ const CreateQuiz = () => {
   const submitValue = async (e) => {
     e.preventDefault()
     if(questions.length>1 && answers.length>1){
-    const response = await fetch(`/api/courses/coursequiz/${course_id}`,{
+    const response = await fetch(`/api/courses/subtitlequiz/${subtitle_id}`,{
       method: 'POST',
       body: JSON.stringify({questions,answers}),
       headers: {
@@ -88,14 +89,15 @@ const CreateQuiz = () => {
       setAnswers(['']);
       setQuizAdded("Successful add of Quiz")
     }
-    } else if (questions.length<=1){
+    }
+    else if (questions.length<=1){
         setQuizAdded("Please Write atleast 2 questions")
     }
   }
 
   return (
     <div className='signup'>
-        <form onSubmit={submitValue}>
+    <form onSubmit={submitValue}>
         <h1>Create Exercise</h1>
       {questions.map((q, index) => (
         <><label>Question {`${index+1}`}</label><div key={q.id}>
@@ -113,7 +115,7 @@ const CreateQuiz = () => {
         <><>
         <label>Answer {`${index + 1}`} (Value should be by index from 0 to 3)</label>
         </><div key={index}>
-              <input type="text" value={answer} required="required" placeholder="Write answer for each question here" onChange={(e) => handleAnswerChange(e, index)} />
+              <input type="text" value={answer} placeholder="Write answer for each question here" required="required" onChange={(e) => handleAnswerChange(e, index)} />
               {errors[index] && <div className='error'>{errors[index]}</div>}
           </div></>
       ))}
@@ -128,6 +130,4 @@ const CreateQuiz = () => {
   
   
 }
-
-
-export default CreateQuiz
+export default CreateSubtitleQuiz
