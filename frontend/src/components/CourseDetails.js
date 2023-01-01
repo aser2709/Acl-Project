@@ -4,7 +4,7 @@ import Popup from "../components/Popup"
 import { useEffect, useState } from "react"
 import { FaBeer } from 'react-icons/fa';
 import {MdReportProblem} from 'react-icons/md'
-
+import {useCoursesContext} from '../hooks/useCoursesContext'
 //date-fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
@@ -25,12 +25,13 @@ const CourseDetails = ({ course }) => {
             }
         }).then((resp) => resp.json()).then((data) => {
             setRateCourse(data)
+            console.log("Rating" + data)
+
         })
     }, [])
     
     useEffect(() => {
-        
-        fetch('api/users/viewRating/' + course.user_id, {
+        fetch('api/user/' + course.user_id, {
            
             method: 'GET',
             headers: {
@@ -38,27 +39,13 @@ const CourseDetails = ({ course }) => {
             }
         }).then((resp) => resp.json()).then((data) => {
             setRateInstructor(data)
+            console.log(data)
         })
     }, [])
 
-    const handleClick = async () => {
+   
 
-        if (!user) {
-            return
-        }
-
-        const response = await fetch('api/courses/' + course._id, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${user.token}`
-            }
-        })
-        const json = await response.json()
-
-        if (response.ok) {
-            dispatch({ type: 'DELETE_COURSE', payload: json })
-        }
-    }
+        
     const buyCourse = async () => {
         setButtonPopup(true);
     }
@@ -101,7 +88,7 @@ const CourseDetails = ({ course }) => {
             <p>{formatDistanceToNow(new Date(course.createdAt), { addSuffix: true })}</p>
             {
                 user && user.user_.userType == "Instructor" &&
-                <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
+                <span className="material-symbols-outlined" >delete</span>
             }
             {
                 user && user.user_.userType == "Individual trainee" &&
