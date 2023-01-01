@@ -7,6 +7,7 @@ import ReactFlagsSelect from "react-flags-select";
 import { useState } from "react";
 import SidebarTrainee from './SidebarTrainee'
 import SidebarGuest from './SidebarGuest'
+import SidebarAdmin from './SideBarAdmin'
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -23,8 +24,9 @@ const Navbar = () => {
     <header>
 
       <div className="container">
+      {user && user.user_.userType==="Admin" && <SidebarAdmin/>}
       {user && user.user_.userType==="Instructor" && <Sidebar/>}
-        {user && (user.user_.userType==="Individual trainee" || user.user_.userType==="Corporate trainee") && <SidebarTrainee/>}
+      {user && (user.user_.userType==="Individual trainee" || user.user_.userType==="Corporate trainee") && <SidebarTrainee/>}
       {!user && <SidebarGuest/>}
         <Link to="/">
           <h1>Coree</h1>

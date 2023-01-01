@@ -11,11 +11,16 @@ const adminSchema = new Schema({
     Password: {
       type: String,
       required: true
-    }});
+    },
+    userType:{
+      type : String,
+      required: true
+  }
+  });
 
     
 
-    adminSchema.statics.signup = async function(Username,Password) {
+    adminSchema.statics.signup = async function(Username,Password,userType) {
 
       // validation
       if (!Username || !Password) {
@@ -29,7 +34,7 @@ const adminSchema = new Schema({
       const salt = await bcrypt.genSalt(10)
       const hash = await bcrypt.hash(Password, salt)
     
-      const admin = await this.create({Password: hash, Username})
+      const admin = await this.create({Password: hash, Username,userType})
     
       return admin
     }

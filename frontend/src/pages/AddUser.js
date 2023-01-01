@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useSignup } from "../hooks/useSignup"
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const Adduser = () => {
   const [email, setEmail] = useState('')
@@ -9,6 +10,7 @@ const Adduser = () => {
   const [username, setUsername] = useState('')
   const [userType, setUserType] = useState('')
   const {signup, error, isLoading} = useSignup()
+  const { user } = useAuthContext()
 
 
   const handleSubmit = async (e) => {
@@ -18,6 +20,8 @@ const Adduser = () => {
   } 
 
   return (
+    <>
+    { user && user.user_.userType==="Admin" &&
     <form className="signup" onSubmit={handleSubmit}>
       <h3>Add User</h3>
       
@@ -63,9 +67,8 @@ const Adduser = () => {
       <button disabled={isLoading}>Add User</button>
       {error && <div className="error">{error}</div>}
     </form>
-
-    
-    
+    }
+    </>
   )
 }
 

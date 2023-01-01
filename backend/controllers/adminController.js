@@ -15,12 +15,14 @@ const createToken = (_id) => {
 router.post("/admin/signup", async (req,res) =>{
     const { Username,Password} = req.body
 
+  const userType = 'Admin'
   try {
-    const admin = await adminmodel.signup(Username,Password)
-
+    const admin = await adminmodel.signup(Username,Password,userType)
+    
     // create a token
     const token = createToken(admin._id)
-    res.status(200).json({Username,token})
+    const user_ = await adminmodel.findOne({Username:Username},{userType:1,_id:0})
+    res.status(200).json({Username,token,user_})
   } catch (error) {
     res.status(400).json({ error: error.message })}
 });
@@ -32,7 +34,8 @@ router.post("/admin/login", async (req,res) => {
   
       // create a token
       const token = createToken(admin._id)
-      res.status(200).json({Username,token})
+      const user_ = await adminmodel.findOne({Username:Username},{userType:1,_id:0})
+      res.status(200).json({Username,token,user_})
     } catch (error) {
       res.status(400).json({ error: error.message })
     }
