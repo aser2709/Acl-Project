@@ -29,7 +29,7 @@ const Login = () => {
         value={password} 
       />
             <label > 
-            <a HREF="/forgotpassword"><i>Forgot Password?</i></a> </label>
+            <a href="/forgotpassword"><i>Forgot Password?</i></a> </label>
       <button disabled={isLoading}>Log in</button>
       {error && <div className="error">{error}</div>}
     </form>

@@ -9,6 +9,11 @@ const reportSchema = new Schema({
       type: String,
       required: true
     },
+    course_name: {
+      type: String,
+      required: true
+
+    },
 
     Type: {
         type: String,
@@ -22,7 +27,11 @@ const reportSchema = new Schema({
     resolved: {
         type: Boolean,
         required: true
-      }
+      },
+    unseen:{
+      type: Boolean,
+      required: true
+    }
     
     
     

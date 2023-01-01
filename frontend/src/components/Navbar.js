@@ -7,6 +7,7 @@ import ReactFlagsSelect from "react-flags-select";
 import { useState } from "react";
 import SidebarTrainee from './SidebarTrainee'
 import SidebarGuest from './SidebarGuest'
+import SidebarAdmin from './SideBarAdmin'
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -21,7 +22,11 @@ const Navbar = () => {
   }
   return (
     <header>
+
       <div className="container">
+      {user && user.user_.userType==="Admin" && <SidebarAdmin/>}
+      {user && user.user_.userType==="Instructor" && <Sidebar/>}
+      {user && (user.user_.userType==="Individual trainee" || user.user_.userType==="Corporate trainee") && <SidebarTrainee/>}
       {!user && <SidebarGuest/>}
         <Link to="/">
           <h1>Coree</h1>
@@ -40,11 +45,15 @@ const Navbar = () => {
             </div>
           )}
         </nav><nav>
-          <ReactFlagsSelect
+        </nav>
+        <div className='menu-flags'>
+        <ReactFlagsSelect
             selected={selected}
             onSelect={(code) => setSelected(code)}
+            searchable={true}
+            className="menu-flags"
           />
-        </nav>
+        </div>
       </div>
     </header>
   )

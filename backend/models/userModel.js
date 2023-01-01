@@ -5,6 +5,18 @@ const validator = require('validator')
 
 const Schema = mongoose.Schema
 
+const questionSchema = new Schema ({
+  id: {
+      type: Number,
+      unique: true
+  },
+  question: {
+      type: String
+  },
+  options: {
+      type: Array
+  }
+})
 const youtubeLinkScehma = new Schema({
   _id:{
     type: String
@@ -28,7 +40,16 @@ const subtitleSchema = new Schema({
   },
   youtube:[
       youtubeLinkScehma
-  ]
+  ],
+  exercise:{
+    questions: [
+        questionSchema
+    ],
+    answers: {
+        type: Array,
+        default: []
+    }
+}
 })
 const registeredCoursesSchema = new Schema({
   _id:{

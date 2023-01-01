@@ -14,7 +14,7 @@ const { logout,
     getRegisteredCourses,
     getSingleCourseUser,
     getBiography,
-    updateBiography } = require('../controllers/userController')
+    updateBiography, getSubtitle, getAllSubtitles } = require('../controllers/userController')
 
 const requireAuth = require("../middleware/requireAuth");
 
@@ -57,5 +57,12 @@ router.patch('/registerCourse', AddRegisteredCourse);
 router.get('/registeredCourse/all', getRegisteredCourses);
 //get Single Course a user registered for
 router.get('/courses/:id', getSingleCourseUser);
+
+
+//Get subtitles for a registered course
+router.get('/registeredCourse/subtitles/:id',getAllSubtitles)
+
+//Get a single Subtitl for a registered course
+router.get('/registeredCourse/subtitle/:id',getSubtitle)
 
 module.exports = router

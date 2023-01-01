@@ -2,6 +2,41 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
+
+const resultSchema = new Schema({
+    username: {
+        type: String
+    },
+    result: {
+        type: Array,
+        default: []
+    },
+    attempts : {
+        type: Number,
+        default: 0
+    },
+    points: {
+        type: Number,
+        default: 0
+    },
+    achived: {
+        type: String,
+        default: ''
+    }
+})
+const questionSchema = new Schema ({
+    id: {
+        type: Number,
+        unique: true
+    },
+    question: {
+        type: String
+    },
+    options: {
+        type: Array
+    }
+})
+
 const youtubeLinkScehma = new Schema({
     youtubelink:{
         type:String,
@@ -19,6 +54,18 @@ const subtitleSchema = new Schema({
     },
     youtube:[
         youtubeLinkScehma
+    ],
+    exercise:{
+        questions: [
+            questionSchema
+        ],
+        answers: {
+            type: Array,
+            default: []
+        }
+    },
+    results:[
+        resultSchema
     ]
 })
 const courseSchema = new Schema({
@@ -151,7 +198,19 @@ const courseSchema = new Schema({
     video_preview:{
         type: String,
         required: true
-    }
+    },
+    exercise:{
+        questions: [
+            questionSchema
+        ],
+        answers: {
+            type: Array,
+            default: []
+        }
+    },
+    results:[
+        resultSchema
+    ]
 }, { timestamps: true }, {toObject:{getters: true, }, toJSON:{getters: true}})
 
 

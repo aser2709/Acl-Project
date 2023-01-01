@@ -44,6 +44,14 @@ header a {
   grid-template-columns: 2fr 2fr;
   gap: 100px;
 }
+.subtitle {
+display: flex;
+}
+.subtitle .course-details{
+  position: relative;
+  width: 80%;
+  margin-left: 10px;
+}
 .course-details {
   background: #fff;
   border-radius: 4px;
@@ -73,6 +81,23 @@ header a {
   border-radius: 50%;
   color: #333;
 }
+.course-details .create-course-quiz{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  width: 20%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-right: 4px;
+  margin-left: 80%;
+  font-family: "Poppins";
+  border-radius: 8px;
+  cursor: pointer;
+  position:relative;
+
+}
+
 .head-text{
   position: relative;
 color: #3c4144;
@@ -328,7 +353,13 @@ input[type="checkbox"]
   background-color: #28bac2;
   position: absolute;
   right: 20px;
-  top: 75%;
+  top: 65%;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+  color: white;
 }
 .h1-price{
   font-size: 6mm;
@@ -373,9 +404,15 @@ input[type="checkbox"]
   width: fit-content;
 }
 .join-course{
-  background-color: #28bac2;
   position: relative;
   left: 106%;
+  background-color: var(--primary);
+  color: white;
+  border: 2px solid var(--primary);
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
 }
 .join-course:hover{
   background-color:rgb(255, 255, 255);
@@ -383,8 +420,10 @@ input[type="checkbox"]
   position: relative;
   left: 106%;
   border: 1px solid var(--primary);
-  border-radius: 20px;
+  border-radius: 30px;
   cursor: pointer;
+  font-size: larger;
+  width: 30mm;
 }
 .success {
   color: #270;
@@ -397,14 +436,14 @@ input[type="checkbox"]
 .report-problem{
   background-color: #919595;
   position: relative;
-  font-size: 10px;
+  width: 70px;
   font-weight: bolder;
   font-style: italic;
   height: auto;
   border-style:solid;
   top: 4%;
-  
-  
+  margin-left: 92%;
+  border: none;
 }
 
 .report-problem:hover{
@@ -413,6 +452,44 @@ input[type="checkbox"]
 }
 
 
+.unresolved{
 
+  color: rgb(249, 184, 34);
+}
 
+.resolved{
 
+  color: green;
+}
+
+.menu-flags{
+  background-color: #28bac2;
+}
+.resolve_button{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  width: 13%;
+  padding: 10px;
+  margin-top: -7%;
+  margin-right: 4px;
+  margin-left: 40%;
+  font-family: "Poppins";
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+
+}.seen_button{
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  width: 13%;
+  padding: 10px;
+  margin-right: 4px;
+  margin-left: 60%;
+  font-family: "Poppins";
+  border-radius: 8px;
+  cursor: pointer;
+  position: absolute;
+
+}

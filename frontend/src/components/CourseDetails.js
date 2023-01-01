@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom"
-import { useCoursesContext } from "../hooks/useCoursesContext"
+
 import { useAuthContext } from "../hooks/useAuthContext"
 import Popup from "../components/Popup"
 import { useEffect, useState } from "react"
+import { FaBeer } from 'react-icons/fa';
+import {MdReportProblem} from 'react-icons/md'
 
 //date-fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow"

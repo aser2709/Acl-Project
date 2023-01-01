@@ -14,6 +14,7 @@ router.use(requireAuth)
 
 //Get all user Reports
 router.get('/yourReports', getUserReports)
+router.get('/allReports',getAllReports)
 
 
 
@@ -22,7 +23,7 @@ router.post('/createReport', createReport)
 
 
 // UPDATE a Report
-router.patch('/:courseId',updateReport)
+router.patch('/:id',updateReport)
 
 
 module.exports = router

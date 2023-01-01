@@ -9,6 +9,8 @@ const Addreport = (req,res) => {
     const [Type, setType] = useState('')
     const [Body, setBody] = useState('')
     const [error, setError] = useState(null)
+    const [emptyFields, setEmptyFields] = useState([])
+    const [ReportAdded,setReportAdded] = useState(null)
     const { user } = useAuthContext()
     //const {adminsignup, error, isLoading} = useAdminSignup()
   
@@ -19,8 +21,9 @@ const Addreport = (req,res) => {
       const userEmail = user.email;
       const params = new URLSearchParams(window.location.search);
       const courseId = params.get('courseId');
+      const courseName = params.get('courseName');
       console.log(courseId);
-      const Rreports = {userEmail,courseId,Type,Body}
+      const Rreports = {userEmail,courseId,courseName,Type,Body}
       
 
       const response = await fetch('api/reports/createReport',{
@@ -31,9 +34,20 @@ const Addreport = (req,res) => {
             'Authorization': `Bearer ${user.token}`
         }
     })
+    const json = await response.json()
+    if (!response.ok) {
+      setError(json.error)
+      setEmptyFields(json.emptyFields)
+      setReportAdded("Unsuccessful add of Report")
+  }
     if(response.ok)
     {
-        console.log("Report Added")
+      console.log("Report Added")
+      setType('')
+      setBody('')
+      setError(null)
+      setReportAdded("Successful add of Report")
+      setEmptyFields([])
     }
      
     } 
@@ -58,6 +72,8 @@ const Addreport = (req,res) => {
           />
           <button>Add Report</button>
           {error && <div className="error">{error}</div>}
+          {ReportAdded==="Unsuccessful add of Report" && <div className='error'>{ReportAdded}</div>}
+          {ReportAdded==="Successful add of Report" && <div className='success'>{ReportAdded}</div>} 
         </form>
     
         

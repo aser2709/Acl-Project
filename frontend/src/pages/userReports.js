@@ -1,45 +1,54 @@
 import { useEffect } from "react"
 import { useAuthContext } from "../hooks/useAuthContext"
 import { useState } from "react"
+import { useCoursesContext } from "../hooks/useCoursesContext"
 
 
-import reportDetails from "../components/reportDetails"
+import ReportDetails from "../components/reportDetails"
 
 
-const YourCourses = () =>{
-    const {courses,dispatch}=useCoursesContext()
+const UserReports = () =>{
     const {user} = useAuthContext()
+    const {courses,dispatch}=useCoursesContext()
+    
     
 
     useEffect(()=>{
-        const fetchCourses = async () =>{
-            const response = await fetch('/api/reports/yourReports', {
-                headers: {'Authorization': `Bearer ${user.token}`},
+        const fetchReports = async () =>{
+        const userEmail = user.email;
+        const response = await fetch('/api/reports/yourReports', {
+                method: 'GET',
+                headers: {'Authorization': `Bearer ${user.token}`,
+                email: userEmail
+            },
             })
             const json = await response.json()
+            
 
             if(response.ok){
                 dispatch({type:'SET-COURSES',payload: json})
             }
+
+
             
         }
         if(user){
-            fetchCourses()
+            fetchReports()
             }
-    }, [dispatch, user])    
+         }, [dispatch, user])    
     return (
-        <div className="home">
+        <div className="report-view">
     
-            <div className="courses">
-                {courses && Array.from(courses).map((course)=>(
-                    <CourseDetails key={course._id} course={course}/>
+            <div className="reports">
+
+                { courses && Array.from(courses).map((report)=>(
+                    <ReportDetails key={courses} report={report}/>
                 ))}
             </div>
              
-            <FilterForm/>
             
         </div>
     )
 }
 
-export default YourCourses
+export default UserReports
