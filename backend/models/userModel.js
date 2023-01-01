@@ -31,6 +31,9 @@ const subtitleSchema = new Schema({
   ]
 })
 const registeredCoursesSchema = new Schema({
+  _id:{
+    type: String
+  },
   title: {
     type: String,
     required: true

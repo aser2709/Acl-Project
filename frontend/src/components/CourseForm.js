@@ -5,6 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext"
 const CourseForm = () => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
+  const [discount, setDiscount] = useState('')
   const [fields, setFields] = useState([{ name: '', youtube: [{youtubelink: '' ,short_description: ''}] }]);
   const [short_summary, setShort] = useState('')
   const [CourseAdded,setCourseAdded] = useState(null)
@@ -54,7 +55,7 @@ const CourseForm = () => {
     setFields(fields)
     const instructor = user.user_.firstName +" "+user.user_.lastName;
     const subtitle = fields;
-    const course = { title, price, short_summary, subject, total_hours_course, instructor: instructor, rating: 1, subtitle: subtitle, video_preview };
+    const course = { title, price, short_summary, discount, subject, total_hours_course, instructor: instructor, rating: 1, subtitle: subtitle, video_preview };
 
     const response = await fetch('/api/courses',{
       method: 'POST',
@@ -73,6 +74,7 @@ const CourseForm = () => {
             if (response.ok) {
               setTitle('')
               setPrice('')
+              setDiscount('')
               setShort('')
               setSubject('')
               setTotalHours('')
@@ -101,6 +103,12 @@ const CourseForm = () => {
         type="number"
         onChange={(e) => setPrice(e.target.value)}
         value={price}
+      />
+      <label>Discount Percentage</label>
+      <input
+        type="number"
+        onChange={(e) => setDiscount(e.target.value)}
+        value={discount}
       />
       {Array.from(fields).map((field, fieldIndex) => (
         <div key={fieldIndex}>
