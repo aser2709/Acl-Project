@@ -1,7 +1,15 @@
 import { useState } from "react"
 import { useAdminLogin } from "../hooks/useAdminLogin"
+import { useNavigate } from 'react-router-dom'
+import { useAuthContext } from '../hooks/useAuthContext'
+
 
 const Adminlogin = () => {
+  const navigate = useNavigate();
+  const { user } = useAuthContext()
+  const toHome = () => {
+    if (user){
+    navigate('/');}}
   const [Username, setUsername] = useState('')
   const [Password, setPassword] = useState('')
   const {adminlogin, error, isLoading} = useAdminLogin()
@@ -13,6 +21,7 @@ const Adminlogin = () => {
   }
 
   return (
+    
     <form className="signup" onSubmit={handleSubmit}>
       <h3>Login Admin</h3>
       
@@ -28,7 +37,7 @@ const Adminlogin = () => {
         onChange={(e) => setPassword(e.target.value)} 
         value={Password} 
       />
-      <button disabled={isLoading}>Login Admin</button>
+      <button disabled={isLoading}onClick={toHome} >Login Admin</button>
       {error && <div className="error">{error}</div>}
     </form>
   )

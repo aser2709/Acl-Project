@@ -37,8 +37,11 @@ import SubtitleMain from './components/Quiz/SubtitleMain'
 import SubtitleQuiz from './components/Quiz/SubtitleQuiz'
 import InstructorSubtitles from './pages/InstructorSubtitles'
 import CreateSubtitleQuiz from './components/Quiz/CreateSubtitleQuiz'
+
 import Guest from './pages/guest'
 import Tos from './pages/tos'
+import AdminReports from './pages/ReportAdmin'
+import AdminRequest from './pages/RequestAdmin'
 
 
 function App() {
@@ -59,8 +62,7 @@ function App() {
             <Route 
               path="/Search" 
               element={<Search/>} 
-            />                                                           
-             
+            />  
             <Route 
               path="/guest" 
               element={<Guest/>} 
@@ -83,6 +85,13 @@ function App() {
               path="/addadmin" 
               element={<AddAdmin/>} 
             /> 
+            <Route 
+            path="/reportadmin" 
+            element={<AdminReports/>} 
+          /> <Route 
+          path="/requestadmin" 
+          element={<AdminRequest/>} 
+        /> 
             
             <Route 
               path="/adduser" 

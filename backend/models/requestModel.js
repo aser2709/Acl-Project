@@ -6,12 +6,17 @@ const adminrequestSchema = new Schema({
       type: String,
       required: true,
     },
-    type: {
+    course_id: {
+      type: String,
+      required: true
+    },
+    course_name: {
       type: String,
       required: true
     },
     Request: {
-        type: String,
+        type: Boolean,
         required: true
     }});
-    module.exports = mongoose.model('Request', adminrequestSchema)
+    const request = mongoose.model('Request', adminrequestSchema);
+    module.exports = request;
