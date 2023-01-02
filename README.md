@@ -34,7 +34,7 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 
 
-Main website features for a User:
+Main website features for a Trainee:
 - Sign Up
 - Log In
 - Change Password
