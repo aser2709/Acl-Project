@@ -73,10 +73,7 @@ const CourseDetails = ({ course }) => {
         const xCourse = { title, subtitle, short_summary, _id }
         const email = user.email
         const RCourse = { xCourse, email }
-        localStorage.setItem("course",xCourse);
-        toNavigate();
-
-        /**const response = await fetch('api/user/registerCourse', {
+        const response = await fetch('api/user/registerCourse', {
             method: 'PATCH',
             body: JSON.stringify(RCourse),
             headers: {
@@ -87,7 +84,7 @@ const CourseDetails = ({ course }) => {
         if (response.ok) {
             console.log("Course Registered")
             setButtonPopup(false);
-        }*/
+        }
     }
 
 

@@ -105,7 +105,7 @@ const SingleCourse = () => {
         setText('Join Course')
     }
     const toNavigate = () => {
-        navigate('/pay');
+        navigate('/payments');
     }
     return (
         <div className="home">
