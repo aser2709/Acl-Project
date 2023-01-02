@@ -11,6 +11,7 @@ const adminCont = require("./controllers/adminController");
 const instructorCont = require("./controllers/adminController");
 const corporatetraineeCont = require("./controllers/adminController");
 const adminrequest = require("./routes/request")
+const PaymentsRoutes = require('./routes/payments')
 
 //express app
 const app = express()

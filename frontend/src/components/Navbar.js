@@ -29,7 +29,7 @@ const Navbar = () => {
       {user && (user.user_.userType==="Individual trainee" || user.user_.userType==="Corporate trainee") && <SidebarTrainee/>}
       {!user && <SidebarGuest/>}
         <Link to="/">
-          <h1>Coree</h1>
+          <h1>UdemyPlus</h1>
         </Link>
         <nav>
           {user && (
