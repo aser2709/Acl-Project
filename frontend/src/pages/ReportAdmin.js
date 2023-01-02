@@ -41,7 +41,7 @@ const AdminReports = () =>{
             <div className="reports">
 
                 { courses && Array.from(courses).map((report)=>(
-                    <ReportAdminDetails key={courses} report={report}/>
+                    <ReportAdminDetails key={courses._id} report={report}/>
                 ))}
             </div>
              

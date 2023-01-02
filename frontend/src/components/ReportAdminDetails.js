@@ -63,7 +63,6 @@ fetchReports()
             <h4>{report.course_name}</h4>
             <p><strong>Type: </strong>{report.Type}</p>
             <p><strong>Body: </strong>{report.Body}</p>
-            <p><strong>Body: </strong>{report.Body}</p>
             {
                 report.unseen==true &&
                 <p><strong>Status:</strong><div class = "unresolved">unseen </div></p>

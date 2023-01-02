@@ -97,12 +97,13 @@ const CourseDetails = ({ course }) => {
             <p><strong>Instructor Rating: </strong>{rateInstructor}</p>
             <p><strong>Subject: </strong>{course.subject}</p>
             <p><strong>Course Rating: </strong>{rateCourse}</p>
-            
             <h1 className="h1-price">Price: {course.price}</h1>
+            {parseInt(course.discount) > 0 ? <h4 className="h1-price">After Discount: {course.price - (course.price * parseInt(course.discount) / 100)}</h4> : ''}
+            
             <button   className = "report-problem" onClick={() => window.location.href=`/adding?courseId=${course._id}&courseName=${course.title}`}>
                 <MdReportProblem size={30} />
             </button>
-            {parseInt(course.discount) > 0 ? <h4 className="h1-price">After Discount: {course.price - (course.price * parseInt(course.discount) / 100)}</h4> : ''}
+            
             <p>{formatDistanceToNow(new Date(course.createdAt), { addSuffix: true })}</p>
             {
                 user && user.user_.userType == "Individual trainee" &&

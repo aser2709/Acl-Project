@@ -20,6 +20,9 @@ const Navbar = () => {
     navigate('/');
     logout()
   }
+  function Search() {
+    navigate('/Search');
+  }
   return (
     <header>
 
@@ -45,6 +48,13 @@ const Navbar = () => {
             </div>
           )}
         </nav><nav>
+        <nav>
+        {user && (
+            <div>
+             <button onClick={Search}>Search</button>
+            </div>
+          )}
+        </nav>
         </nav>
         <div className='menu-flags'>
         <ReactFlagsSelect

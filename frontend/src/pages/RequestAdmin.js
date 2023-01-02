@@ -41,11 +41,9 @@ const Adminrequest = () =>{
             <div className="request">
 
                 { courses && Array.from(courses).map((request)=>(
-                    <RequestAdminDetails key={courses} request={request}/>
+                    <RequestAdminDetails key={courses._id} request={request}/>
                 ))}
-            </div>
-             
-            
+            </div>            
         </div>
     )
 }
