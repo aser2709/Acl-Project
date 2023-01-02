@@ -39,6 +39,9 @@ import InstructorSubtitles from './pages/InstructorSubtitles'
 import CreateSubtitleQuiz from './components/Quiz/CreateSubtitleQuiz'
 import Guest from './pages/guest'
 import Tos from './pages/tos'
+import Payments from './pages/Payments'
+import AdminReports from './pages/ReportAdmin'
+import AdminRequest from './pages/RequestAdmin'
 
 
 function App() {
@@ -89,11 +92,11 @@ function App() {
             <Route 
             path="/reportadmin" 
             element={<AdminReports/>} 
-          /> <Route 
-          path="/requestadmin" 
-          element={<AdminRequest/>} 
-        /> 
-            
+            /> 
+            <Route 
+            path="/requestadmin" 
+            element={<AdminRequest/>} 
+            /> 
             <Route 
               path="/adduser" 
               element={<AddUser/>} 
