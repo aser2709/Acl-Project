@@ -11,8 +11,6 @@ const adminCont = require("./controllers/adminController");
 const instructorCont = require("./controllers/adminController");
 const corporatetraineeCont = require("./controllers/adminController");
 const adminrequest = require("./routes/request")
-const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
-
 
 //express app
 const app = express()
@@ -40,13 +38,12 @@ app.use("/admin",adminrequest);
 app.use('/api/courses',courseRoutes)
 app.use('/api/guest',guestRoutes)
 app.use('/api/user',userRoutes)
+app.use('/api/payments', PaymentsRoutes);
 app.post('/filtercourse',filterCourse)
 app.use("/api", adminCont);
 app.use("/api", instructorCont);
 app.use("/api", corporatetraineeCont);
 app.use("/api/reports", reportRoutes);
-
-
 
 
 
