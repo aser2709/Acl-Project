@@ -290,18 +290,22 @@ const getRating = async (req,res) =>{
   let items = Object.entries(instructor.get('rating', null, {getters: false})); // get an array of key/value pairs of the object like this [[1:1], [2:1]...]
   let sum = 0; // sum of weighted ratings
   let total = 0; // total number of ratings
-  console.log(items)
+ 
   for(let [key,value] of items){
-      console.log(value)
+     
       if(Number.isInteger(value)){
           total += value;
           sum += value * parseInt(key);
           }  // multiply the total number of ratings by it's weight in this case which is the key
   }
    let final = Math.round((sum / total) * 10) / 10
-  console.log(final)
+ 
 
-  return final 
+ return res.status(200).json(final) 
 }
 
-module.exports = { signupUser,getBiography,updateBiography, updateEmail, loginUser, logout, changePassword, forgotPassword, resetpassword,AddRegisteredCourse,getRegisteredCourses,getSingleCourseUser,getRating,addRating,getSubtitle,getAllSubtitles }
+
+
+module.exports = { signupUser,getBiography,updateBiography, updateEmail, loginUser,
+   logout, changePassword, forgotPassword, resetpassword,AddRegisteredCourse,
+   getRegisteredCourses,getSingleCourseUser,getRating,addRating,getSubtitle,getAllSubtitles }

@@ -36,7 +36,7 @@ const getCourse = async (req, res) => {
 
 //create a new course
 const createCourse = async (req, res) => {
-        const { title, subtitle, price, short_summary, instructor, rating,subject,total_hours_course,video_preview } = req.body
+        const { title, subtitle, price, discount, short_summary, instructor, rating,subject,total_hours_course,video_preview } = req.body
     
         let emptyFields =[]
     
@@ -69,7 +69,7 @@ const createCourse = async (req, res) => {
         try{
         const user_id = req.user._id
         const course = await
-        Course.create({title, subtitle, price, short_summary, instructor, rating,subject,total_hours_course, user_id,video_preview})
+        Course.create({title, subtitle, price, discount, short_summary, instructor, rating,subject,total_hours_course, user_id,video_preview})
         res.status(200).json(course)
         
         } catch (error){
@@ -162,22 +162,20 @@ const addRating = async(req,res) =>{
 const getRating = async (req,res) =>{
     const { id } = req.params
     const course = await Course.findById({ _id: id })
+    
 
     let items = Object.entries(course.get('rating', null, {getters: false})); // get an array of key/value pairs of the object like this [[1:1], [2:1]...]
     let sum = 0; // sum of weighted ratings
     let total = 0; // total number of ratings
-    console.log(items)
     for(let [key,value] of items){
-        console.log(value)
         if(Number.isInteger(value)){
             total += value;
             sum += value * parseInt(key);
             }  // multiply the total number of ratings by it's weight in this case which is the key
     }
      let final = Math.round((sum / total) * 10) / 10
-    console.log(final)
 
-    return final 
+    return res.status(200).json(final) 
 }
 
 //Get Subtitles for a Course
