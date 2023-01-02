@@ -42,6 +42,7 @@ import Guest from './pages/guest'
 import Tos from './pages/tos'
 import AdminReports from './pages/ReportAdmin'
 import AdminRequest from './pages/RequestAdmin'
+import Payments from './pages/Payments'
 
 
 function App() {
@@ -79,8 +80,11 @@ function App() {
             <Route 
               path="/adminHome" 
               element={<AdminHome/>} 
-            /> 
-            
+            />
+            <Route 
+              path="/payments" 
+              element={<Payments/>} 
+            />
             <Route 
               path="/addadmin" 
               element={<AddAdmin/>} 
