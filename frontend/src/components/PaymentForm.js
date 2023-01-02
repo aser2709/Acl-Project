@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import {CardElement,useElements,useStripe} from "@stripe/react-stripe-js"
 import axios from "axios"
+import {  useNavigate } from 'react-router-dom'
 
 const CARD_OPTIONS = {
 	iconStyle: "solid",
@@ -28,6 +29,15 @@ export default function PaymentForm() {
     const [success,setSuccess] = useState(false)
     const stripe = useStripe()
     const elements = useElements()
+    const params = new URLSearchParams(window.location.search);
+    const course_id = params.get('courseId');
+    const amount = params.get('amount');
+    const navigate = useNavigate();
+    const {Rcourse} = localStorage.getItem("course");
+    console.log(Rcourse);
+    const toNavigate = () => {
+        navigate('/');
+      }
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
@@ -47,15 +57,18 @@ export default function PaymentForm() {
             if(response.data.success){
                 console.log("Succesfull Payment")
                 setSuccess(true)
+                toNavigate()
             }
 
 
         } catch (error) {
             console.log("Error",error)
+            console.log("R:"+Rcourse)
 
         }
     } else {
         console.log(error.message)
+        console.log("R:"+Rcourse)
     }
 }
   
@@ -64,7 +77,9 @@ export default function PaymentForm() {
     {
         !success ? 
         <form onSubmit={handleSubmit}>
+            <div><center>Amount: {amount}</center></div>
             <fieldset className='FormGroup'>
+                
                 <div className='FormRow'>
                     <CardElement options={CARD_OPTIONS}/>
                 </div>

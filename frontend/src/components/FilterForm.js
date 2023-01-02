@@ -22,7 +22,6 @@ const FilterForm = () => {
             course = {
                 "$and": [
                     { "price": { "$gte": lowprice, "$lte": highprice } },
-                    { "rating": { "$gte": lowRating, "$lte": highRating } }
                 ]
             }
         }
@@ -30,7 +29,6 @@ const FilterForm = () => {
             course = {
                 "$and": [
                     { "price": { "$gte": lowprice, "$lte": highprice } },
-                    { "rating": { "$gte": lowRating, "$lte": highRating } },
                     { "subject": subjectName }
                 ]
             }

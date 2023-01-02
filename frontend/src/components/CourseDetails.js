@@ -5,6 +5,8 @@ import { useEffect, useState } from "react"
 import { FaBeer } from 'react-icons/fa';
 import {MdReportProblem} from 'react-icons/md'
 import {useCoursesContext} from '../hooks/useCoursesContext'
+import {  useNavigate } from 'react-router-dom'
+
 //date-fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
@@ -16,8 +18,13 @@ const CourseDetails = ({ course }) => {
     const [buttonPopup, setButtonPopup] = useState(false);
     const [rateCourse, setRateCourse] = useState(0)
     const [rateInstructor, setRateInstructor] = useState(0)
+    const navigate = useNavigate();
 
+    const toNavigate = () => {
+        navigate('/payments');
+      }
     useEffect(() => {
+        const fetchData = async () => {
         fetch('api/courses/viewRating/' + course._id, {
             method: 'GET',
             headers: {
@@ -28,9 +35,14 @@ const CourseDetails = ({ course }) => {
             console.log("Rating" + data)
 
         })
-    }, [])
+        }
+        if(user){
+            fetchData()
+        }
+    }, [user])
     
     useEffect(() => {
+        const fetchData = async () => {
         fetch('api/user/' + course.user_id, {
            
             method: 'GET',
@@ -41,7 +53,11 @@ const CourseDetails = ({ course }) => {
             setRateInstructor(data)
             console.log(data)
         })
-    }, [])
+        }
+        if(user){
+            fetchData()
+        }
+    }, [user])
 
    
 
@@ -57,8 +73,10 @@ const CourseDetails = ({ course }) => {
         const xCourse = { title, subtitle, short_summary, _id }
         const email = user.email
         const RCourse = { xCourse, email }
+        localStorage.setItem("course",xCourse);
+        toNavigate();
 
-        const response = await fetch('api/user/registerCourse', {
+        /**const response = await fetch('api/user/registerCourse', {
             method: 'PATCH',
             body: JSON.stringify(RCourse),
             headers: {
@@ -69,7 +87,7 @@ const CourseDetails = ({ course }) => {
         if (response.ok) {
             console.log("Course Registered")
             setButtonPopup(false);
-        }
+        }*/
     }
 
 
@@ -86,10 +104,6 @@ const CourseDetails = ({ course }) => {
             <h1 className="h1-price">Price: {course.price}</h1>
             {parseInt(course.discount) > 0 ? <h4 className="h1-price">After Discount: {course.price - (course.price * parseInt(course.discount) / 100)}</h4> : ''}
             <p>{formatDistanceToNow(new Date(course.createdAt), { addSuffix: true })}</p>
-            {
-                user && user.user_.userType == "Instructor" &&
-                <span className="material-symbols-outlined" >delete</span>
-            }
             {
                 user && user.user_.userType == "Individual trainee" &&
                 <button className="buy-course" onClick={buyCourse}>Register</button>

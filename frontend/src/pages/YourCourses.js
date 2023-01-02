@@ -13,7 +13,7 @@ import FilterForm from "../components/FilterForm"
 const YourCourses = () =>{
     const {courses,dispatch}=useCoursesContext()
     const {user} = useAuthContext()
-    const GuestToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk1ZDdkNDM0MmQ2NTUxY2ViODdmZDAiLCJpYXQiOjE2NzIzMzkwMTcsImV4cCI6MTY3MjU5ODIxN30.zdRMhR6GflLf6QI28SfgeZMISMc9sMtNGUFec-wn1C4'
+    const GuestToken='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mzk1ZDdkNDM0MmQ2NTUxY2ViODdmZDAiLCJpYXQiOjE2NzI2MjUzMDMsImV4cCI6MTY3Mjg4NDUwM30.DJMt6VsLDMZNO6p0BRqKxrhi1jlFS_JRmqRKwLo6cGI'
     
 
     useEffect(()=>{
