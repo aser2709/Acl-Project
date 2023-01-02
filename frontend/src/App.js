@@ -36,7 +36,8 @@ import UserReports from './pages/userReports'
 import SubtitleMain from './components/Quiz/SubtitleMain'
 import SubtitleQuiz from './components/Quiz/SubtitleQuiz'
 import InstructorSubtitles from './pages/InstructorSubtitles'
-import CreateSubtitleQuiz from './components/Quiz/CreateSubtitleQuiz'import Guest from './pages/guest'
+import CreateSubtitleQuiz from './components/Quiz/CreateSubtitleQuiz'
+import Guest from './pages/guest'
 import Tos from './pages/tos'
 
 
