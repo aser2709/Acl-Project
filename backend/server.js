@@ -11,6 +11,8 @@ const adminCont = require("./controllers/adminController");
 const instructorCont = require("./controllers/adminController");
 const corporatetraineeCont = require("./controllers/adminController");
 const adminrequest = require("./routes/request")
+const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
+
 
 //express app
 const app = express()
@@ -20,6 +22,7 @@ app.use(express.json())
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}))
 
 app.use((req, res, next) => {
     console.log(req.path, req.method)
@@ -42,6 +45,8 @@ app.use("/api", adminCont);
 app.use("/api", instructorCont);
 app.use("/api", corporatetraineeCont);
 app.use("/api/reports", reportRoutes);
+
+
 
 
 

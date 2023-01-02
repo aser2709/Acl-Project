@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,6 +21,8 @@
     "mongoose": "^6.7.0",
     "mongose": "^0.0.2-security",
     "nodemailer": "^6.8.0",
+    "stripe": "^11.5.0",
     "validator": "^13.7.0"
-  }
+  },
+  "description": ""
 }
