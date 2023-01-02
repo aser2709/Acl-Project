@@ -32,6 +32,8 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 
 
+
+
 Main website features for a User:
 - Sign Up
 - Log In
@@ -86,6 +88,10 @@ Main website features for a User:
 
 
 
+
+
+
+
 Main website features for an Admin:
 - Add another admin
 - Add user
@@ -113,6 +119,11 @@ Main website features for an Admin:
 
 <a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Admin/Reported%20Problems.JPG" width="300">
 </a>
+
+
+
+
+
 
 
 
@@ -230,6 +241,11 @@ Initially, run `npm init` and `npm i` in the terminal to download all node modul
 - Report
 - Request
 - Result
+
+
+# Credits
+- [Web Dev Simplified Youtube Channel](https://www.youtube.com/@WebDevSimplified)
+- [The Net Ninja Youtube Channel](https://www.youtube.com/@NetNinja)
 
 
 
