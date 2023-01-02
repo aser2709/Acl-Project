@@ -1,4 +1,4 @@
-# Coree
+# Udemyplus
 # Collaborators:
 - [Yousef Mohamed Hassan](https://www.github.com/usef2081)  _( Scrum Master )_
 - [Aser Ashraf](https://github.com/aser2709) 
@@ -200,7 +200,6 @@ Main website features for an Instructor:
     -  App.js runs on port `3000`
 
 ### Which files to run
-_We are working on deploying the app on herokuapp and Netlify. In the meantime, you can follow these steps to run the app._
 
 Open 2 terminals:
 
