@@ -55,6 +55,21 @@ const subtitleSchema = new Schema({
     youtube:[
         youtubeLinkScehma
     ],
+    videoWatched:{
+        type: Boolean,
+        required:true,
+        default:false
+    },
+    quizTaken:{
+        type: Boolean,
+        required:true,
+        default:false
+    },
+    now:{
+        type: Number,
+        required:true,
+        default:0
+    },
     exercise:{
         questions: [
             questionSchema
