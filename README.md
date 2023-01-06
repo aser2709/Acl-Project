@@ -34,7 +34,11 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 
 
-Main website features for a Trainee:
+
+
+
+
+<ins>**1. Main website features for a Trainee:**</ins>
 - Sign Up
 - Log In
 - Change Password
@@ -90,9 +94,14 @@ Main website features for a Trainee:
 
 
 
+<br></br>
+<br></br>
 
 
-Main website features for an Admin:
+
+
+
+<ins>**2.Main website features for an Admin:**</ins>
 - Add another admin
 - Add user
 - Respond to Courses Access requests
@@ -127,7 +136,15 @@ Main website features for an Admin:
 
 
 
-Main website features for an Instructor:
+<br></br>
+<br></br>
+
+
+
+
+
+
+<ins>**3.Main website features for an Instructor:**</ins>
 - Add a Course
 - Change his Biography and Email
 - Create a Quiz 
