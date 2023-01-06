@@ -32,7 +32,6 @@ Furthermore, navigation is always reversible; the app allows the users to go bac
 We also allow for immediate feedback for example the user is sent a confirmation message upon any action taken.
 
 <br></br>
-<br></br>
 
 <ins>**1. Main website features for a Trainee:**</ins>
 - Sign Up
@@ -95,7 +94,6 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 
 <br></br>
-<br></br>
 
 
 
@@ -136,7 +134,6 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 
 
-<br></br>
 <br></br>
 
 
