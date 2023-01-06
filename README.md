@@ -1,9 +1,22 @@
 
 # Udemyplus
 
-This project is to create an Online Learing System similar to Coursea and Udemy.
+This project is to create an Online Learing System similar to Coursera and Udemy.
+
+## Table of Contents
+1) [Collaborators](#collab)
+2) [Features](#features)
+3) [Screenshots](#screenshots)
+4) [Running and Deployment](#run)
+5) [API References and Routes](#api)
+6) [Installation and Libraries](#install-library)
+7) [Database Models](#database)
+8) [Credits](#credits)
+9) [Licenses](#licenses)
 
 
+
+<a name="collab"></a>
 ## Collaborators
 - [Yousef Mohamed Hassan](https://www.github.com/usef2081)  _( Scrum Master )_
 - [Aser Ashraf](https://github.com/aser2709) 
@@ -23,6 +36,7 @@ This project’s goal was to implement an Online Education system using the Agil
 </a>
 </div>
 
+<a name="features"></a>
 ## Features
 
 We have four different types of users: Individual trainees, Corporate trainees, Instructors and Admins.
@@ -32,6 +46,7 @@ Furthermore, navigation is always reversible; the app allows the users to go bac
 We also allow for immediate feedback for example the user is sent a confirmation message upon any action taken.
 
 <br></br>
+## 
 
 <ins>**1. Main website features for a Trainee:**</ins>
 - Sign Up
@@ -44,7 +59,7 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 
 
-
+<a name="screenshots"></a>
 {SignUp}
 
 <a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/SignUp.JPG" width="700">
@@ -97,7 +112,7 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 
 
-
+##
 
 <ins>**2.Main website features for an Admin:**</ins>
 - Add another admin
@@ -139,6 +154,7 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 
 
+##
 
 
 <ins>**3.Main website features for an Instructor:**</ins>
@@ -182,7 +198,7 @@ We also allow for immediate feedback for example the user is sent a confirmation
 <a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Instructor%20Course.JPG" width="700">
 </a>
 
-
+<a name="run"></a>
 ##  How To Run
 
 ### Port Numbers
@@ -202,7 +218,7 @@ Open 2 terminals:
   b. In the second terminal run `cd frontend` then `npm start`
 
 ```
-
+<a name="api"></a>
 
 ## API Reference
 
@@ -318,7 +334,7 @@ Here are some References but not all
 
 
 
-
+<a name="install-library"></a>
 
 ## Installation
 
@@ -327,15 +343,15 @@ Initially, run `npm init` and `npm i` in the terminal to download all node modul
 
 # Libraries
 
-   - express
-   - cors
-   - Body-parser
-   - jsonwebtoken
-   - stripe 
-   - bcrypt
-   - axios
-   - mongoose
-   - material ui components
+   - [express](https://expressjs.com/)
+   - [cors](https://expressjs.com/en/resources/middleware/cors.html)
+   - [Body-parser](https://expressjs.com/en/resources/middleware/body-parser.html)
+   - [jsonwebtoken](https://jwt.io/)
+   - [Stripe](https://stripe.com/docs/api) 
+   - [bcrypt](https://www.npmjs.com/package/bcrypt)
+   - [axios](https://axios-http.com/docs/intro)
+   - [mongoose](https://mongoosejs.com/)
+   - [material ui components](https://mui.com/)
   - react-router-dom
   - react-scripts
   - react-country-region-selector
@@ -343,7 +359,9 @@ Initially, run `npm init` and `npm i` in the terminal to download all node modul
   - react-stripe-checkout
   - react-toastify
   - jquery
-  # Database
+ 
+ <a name="database"></a>
+ # Database
  To provide database access for Udemyplus, we used mongoose (a MongoDB object modeling tool designed to work in an asynchronous environment).
  We have 6 models:
 - User 
@@ -353,17 +371,89 @@ Initially, run `npm init` and `npm i` in the terminal to download all node modul
 - Request
 - Result
 
+
+
+|**`User`**|
+| :-------- |
+| Email      |
+| Biography     |
+| Password      |
+| firstName      |
+| lastName      |
+| userName      |
+| userType     |
+| Rating      |
+
+<br></br>
+
+
+| **`Admin`** |
+| :-------- |
+| userName    |
+| Password     |
+| userType     |
+
+<br></br>
+
+| **`Course`** |
+| :-------- |
+| Title      |
+| subtitle      |
+| price      |
+| discount     |
+| short_summary      |
+| instructor|
+| rating      |
+
+<br></br>
+
+| **`Report`** |
+| :-------- |
+| user_email      |
+| course_id      |
+| course_name     |
+| type      |
+| body      |
+| resolved      |
+| unseen      |
+
+<br></br>
+
+| **`Request`** |
+| :-------- |
+| Email      |
+| course_id      |
+| course_name      |
+| requested      |
+
+
+<br></br>
+
+| **`Result`** |
+| :-------- |
+| username     |
+| result     |
+| attempts     |
+| points     |
+| achived      |
+
+
+
+
+
 ## Tech Stack
 
 **Client:** React
 
 **Server:** Node, Express , Mongodb
 
+<a name="credits"></a>
 # Credits
 - [Web Dev Simplified Youtube Channel](https://www.youtube.com/@WebDevSimplified)
 - [The Net Ninja Youtube Channel](https://www.youtube.com/@NetNinja)
 
-## License
+<a name="licenses"></a>
+## Licenses
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT License](https://choosealicense.com/licenses/mit/)
 
