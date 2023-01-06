@@ -47,42 +47,42 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 {SignUp}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/SignUp.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/SignUp.JPG" width="700">
 </a>
 
 {Change Password}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Change%20Password.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Change%20Password.JPG" width="700">
 </a>
 
 {Courses}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Courses.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Courses.JPG" width="700">
 </a>
 
 {Single Course Preview}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Single Course Preview.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Single Course Preview.JPG" width="700">
 </a>
 
 {UnAuthorized Page}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/UnAuthorized Page.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/UnAuthorized Page.JPG" width="700">
 </a>
 
 {Register For a Course}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Register for Course.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Register for Course.JPG" width="700">
 </a>
 
 {Payment for a course}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Payment for a course.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Payment for a course.JPG" width="700">
 </a>
 
 {Registered Courses}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Registered Courses.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Registered Courses.JPG" width="700">
 </a>
 
 
@@ -109,22 +109,22 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 {Add Admin}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Admin/Add%20Admin.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Admin/Add%20Admin.JPG" width="700">
 </a>
 
 {Add User}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Admin/Add%20User.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Admin/Add%20User.JPG" width="700">
 </a>
 
 {Access Request}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Admin/Access%20Request.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Admin/Access%20Request.JPG" width="700">
 </a>
 
 {Reported Problems}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Admin/Reported%20Problems.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Admin/Reported%20Problems.JPG" width="700">
 </a>
 
 
@@ -154,32 +154,32 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 {Add Course}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Add%20Course.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Add%20Course.JPG" width="700">
 </a>
 
 {Change Biography & email}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Change%20Biography%20%26%20email.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Change%20Biography%20%26%20email.JPG" width="700">
 </a>
 
 {Create Quiz}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Create%20Quiz.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Create%20Quiz.JPG" width="700">
 </a>
 
 {ForgetPassword}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/ForgetPassword.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/ForgetPassword.JPG" width="700">
 </a>
 
 {Change Forgot Password}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Forgot%20Password.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Forgot%20Password.JPG" width="700">
 </a>
 
 {Instructor Courses}
 
-<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Instructor%20Course.JPG" width="300">
+<a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/Instructor/Instructor%20Course.JPG" width="700">
 </a>
 
 
