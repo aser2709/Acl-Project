@@ -1,6 +1,6 @@
 # Udemyplus
 # Collaborators:
-- [Yousef Mohamed Hassan](https://www.github.com/usef2081)  _( Scrum Master )_
+- [Yousef Mohamed Hassan](https://www.github.com/usef2081)
 - [Aser Ashraf](https://github.com/aser2709) 
 - [Kareem Emad](https://github.com/KareemEmad1) 
 - [Abdelrahman Mamdouh](https://github.com/Abdelrahmansharaky)  
