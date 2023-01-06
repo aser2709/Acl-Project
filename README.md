@@ -1,12 +1,15 @@
+
 # Udemyplus
-# Collaborators:
-- [Yousef Mohamed Hassan](https://www.github.com/usef2081)
+
+This project is to create an Online Learing System similar to Coursea and Udemy.
+
+
+## Collaborators
+- [Yousef Mohamed Hassan](https://www.github.com/usef2081)  _( Scrum Master )_
 - [Aser Ashraf](https://github.com/aser2709) 
 - [Kareem Emad](https://github.com/KareemEmad1) 
 - [Abdelrahman Mamdouh](https://github.com/Abdelrahmansharaky)  
 - [Ahmed Osama](https://github.com/ahmeddos)
-
-
 # Motivation
 This project’s goal was to implement an Online Education system using the Agile Methodology split into three sprints, following the assigned System Requirements and implementing it using the MERN Stack (MongoDB, Express.js, React and Node.js).
 
@@ -20,8 +23,7 @@ This project’s goal was to implement an Online Education system using the Agil
 </a>
 </div>
 
-
-# Features
+## Features
 
 We have four different types of users: Individual trainees, Corporate trainees, Instructors and Admins.
 Our web application offers a smooth process of online education by providing a user experience that fosters satisfiability, efficiency, learnability and visibility.
@@ -29,14 +31,8 @@ Some examples of this is seen in registration process of the courses.
 Furthermore, navigation is always reversible; the app allows the users to go back and change a previously made choice.
 We also allow for immediate feedback for example the user is sent a confirmation message upon any action taken.
 
-
-
-
-
-
-
-
-
+<br></br>
+<br></br>
 
 <ins>**1. Main website features for a Trainee:**</ins>
 - Sign Up
@@ -89,6 +85,10 @@ We also allow for immediate feedback for example the user is sent a confirmation
 
 <a> <img src="https://github.com/aser2709/Acl-Project/blob/main/frontend/src/assets/screenshot/User/Registered Courses.JPG" width="300">
 </a>
+
+
+
+
 
 
 
@@ -186,48 +186,149 @@ We also allow for immediate feedback for example the user is sent a confirmation
 </a>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# How to Run
+##  How To Run
 
 ### Port Numbers
 - Backend:
      - server.js runs on port `4000` 
 - Frontend: 
     -  App.js runs on port `3000`
+## Deployment
 
-### Which files to run
+To deploy this project run
 
+```bash
 Open 2 terminals:
 
   a. In the first terminal run `cd backend` and then `node server.js`
 
   b. In the second terminal run `cd frontend` then `npm start`
 
+```
+
+
+## API Reference
+
+Here are some References but not all
+
+#### Get all courses
+
+```http
+  GET /api/courses/courses
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` | **Required**. Your API key |
+
+#### Get a course
+
+```http
+  GET /api/courses/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of item to fetch |
+
+#### Create a new Course
+
+```http
+  Post /api/courses/
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `title`              | `string` | **Required**. title of Course to fetch |
+| `subtitle`           | `string` | **Required**. subtitle of Course to fetch |
+| `price`              | `string` | **Required**. price of Course to fetch |
+| `discount`           | `string` | **Required**. discount of Course to fetch |
+| `short Summary`      | `string` | **Required**. short Summary of Course to fetch |
+| `Instructor`         | `string` | **Required**. Instructor of Course to fetch |
+| `Rating`             | `string` | **Required**. Rating of Course to fetch |
+| `Subject`            | `string` | **Required**. Subject of Course to fetch |
+| `Total Course Hours` | `string` | **Required**. Total Hours of Course to fetch |
+| `Video Preview`      | `string` | **Required**. link of Course to fetch |
+
+
+#### Login A User
+
+```http
+  POST /api/user/login
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `Email`      | `string` | **Required**. Email of user |
+| `Password`      | `string` | **Required**. Password of user  |
+
+#### User change Password
+
+```http
+  Patch /api/user/change_password
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `Old Password`      | `string` | **Required**. Old Password of User to fetch |
+| `New Password`      | `string` | **Required**. New Password of User to fetch |
+
+
+#### Add a registered course to a User
+
+```http
+  Patch /api/user/registerCourse
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `Course`      | `Object` | **Required**. Includes all necessary information of Course to fetch  |
+| `Email`      | `string` | **Required**. Email of User to fetch |
+
+
+#### Get all Reports
+
+```http
+  GET /api/reports/allReports
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` | **Required**. Your API key |
+
+#### Create a new Report
+
+```http
+  Post /api/reports/createReport
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `user_email`      | `string` | **Required**. Email of user to fetch |
+| `course_id`      | `string` | **Required**. Id of Course to fetch |
+| `course_name`      | `string` | **Required**.  Name of Course to fetch |
+| `Type`      | `string` | **Required**. Type of Problem to fetch |
+| `Body`      | `string` | **Required**. Description of Problem |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Installation
+
+Initially, run `npm init` and `npm i` in the terminal to download all node modules and install some basic libraries.
 
 
 # Libraries
-Initially, run `npm init` and `npm i` in the terminal to download all node modules and install some basic libraries.
 
    - express
    - cors
@@ -237,7 +338,7 @@ Initially, run `npm init` and `npm i` in the terminal to download all node modul
    - bcrypt
    - axios
    - mongoose
-    - material ui components
+   - material ui components
   - react-router-dom
   - react-scripts
   - react-country-region-selector
@@ -245,11 +346,8 @@ Initially, run `npm init` and `npm i` in the terminal to download all node modul
   - react-stripe-checkout
   - react-toastify
   - jquery
-  
-  
-  
   # Database
- To provide database access for Coree, we used mongoose (a MongoDB object modeling tool designed to work in an asynchronous environment).
+ To provide database access for Udemyplus, we used mongoose (a MongoDB object modeling tool designed to work in an asynchronous environment).
  We have 6 models:
 - User 
 - Admin
@@ -258,12 +356,17 @@ Initially, run `npm init` and `npm i` in the terminal to download all node modul
 - Request
 - Result
 
+## Tech Stack
+
+**Client:** React
+
+**Server:** Node, Express , Mongodb
 
 # Credits
 - [Web Dev Simplified Youtube Channel](https://www.youtube.com/@WebDevSimplified)
 - [The Net Ninja Youtube Channel](https://www.youtube.com/@NetNinja)
 
+## License
 
-
-
+[MIT](https://choosealicense.com/licenses/mit/)
 
